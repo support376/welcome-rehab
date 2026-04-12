@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title>AI 진단 · 웰컴법률사무소</title>
+<link href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#0B0913; --bg-1:#161320; --bg-2:#1C182B;
+    --purple-bright:#6529FF; --cyan:#00B8FF; --mint:#1EF5CA;
+    --text:#F5F5FA; --text-dim:#A7A7A7;
+    --border:rgba(255,255,255,.08);
+    --card:rgba(255,255,255,.04);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{
+    font-family:'Wanted Sans Variable','Wanted Sans',-apple-system,system-ui,sans-serif;
+    background:var(--bg-0); color:var(--text);
+    letter-spacing:-0.03em; -webkit-font-smoothing:antialiased;
+    overflow:hidden;
+  }
+  body::before{
+    content:'';position:fixed;inset:-20%;z-index:0;
+    background:
+      radial-gradient(50% 40% at 20% 10%,rgba(101,41,255,.35),transparent 70%),
+      radial-gradient(50% 40% at 80% 90%,rgba(0,184,255,.25),transparent 70%),
+      radial-gradient(40% 40% at 50% 50%,rgba(30,245,202,.12),transparent 70%);
+    filter:blur(80px);pointer-events:none;
+  }
+  a{color:inherit;}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+
+  .app{
+    position:relative;z-index:1;
+    display:flex;flex-direction:column;
+    height:100vh;max-width:820px;margin:0 auto;
+  }
+
+  /* Header */
+  .chat-header{
+    display:flex;align-items:center;gap:14px;
+    padding:16px 20px;
+    border-bottom:1px solid var(--border);
+    backdrop-filter:blur(14px);
+    background:rgba(11,9,19,.55);
+  }
+  .back{
+    width:36px;height:36px;border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--card);border:1px solid var(--border);
+    font-size:18px;
+  }
+  .avatar{
+    width:44px;height:44px;border-radius:50%;
+    background:linear-gradient(135deg,var(--purple-bright),var(--cyan));
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:14px;color:#0B0913;
+    box-shadow:0 0 0 2px rgba(30,245,202,.3);
+  }
+  .h-title{flex:1;min-width:0;}
+  .h-title .name{font-size:14px;font-weight:800;display:flex;align-items:center;gap:8px;}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 8px var(--mint);}
+  .h-title .sub{font-size:11px;color:var(--text-dim);margin-top:2px;}
+  .settings{
+    padding:8px 12px;border-radius:10px;
+    background:var(--card);border:1px solid var(--border);
+    font-size:11px;color:var(--text-dim);
+  }
+
+  /* Disclaimer */
+  .disclaimer{
+    margin:12px 20px 0;padding:10px 14px;
+    border-radius:12px;font-size:11px;line-height:1.5;
+    background:rgba(255,180,0,.06);
+    border:1px solid rgba(255,180,0,.2);
+    color:#FFD591;
+  }
+
+  /* Messages */
+  .messages{
+    flex:1;overflow-y:auto;
+    padding:20px;display:flex;flex-direction:column;gap:14px;
+    scroll-behavior:smooth;
+  }
+  .messages::-webkit-scrollbar{width:6px;}
+  .messages::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px;}
+
+  .msg{max-width:85%;display:flex;gap:10px;animation:fadeIn .4s ease-out;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+  .msg.user{align-self:flex-end;flex-direction:row-reverse;}
+  .msg .bubble{
+    padding:14px 18px;border-radius:18px;
+    font-size:14.5px;line-height:1.65;
+    word-wrap:break-word;white-space:pre-wrap;
+  }
+  .msg.bot .bubble{
+    background:var(--card);
+    border:1px solid var(--border);
+    backdrop-filter:blur(10px);
+    border-top-left-radius:4px;
+  }
+  .msg.user .bubble{
+    background:linear-gradient(135deg,var(--purple-bright),var(--cyan));
+    color:#0B0913;font-weight:600;
+    border-top-right-radius:4px;
+  }
+  .msg .bubble pre{
+    margin-top:10px;padding:12px;border-radius:10px;
+    background:rgba(0,0,0,.4);border:1px solid var(--border);
+    font-size:11px;line-height:1.5;color:var(--mint);
+    font-family:ui-monospace,'SF Mono',Consolas,monospace;
+    overflow-x:auto;white-space:pre;
+  }
+  .msg .bubble b{color:var(--mint);font-weight:700;}
+  .mini-avatar{
+    width:32px;height:32px;border-radius:50%;flex-shrink:0;
+    background:linear-gradient(135deg,var(--purple-bright),var(--cyan));
+    display:flex;align-items:center;justify-content:center;
+    font-size:11px;font-weight:800;color:#0B0913;
+  }
+
+  .typing{display:flex;gap:4px;padding:4px 2px;}
+  .typing span{
+    width:7px;height:7px;border-radius:50%;background:var(--text-dim);
+    animation:blink 1.4s infinite;
+  }
+  .typing span:nth-child(2){animation-delay:.2s;}
+  .typing span:nth-child(3){animation-delay:.4s;}
+  @keyframes blink{0%,60%,100%{opacity:.3;}30%{opacity:1;}}
+
+  /* Input */
+  .composer{
+    padding:14px 20px 20px;
+    border-top:1px solid var(--border);
+    background:rgba(11,9,19,.7);
+    backdrop-filter:blur(14px);
+  }
+  .composer form{
+    display:flex;gap:10px;align-items:flex-end;
+    background:var(--card);border:1px solid var(--border);
+    border-radius:20px;padding:8px 8px 8px 18px;
+    transition:border .2s;
+  }
+  .composer form:focus-within{border-color:rgba(0,184,255,.5);}
+  .composer textarea{
+    flex:1;background:none;border:none;outline:none;
+    color:var(--text);font-family:inherit;font-size:14.5px;
+    resize:none;max-height:140px;min-height:24px;
+    line-height:1.5;padding:8px 0;
+  }
+  .composer textarea::placeholder{color:var(--text-dim);}
+  .send-btn{
+    width:40px;height:40px;border-radius:50%;
+    background:linear-gradient(135deg,var(--purple-bright),var(--cyan));
+    color:#0B0913;display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;transition:transform .15s,opacity .15s;
+  }
+  .send-btn:disabled{opacity:.3;cursor:not-allowed;}
+  .send-btn:not(:disabled):hover{transform:scale(1.08);}
+  .composer .hint{font-size:10px;color:var(--text-dim);text-align:center;margin-top:8px;}
+
+  /* Key modal */
+  .modal-backdrop{
+    position:fixed;inset:0;z-index:100;
+    background:rgba(11,9,19,.85);backdrop-filter:blur(10px);
+    display:flex;align-items:center;justify-content:center;padding:20px;
+  }
+  .modal{
+    max-width:440px;width:100%;padding:36px 32px;
+    background:var(--bg-1);border:1px solid var(--border);
+    border-radius:24px;
+    box-shadow:0 40px 80px rgba(0,0,0,.5);
+  }
+  .modal h2{font-size:22px;font-weight:800;margin-bottom:8px;letter-spacing:-0.04em;}
+  .modal p{color:var(--text-dim);font-size:13px;line-height:1.6;margin-bottom:24px;}
+  .modal label{display:block;font-size:12px;font-weight:700;margin-bottom:8px;color:var(--text-dim);}
+  .modal input,.modal select{
+    width:100%;padding:14px 16px;border-radius:12px;
+    background:var(--card);border:1px solid var(--border);
+    color:var(--text);font-family:inherit;font-size:14px;
+    margin-bottom:16px;outline:none;transition:border .2s;
+  }
+  .modal input:focus,.modal select:focus{border-color:var(--cyan);}
+  .modal .start{
+    width:100%;padding:16px;border-radius:12px;
+    background:linear-gradient(90deg,var(--purple-bright),var(--cyan),var(--mint));
+    color:#0B0913;font-weight:800;font-size:15px;
+    transition:transform .15s;
+  }
+  .modal .start:hover{transform:translateY(-1px);}
+  .modal .note{
+    margin-top:16px;padding:12px;border-radius:10px;
+    font-size:11px;color:var(--text-dim);line-height:1.6;
+    background:rgba(255,255,255,.03);border:1px solid var(--border);
+  }
+  .modal .note a{color:var(--cyan);}
+
+  .err{
+    margin:0 20px 10px;padding:10px 14px;
+    background:rgba(255,80,80,.1);border:1px solid rgba(255,80,80,.3);
+    color:#FF9999;border-radius:10px;font-size:12px;
+  }
+</style>
+</head>
+<body>
+
+<!-- API Key Modal -->
+<div class="modal-backdrop" id="keyModal">
+  <div class="modal">
+    <h2>AI 진단 시작하기</h2>
+    <p>Anthropic API 키를 입력하시면 AI 변호사 어시스턴트가 진단을 시작합니다. 키는 이 브라우저에만 저장됩니다.</p>
+    <label>ANTHROPIC API KEY</label>
+    <input id="keyInput" type="password" placeholder="sk-ant-..." autocomplete="off"/>
+    <label>MODEL</label>
+    <select id="modelSelect">
+      <option value="claude-sonnet-4-5">claude-sonnet-4-5 (권장·빠름)</option>
+      <option value="claude-opus-4-5">claude-opus-4-5 (고품질)</option>
+      <option value="claude-haiku-4-5-20251001">claude-haiku-4-5 (저비용)</option>
+    </select>
+    <button class="start" id="startBtn">진단 시작 →</button>
+    <div class="note">
+      ⚠️ 본 페이지는 <b style="color:var(--text)">데모용</b>입니다. 실제 서비스에서는 서버 프록시를 통해 키를 보관해야 합니다.<br/>
+      API 키 발급: <a href="https://console.anthropic.com/" target="_blank">console.anthropic.com</a>
+    </div>
+  </div>
+</div>
+
+<div class="app">
+  <div class="chat-header">
+    <a href="index.html" class="back">←</a>
+    <div class="avatar">AI</div>
+    <div class="h-title">
+      <div class="name">AI 상담 어시스턴트 <span class="dot"></span></div>
+      <div class="sub">웰컴법률사무소 · 양홍수 변호사 사무소</div>
+    </div>
+    <button class="settings" id="resetBtn">재시작</button>
+  </div>
+
+  <div class="disclaimer">
+    ⓘ 저는 AI 어시스턴트이며 변호사가 아닙니다. 법률 자문을 드리지 않고 사실관계만 수집합니다. 최종 판단은 양홍수 변호사가 직접 검토 후 안내드립니다.
+  </div>
+
+  <div class="messages" id="messages"></div>
+  <div id="errBox"></div>
+
+  <div class="composer">
+    <form id="form">
+      <textarea id="input" placeholder="편하게 말씀해 주세요..." rows="1"></textarea>
+      <button type="submit" class="send-btn" id="sendBtn" disabled>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </form>
+    <div class="hint">Enter로 전송 · Shift+Enter로 줄바꿈</div>
+  </div>
+</div>
+
+<script>
+const SYSTEM_PROMPT = `당신은 웰컴법률사무소(대표변호사 양홍수)의 AI 인테이크 어시스턴트입니다. 의뢰인의 사실관계를 대화로 수집하고, 끝에 **웰컴회생 Lite** 또는 **웰컴회생 Pro** 중 어디로 배정할지 힌트를 남깁니다.
+
+# 웰컴회생의 바벨 전략 (핵심 포지션)
+저희는 두 가지 상품만 운영합니다. 중간은 없습니다.
+
+## 웰컴회생 Lite (단순 · 빠름 · 저가)
+- **착수금 20만원으로 당일 계약·접수** 가능, 잔금 최대 12개월 분납
+- 직장인·무담보·단순 케이스 대상
+- 100% 비대면 (카톡·전자서명·우편)
+- 신청 당일 추심 중지 들어감 → 독촉 전화 즉시 차단
+- 표준화된 프로세스로 비용을 극한까지 낮춤
+- **Lite 적합 조건**: 정규직 직장인 / 무담보 중심 / 1억 미만 / 사업·법인·세금·전문직 이슈 없음 / 편파변제·형사 리스크 없음 / 과거 이력 없음
+
+## 웰컴회생 Pro (복잡 · 깊음 · 변호사 직접)
+양홍수 변호사가 처음부터 끝까지 직접 담당합니다.
+- **일반회생** (무담보 50억/담보 150억 한도): 개인회생 한도 초과, 의사·변호사·회계사 등 전문직, 고소득 자영업자
+- **법인회생/간이회생/ARS**: 사업을 계속 운영하면서 구조조정
+- **법인파산 + 대표이사 개인회생 동시 진행**: 회사는 정리, 대표는 재기
+- **세금 채권 편입**: 국세·지방세·4대보험 체납 회생절차 편입 전략
+- **전문직 면허 유지 설계**: 의사·변호사·회계사 면허 영향 최소화
+- **다른 사무소에서 거절/기각된 복잡 케이스** 재검토
+- **Pro 필수 조건**: 법인대표 / 자영업자 고액 / 전문직(면허) / 세금 체납 / 편파변제 의혹 / 형사 리스크 / 과거 기각 / 한도 초과 — 이 중 하나라도 해당되면 반드시 Pro
+
+# 대화 전략 (바벨 배정)
+첫 2~3개 질문으로 **직업 형태 + 사업·법인 유무 + 대략적 채무 규모**를 빠르게 파악해서 Lite/Pro 갈래를 머릿속에서 정한 뒤, 그에 맞게 후속 질문 깊이를 조절합니다.
+
+- **Lite 쪽으로 기운다면**: 질문을 간결하게, 빠르게 진행. "Lite면 오늘 20만원으로 바로 시작하실 수 있어요"를 적절히 언급해서 결정 부담을 낮춥니다.
+- **Pro 쪽으로 기운다면**: 사업·법인·세금·자산·리스크를 깊이 파고듭니다. "이 부분은 변호사님이 직접 설계하시는 영역이에요"로 신뢰를 쌓습니다.
+
+의뢰인이 "한도를 넘는다", "세금이 많다", "법인이 있다", "면허가 걱정된다", "사업을 계속하고 싶다", "다른 곳에서 거절됐다"고 말하면 → 해당 Pro 강점을 짧게 언급해 안심시키되 **절대 "가능합니다"라고 단정하지 말 것**. "저희가 자주 다루는 영역이에요", "변호사님이 비슷한 케이스를 여러 번 해결하셨어요" 톤 유지.
+
+# 대화 원칙
+1. 반드시 존댓말, "선생님" 호칭
+2. **한 번에 질문 1~2개만**. 설문지처럼 쏟아내지 마세요
+3. 첫 메시지는 짧은 자기소개 + 면책 고지 + 열린 질문("어떤 상황이신지 편하게 말씀해 주세요")
+4. 답변을 받으면 먼저 짧게 공감/확인 → 후속 질문
+5. 힘들어 보이면 사실 질문 전에 감정 공감 먼저
+6. 모순은 부드럽게 재확인
+7. **법률 판단·성공률·구체 변제금 절대 언급 금지**
+8. 숫자는 구간으로 받아도 됩니다 (예: "대략 5천 정도" OK)
+
+# 수집할 정보 (대화로 자연스럽게 — 순서는 답변에 따라 조절)
+
+[A] 프로필
+- 직업 형태: 직장인 / 개인사업자 / 법인대표 / 프리랜서 / 전문직(의사·변호사 등)
+- 전문직이면 면허 종류 및 현재 유지 여부
+- 나이대, 부양가족 수
+
+[B] 채무 전체 그림 (가장 중요)
+- 무담보 채무 총액 및 주요 채권자(은행·카드·저축은행·대부업·사채)
+- 담보 채무 (주담대, 사업자 담보)
+- 사업자 대출 / 정책자금 (보증기금, 신복위, 소상공인)
+- **세금 체납**: 국세(부가세·종소세·법인세)·지방세·4대보험 각각 금액
+- **임금 체불** (법인대표·자영업자면 반드시 확인)
+- 사채·개인 채무
+- 법인채무 중 **대표이사 개인 연대보증** 여부 및 금액
+
+[C] 사업·소득
+- 사업 지속 의사: 계속 운영 / 정리
+- 월평균 매출·순이익 (자영업·법인대표)
+- 개인 실수령 소득
+- 소득 증빙 가능성
+
+[D] 자산
+- 부동산 (자가/전세보증금 금액)
+- 차량 (업무 필수 여부)
+- 사업장 시설·재고·매출채권
+- 예적금·보험·주식·코인
+- 배우자 공동자산, 최근 처분한 자산
+
+[E] 리스크·긴급도
+- 압류/가압류/경매 진행 상황
+- 소송 진행 건
+- **형사 리스크** (부도수표, 사기, 배임, 횡령, 관세법 등 고소·고발)
+- 편파변제·재산 처분 이력 (최근 1년)
+- 과거 회생·파산·워크아웃 이력
+
+[F] 연락처 (마지막)
+- 이름, 휴대폰
+- 개인정보 수집·이용 동의 확인
+
+# 종결 절차
+- [A]~[E]가 충분히 수집되면: "마지막으로 결과를 보내드릴 연락처를 받아도 될까요?"
+- 연락처 수집 완료 후: "변호사에게 전달할 요약을 정리하고 있어요 잠시만요." 라고 말한 뒤
+- 마지막 메시지에 아래 형식의 JSON 코드 블록을 출력합니다 (사용자에게는 "내부 전달용 요약"이라고 간단히 안내):
+
+\`\`\`json
+{
+  "profile": {"job_type":"","license":"","dependents":0,"age_range":""},
+  "debt": {"unsecured_total":"","secured_total":"","business_loan":"","tax_national":"","tax_local":"","insurance_4":"","unpaid_wages":"","private_loan":"","personal_guarantee":""},
+  "business": {"continue":true,"monthly_revenue":"","monthly_profit":"","personal_income":"","proof_available":""},
+  "assets": {"real_estate":"","vehicle":"","business_assets":"","savings":"","spouse_assets":"","recent_disposal":""},
+  "risk": {"garnishment":"","lawsuits":"","criminal":"","unfair_payment":"","history":""},
+  "contact": {"name":"","phone":"","consent":true},
+  "case_type_hint": "개인회생|일반회생|법인회생|법인파산+개인회생|파산|워크아웃",
+  "recommended_product": "Lite|Pro",
+  "product_reason": "왜 Lite 또는 Pro인지 한 줄 근거",
+  "urgency": "high|medium|low",
+  "complexity": "simple|moderate|complex",
+  "notes": "변호사 검토 시 주의할 특이사항"
+}
+\`\`\`
+
+그리고 마지막 멘트:
+- **Lite 추천 시**: "선생님 상황은 저희 **웰컴회생 Lite** 상품이 딱 맞아 보여요. **오늘 20만원으로 바로 계약하시면 당일 추심 중지**가 들어갑니다. 변호사가 24시간 이내에 최종 검토 후 연락드리겠습니다."
+- **Pro 추천 시**: "선생님 케이스는 저희 **웰컴회생 Pro**로 양홍수 변호사가 직접 설계해야 하는 케이스예요. 24시간 이내에 변호사가 직접 검토 후 연락드리겠습니다. 먼저 전화 상담 원하시면 02-0000-0000으로 연락 주셔도 됩니다."`;
+
+const DEFAULT_MODEL = 'claude-sonnet-4-5';
+const STORAGE_KEY = 'welcome_rehab_key';
+const STORAGE_MODEL = 'welcome_rehab_model';
+const STORAGE_MSGS = 'welcome_rehab_msgs';
+
+let apiKey = localStorage.getItem(STORAGE_KEY) || '';
+let model = localStorage.getItem(STORAGE_MODEL) || DEFAULT_MODEL;
+let messages = JSON.parse(localStorage.getItem(STORAGE_MSGS) || '[]');
+let isBusy = false;
+
+const $ = (id) => document.getElementById(id);
+const messagesEl = $('messages');
+const keyModal = $('keyModal');
+const errBox = $('errBox');
+
+function saveMsgs(){ localStorage.setItem(STORAGE_MSGS, JSON.stringify(messages)); }
+
+function escapeHTML(s){
+  return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function renderMarkdown(text){
+  const parts = text.split(/(```[\s\S]*?```)/g);
+  return parts.map(p => {
+    if(p.startsWith('```')){
+      const body = p.replace(/^```(\w+)?\n?/,'').replace(/```$/,'');
+      return '<pre>' + escapeHTML(body) + '</pre>';
+    }
+    return escapeHTML(p)
+      .replace(/\*\*(.+?)\*\*/g,'<b>$1</b>')
+      .replace(/\n/g,'<br>');
+  }).join('');
+}
+
+function render(){
+  messagesEl.innerHTML = '';
+  messages.filter(m => !m._hidden).forEach(m => {
+    const div = document.createElement('div');
+    div.className = 'msg ' + (m.role === 'user' ? 'user' : 'bot');
+    const avatar = m.role === 'assistant' ? '<div class="mini-avatar">AI</div>' : '';
+    div.innerHTML = avatar + '<div class="bubble">' + renderMarkdown(m.content) + '</div>';
+    messagesEl.appendChild(div);
+  });
+  if(isBusy){
+    const div = document.createElement('div');
+    div.className = 'msg bot';
+    div.innerHTML = '<div class="mini-avatar">AI</div><div class="bubble"><div class="typing"><span></span><span></span><span></span></div></div>';
+    messagesEl.appendChild(div);
+  }
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function showErr(msg){
+  errBox.innerHTML = '<div class="err">⚠️ ' + escapeHTML(msg) + '</div>';
+  setTimeout(() => errBox.innerHTML = '', 6000);
+}
+
+async function callClaude(){
+  isBusy = true; render();
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{
+        'content-type':'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version':'2023-06-01',
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
+      body: JSON.stringify({
+        model: model,
+        max_tokens: 1500,
+        system: SYSTEM_PROMPT,
+        messages: messages.map(m => ({role:m.role, content:m.content}))
+      })
+    });
+    const data = await res.json();
+    if(data.error){
+      showErr(data.error.message || 'API 오류');
+      isBusy = false; render();
+      return;
+    }
+    const text = data.content?.map(c => c.text).join('') || '';
+    messages.push({role:'assistant', content:text});
+    saveMsgs();
+  } catch(e){
+    showErr('네트워크 오류: ' + e.message);
+  }
+  isBusy = false; render();
+}
+
+async function sendMessage(text){
+  if(!text.trim() || isBusy) return;
+  messages.push({role:'user', content:text.trim()});
+  saveMsgs(); render();
+  await callClaude();
+}
+
+async function kickoff(){
+  if(messages.length === 0){
+    messages.push({role:'user', content:'안녕하세요, 진단 받으러 왔어요.', _hidden:true});
+    saveMsgs();
+    await callClaude();
+  } else {
+    render();
+  }
+}
+
+// Key modal
+$('startBtn').onclick = () => {
+  const k = $('keyInput').value.trim();
+  if(!k.startsWith('sk-ant-')){ alert('유효한 Anthropic API 키를 입력해 주세요'); return; }
+  apiKey = k;
+  model = $('modelSelect').value;
+  localStorage.setItem(STORAGE_KEY, apiKey);
+  localStorage.setItem(STORAGE_MODEL, model);
+  keyModal.style.display = 'none';
+  kickoff();
+};
+
+if(apiKey){
+  keyModal.style.display = 'none';
+  $('modelSelect').value = model;
+  kickoff();
+} else {
+  $('keyInput').focus();
+}
+
+// Input
+const input = $('input');
+const sendBtn = $('sendBtn');
+const form = $('form');
+input.addEventListener('input', () => {
+  sendBtn.disabled = !input.value.trim() || isBusy;
+  input.style.height = 'auto';
+  input.style.height = Math.min(input.scrollHeight, 140) + 'px';
+});
+input.addEventListener('keydown', (e) => {
+  if(e.key === 'Enter' && !e.shiftKey){
+    e.preventDefault();
+    form.requestSubmit();
+  }
+});
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const text = input.value;
+  input.value = ''; input.style.height = 'auto';
+  sendBtn.disabled = true;
+  await sendMessage(text);
+});
+
+$('resetBtn').onclick = () => {
+  if(!confirm('대화를 처음부터 다시 시작할까요?')) return;
+  messages = [];
+  localStorage.removeItem(STORAGE_MSGS);
+  render();
+  kickoff();
+};
+</script>
+</body>
+</html>
