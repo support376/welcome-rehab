@@ -267,16 +267,51 @@
     background:rgba(255,255,255,.03);border:1px solid var(--border);
     font-size:13px;color:var(--text-dim);
   }
-  .slot-day{margin-bottom:14px;}
-  .slot-day .day-title{
-    font-size:12px;font-weight:800;color:var(--text-dim);
-    margin-bottom:8px;letter-spacing:-0.01em;
+  /* Date strip (horizontal) */
+  .date-strip{
+    display:flex;gap:8px;overflow-x:auto;
+    padding-bottom:8px;margin-bottom:16px;
+    scrollbar-width:thin;
+    -webkit-overflow-scrolling:touch;
   }
-  .slot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
-  .slot-btn{
-    padding:12px 8px;border-radius:10px;
+  .date-strip::-webkit-scrollbar{height:4px;}
+  .date-strip::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px;}
+  .date-chip{
+    flex:0 0 auto;min-width:62px;
+    padding:12px 10px;border-radius:14px;text-align:center;
     background:rgba(255,255,255,.04);border:1px solid var(--border);
-    font-size:12px;font-weight:700;color:var(--text);
+    font-family:inherit;color:var(--text);cursor:pointer;
+    transition:all .15s;
+  }
+  .date-chip:hover{background:rgba(30,245,202,.06);border-color:rgba(30,245,202,.3);}
+  .date-chip .dow{
+    font-size:11px;color:var(--text-dim);font-weight:700;
+    letter-spacing:.02em;margin-bottom:4px;
+  }
+  .date-chip .day{
+    font-size:18px;font-weight:800;letter-spacing:-0.04em;
+  }
+  .date-chip.selected{
+    background:linear-gradient(135deg,rgba(101,41,255,.28),rgba(30,245,202,.2));
+    border-color:var(--mint);
+    box-shadow:0 0 0 1px var(--mint) inset;
+  }
+  .date-chip.selected .dow{color:var(--mint);}
+  .date-chip.selected .day{color:#fff;}
+  .date-chip.sat .dow{color:#6BA8FF;}
+  .date-chip.sun .dow{color:#FF6B88;}
+
+  /* Time slot sections */
+  .time-section{margin-bottom:14px;}
+  .time-section .sec-label{
+    font-size:11px;font-weight:800;color:var(--text-dim);
+    letter-spacing:.02em;margin-bottom:8px;
+  }
+  .slot-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+  .slot-btn{
+    padding:13px 6px;border-radius:10px;
+    background:rgba(255,255,255,.04);border:1px solid var(--border);
+    font-size:13px;font-weight:700;color:var(--text);
     transition:all .15s;cursor:pointer;font-family:inherit;
   }
   .slot-btn:hover{background:rgba(30,245,202,.06);border-color:rgba(30,245,202,.3);}
@@ -308,7 +343,7 @@
     margin-bottom:10px;letter-spacing:-0.03em;
   }
   .book-success p{font-size:13px;color:var(--text-dim);line-height:1.6;}
-  @media (max-width:460px){ .slot-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:460px){ .slot-grid{grid-template-columns:repeat(3,1fr);} }
 </style>
 </head>
 <body>
@@ -645,29 +680,82 @@ async function loadSlots(){
 function renderSlots(){
   const area = document.getElementById('slotArea');
   area.className = '';
+
+  // Group slots by date key
   const byDay = {};
   bookState.slots.forEach(s => {
     const d = new Date(s.start);
     const key = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
     (byDay[key] = byDay[key] || []).push(s);
   });
-  const days = ['일','월','화','수','목','금','토'];
-  const out = Object.keys(byDay).sort().map(key => {
-    const first = new Date(byDay[key][0].start);
-    const header = `${first.getMonth()+1}월 ${first.getDate()}일 (${days[first.getDay()]})`;
-    const btns = byDay[key].map(s => {
-      const d = new Date(s.start);
-      const h = d.getHours();
-      const ampm = h < 12 ? '오전' : '오후';
-      const h12 = h === 0 ? 12 : (h > 12 ? h-12 : h);
-      return `<button type="button" class="slot-btn" data-start="${s.start}" data-end="${s.end}" data-label="${s.label}">${ampm} ${h12}시</button>`;
-    }).join('');
-    return `<div class="slot-day"><div class="day-title">${header}</div><div class="slot-grid">${btns}</div></div>`;
+  const dayKeys = Object.keys(byDay).sort();
+  bookState.byDay = byDay;
+  bookState.selectedDay = bookState.selectedDay && byDay[bookState.selectedDay] ? bookState.selectedDay : dayKeys[0];
+
+  // Build horizontal date strip
+  const dow = ['일','월','화','수','목','금','토'];
+  const strip = dayKeys.map(key => {
+    const d = new Date(byDay[key][0].start);
+    const dowIdx = d.getDay();
+    const dowCls = dowIdx === 0 ? ' sun' : (dowIdx === 6 ? ' sat' : '');
+    const sel = key === bookState.selectedDay ? ' selected' : '';
+    return `<button type="button" class="date-chip${dowCls}${sel}" data-key="${key}">
+      <div class="dow">${dow[dowIdx]}</div>
+      <div class="day">${d.getDate()}</div>
+    </button>`;
   }).join('');
-  area.innerHTML = out;
-  area.querySelectorAll('.slot-btn').forEach(btn => {
+
+  area.innerHTML = `
+    <div class="date-strip">${strip}</div>
+    <div id="timeArea"></div>
+  `;
+
+  area.querySelectorAll('.date-chip').forEach(chip => {
+    chip.onclick = () => {
+      bookState.selectedDay = chip.dataset.key;
+      // Clear previously selected time when date changes
+      bookState.slot = null;
+      updateSubmitState();
+      renderSlots();
+    };
+  });
+
+  renderTimesForSelectedDay();
+}
+
+function renderTimesForSelectedDay(){
+  const timeArea = document.getElementById('timeArea');
+  if(!timeArea) return;
+  const slots = bookState.byDay[bookState.selectedDay] || [];
+
+  // Bucket by time-of-day
+  const morning = [], afternoon = [], evening = [];
+  slots.forEach(s => {
+    const h = new Date(s.start).getHours();
+    if(h < 12) morning.push(s);
+    else if(h < 18) afternoon.push(s);
+    else evening.push(s);
+  });
+
+  const renderGroup = (label, arr) => {
+    if(arr.length === 0) return '';
+    const btns = arr.map(s => {
+      const h = new Date(s.start).getHours();
+      const h12 = h === 0 ? 12 : (h > 12 ? h-12 : h);
+      const selected = bookState.slot && bookState.slot.start === s.start ? ' selected' : '';
+      return `<button type="button" class="slot-btn${selected}" data-start="${s.start}" data-end="${s.end}" data-label="${s.label}">${h12}:00</button>`;
+    }).join('');
+    return `<div class="time-section"><div class="sec-label">${label}</div><div class="slot-grid">${btns}</div></div>`;
+  };
+
+  timeArea.innerHTML =
+    renderGroup('오전', morning) +
+    renderGroup('오후', afternoon) +
+    renderGroup('저녁', evening);
+
+  timeArea.querySelectorAll('.slot-btn').forEach(btn => {
     btn.onclick = () => {
-      area.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
+      timeArea.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
       bookState.slot = {
         start: btn.dataset.start,
