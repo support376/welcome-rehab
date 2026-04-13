@@ -520,14 +520,14 @@
     aspect-ratio:1/1.1;border-radius:24px;
     background:linear-gradient(135deg,var(--purple-deep),var(--purple));
     border:1px solid var(--border);
-    display:flex;align-items:center;justify-content:center;
-    font-size:72px;font-weight:800;letter-spacing:-0.05em;
-    color:rgba(255,255,255,.15);
     position:relative;overflow:hidden;
   }
+  .attorney-photo img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  }
   .attorney-photo::after{
-    content:'';position:absolute;inset:0;
-    background:radial-gradient(circle at 30% 20%,rgba(30,245,202,.2),transparent 60%);
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(circle at 30% 20%,rgba(30,245,202,.15),transparent 60%);
   }
   .attorney-card h3{font-size:13px;color:var(--mint);font-weight:700;margin-bottom:10px;letter-spacing:.05em;}
   .attorney-card h2{font-size:36px;font-weight:800;letter-spacing:-0.04em;margin-bottom:20px;}
@@ -661,6 +661,58 @@
   }
   .final p{color:var(--text-dim);font-size:17px;margin-bottom:40px;}
 
+  /* ---------- Defense pillars ---------- */
+  .defense-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
+  }
+  .defense-card{
+    padding:32px 28px;border-radius:20px;
+    background:var(--card);border:1px solid var(--border);
+    position:relative;overflow:hidden;
+  }
+  .defense-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,var(--cyan),var(--mint));
+  }
+  .defense-card .num{
+    font-size:12px;font-weight:800;color:var(--mint);
+    letter-spacing:.1em;margin-bottom:14px;
+  }
+  .defense-card h4{
+    font-size:18px;font-weight:800;letter-spacing:-0.03em;
+    margin-bottom:12px;line-height:1.35;
+  }
+  .defense-card p{
+    font-size:13px;line-height:1.7;color:var(--text-dim);
+  }
+  @media (max-width:980px){ .defense-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .defense-grid{grid-template-columns:1fr;} }
+
+  /* ---------- Office / Map ---------- */
+  .office-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:24px;
+    border-radius:24px;overflow:hidden;border:1px solid var(--border);
+    background:var(--card);
+  }
+  .office-photo{position:relative;min-height:360px;}
+  .office-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .office-map{position:relative;min-height:360px;}
+  .office-map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:grayscale(.3) contrast(1.05);}
+  .office-info{
+    grid-column:1/-1;padding:32px 36px;border-top:1px solid var(--border);
+    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  }
+  .office-info .item .label{
+    font-size:11px;font-weight:800;color:var(--mint);
+    letter-spacing:.1em;margin-bottom:8px;
+  }
+  .office-info .item .val{font-size:15px;color:var(--text);line-height:1.6;}
+  .office-info .item .val b{color:#fff;}
+  @media (max-width:860px){
+    .office-grid{grid-template-columns:1fr;}
+    .office-info{grid-template-columns:1fr;padding:28px 24px;gap:18px;}
+  }
+
   /* ---------- Footer ---------- */
   footer{
     border-top:1px solid var(--border);
@@ -720,14 +772,14 @@
 <!-- Hero -->
 <section class="hero">
   <div class="container">
-    <span class="eyebrow">단순하면 20만원 즉시 착수 · 복잡하면 변호사 직접</span>
+    <span class="eyebrow">도산·조세법 전문 변호사 직접 · AI로 빠짐없이</span>
     <h1>
       미루면 이자만 늘어납니다.<br/>
       <span class="grad">오늘 시작하세요.</span>
     </h1>
     <p class="sub">
-      웰컴회생은 <b style="color:#fff">바벨 전략</b>으로 운영됩니다.<br/>
-      단순 케이스는 가장 저렴하게 · 복잡 케이스는 가장 깊이.
+      무자격 사무장이 아닌 <b style="color:#fff">변호사가 직접</b>, AI로 누락 없이 체크합니다.<br/>
+      추가생계비부터 세금 방어까지 — 최고의 방어를 설계합니다.
     </p>
     <div class="cta-row">
       <a href="chat.html" class="cta-primary">3분 AI 진단 시작 →</a>
@@ -806,7 +858,7 @@
         </ul>
 
         <a href="chat.html" class="btn">변호사 상담 예약하기 →</a>
-        <a href="tel:02-0000-0000" class="sub-btn">또는 02-0000-0000</a>
+        <a href="tel:1551-8016" class="sub-btn">또는 1551-8016</a>
       </div>
     </div>
 
@@ -883,18 +935,18 @@
 
     <div class="process-wrap">
       <div class="step">
-        <h3>AI 진단</h3>
-        <p>17개 질문으로 가능성·리스크·Lite/Pro 적합도를 자동 분류합니다.</p>
+        <h3>채팅만으로 즉시 진단</h3>
+        <p>전화 필요 X, 설득 X. 채팅만으로 변제금·탕감액을 빠짐없이 즉시 파악합니다. <b style="color:#fff">절대 먼저 전화하지 않습니다.</b></p>
         <span class="time">약 3분 소요</span>
       </div>
       <div class="step">
-        <h3>변호사 검토</h3>
-        <p>양홍수 변호사가 답변을 직접 검토하고 Lite 또는 Pro 경로를 추천합니다.</p>
-        <span class="time">24시간 이내</span>
+        <h3>도산전문 변호사 직접 상담</h3>
+        <p>양홍수 변호사가 직접 최고의 전략을 설계합니다. <b style="color:#fff">상담은 무료</b>입니다. (노쇼방지금 2만원 · 참여 시 커피쿠폰으로 전액 지급)</p>
+        <span class="time">무료 상담</span>
       </div>
       <div class="step">
-        <h3>즉시 착수</h3>
-        <p>Lite는 당일 20만원 착수 가능. Pro는 상담 후 수임계약 및 분납 설계.</p>
+        <h3>당일 계약 시 수임료 할인</h3>
+        <p>당일 계약하시면 수임료 할인이 적용되며, <b style="color:#fff">분납도 가능</b>합니다. 계약 즉시 추심 방어가 시작됩니다.</p>
         <span class="time">당일 가능</span>
       </div>
     </div>
@@ -923,7 +975,7 @@
       </div>
       <div class="stat">
         <div class="stat-label">누적 개시결정 수</div>
-        <div class="stat-value"><span data-count="2847">0</span><span class="stat-unit">건</span></div>
+        <div class="stat-value"><span data-count="1283">0</span><span class="stat-unit">건</span></div>
         <div class="stat-sub">2018년 개소 이후</div>
       </div>
     </div>
@@ -1037,21 +1089,54 @@
 <section>
   <div class="container">
     <div class="attorney-card">
-      <div class="attorney-photo">YHS</div>
+      <div class="attorney-photo"><img src="assets/yang-hongsu.webp" alt="양홍수 변호사" /></div>
       <div>
         <h3>ATTORNEY</h3>
         <h2>양홍수 변호사</h2>
         <p>
-          "개인회생은 실패자가 받는 절차가 아니라, 다시 시작하기 위한 법적 권리입니다.
-          두려워서 미루는 사이 이자와 추심만 늘어납니다.
-          단순하면 Lite로 가장 싸게, 복잡하면 Pro로 가장 깊이 — 중간은 없습니다."
+          "무자격 사무장이 아닌 변호사가 직접, AI의 힘을 빌려 빠짐없이 체크합니다.
+          추가생계비는 한 항목도 놓치지 않고, 국세청 송무국 경험과 세무사 자격으로
+          세금까지 처리하는 최고의 방어를 설계합니다."
         </p>
         <div class="attorney-meta">
-          <span class="tag">대한변호사협회 인증</span>
-          <span class="tag">도산·회생 전문</span>
-          <span class="tag">누적 수임 1,200건+</span>
-          <span class="tag">법인회생·일반회생 다수</span>
+          <span class="tag">대한변협 인증 도산법·조세법 전문</span>
+          <span class="tag">변호사·세무사 동시자격</span>
+          <span class="tag">회생상담 누적 9,000건+ (2026.3 기준)</span>
+          <span class="tag">서울지방국세청 송무국 경험</span>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why 웰컴회생 -->
+<section>
+  <div class="container">
+    <div class="section-head-center">
+      <span class="section-label">WHY 웰컴회생</span>
+      <h2 class="section-title">최고의 방어는 <span class="grad">디테일에서</span> 나옵니다</h2>
+      <p class="section-desc">무자격 사무장이 아닌, 진짜 변호사가 AI의 힘을 빌려 빠짐없이 체크합니다.</p>
+    </div>
+    <div class="defense-grid">
+      <div class="defense-card">
+        <div class="num">POINT 01</div>
+        <h4>사무장이 아닌<br/>변호사 직접</h4>
+        <p>무자격 사무장 상담 금지. 모든 전략은 양홍수 변호사가 직접 설계하고 검토합니다.</p>
+      </div>
+      <div class="defense-card">
+        <div class="num">POINT 02</div>
+        <h4>AI 누락 체크<br/>시스템</h4>
+        <p>공제·생계비·채무 항목을 AI가 100% 스캔합니다. 사람의 실수로 놓치는 항목을 차단합니다.</p>
+      </div>
+      <div class="defense-card">
+        <div class="num">POINT 03</div>
+        <h4>추가생계비<br/>누락 제로</h4>
+        <p>의료비·교육비·부양가족 등 인정받을 수 있는 모든 생계비를 빠짐없이 반영해 변제금을 최저로 설계합니다.</p>
+      </div>
+      <div class="defense-card">
+        <div class="num">POINT 04</div>
+        <h4>세금 방어<br/>까지</h4>
+        <p>국세청 송무국 경험과 세무사 자격으로 조세채권까지 구조조정. 숫자에 강력한 방어를 제공합니다.</p>
       </div>
     </div>
   </div>
@@ -1151,7 +1236,40 @@
     <p>진단은 3분. Lite면 오늘 20만원으로 시작합니다. Pro면 24시간 내 변호사 연결.</p>
     <div class="cta-row">
       <a href="chat.html" class="cta-primary">지금 AI 진단 시작 →</a>
-      <a href="tel:02-0000-0000" class="cta-secondary">📞 02-0000-0000</a>
+      <a href="tel:1551-8016" class="cta-secondary">📞 1551-8016</a>
+    </div>
+  </div>
+</section>
+
+<!-- Office / Map -->
+<section>
+  <div class="container">
+    <div class="section-head-center">
+      <span class="section-label">OFFICE</span>
+      <h2 class="section-title">웰컴법률사무소</h2>
+      <p class="section-desc">서초역 도보 3분 · 대면·화상·전화 상담 모두 가능합니다.</p>
+    </div>
+    <div class="office-grid">
+      <div class="office-photo"><img src="assets/office-interior.jpg" alt="웰컴법률사무소 내부" /></div>
+      <div class="office-map">
+        <iframe
+          src="https://www.google.com/maps?q=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%9C%EC%B4%88%EA%B5%AC%20%EA%B0%95%EB%82%A8%EB%8C%80%EB%A1%9C%20525%20%EC%84%B8%EC%98%81%EC%A0%9C%EC%9D%B4%ED%83%80%EC%9B%8C&output=embed"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
+      <div class="office-info">
+        <div class="item">
+          <div class="label">ADDRESS</div>
+          <div class="val"><b>서울특별시 서초구 강남대로 525</b><br/>세영제이타워 10층</div>
+        </div>
+        <div class="item">
+          <div class="label">CONTACT</div>
+          <div class="val"><b>1551-8016</b><br/>평일 09:00 – 18:00</div>
+        </div>
+        <div class="item">
+          <div class="label">CONSULTATION</div>
+          <div class="val">대면 · 화상(Zoom / Google Meet)<br/>전화 상담 모두 가능</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1161,7 +1279,7 @@
     <div>
       <div style="color:var(--text);font-weight:700;margin-bottom:6px;">웰컴법률사무소</div>
       대표변호사 양홍수 · 서울지방변호사회 소속<br/>
-      서울특별시 서초구 서초대로 XXX · 사업자등록번호 XXX-XX-XXXXX
+      서울특별시 서초구 강남대로 525, 세영제이타워 10층
     </div>
     <div>
       <a href="#products">상품 비교</a>
@@ -1175,7 +1293,7 @@
 
 <!-- Sticky Mobile CTA -->
 <div class="sticky-cta">
-  <a href="tel:02-0000-0000" class="call">📞 전화 상담</a>
+  <a href="tel:1551-8016" class="call">📞 전화 상담</a>
   <a href="chat.html" class="diag">🔍 AI 진단 시작</a>
 </div>
 

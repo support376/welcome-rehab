@@ -2,3 +2,7 @@ welcome-rehabilitation-website-spec.md
 .vercel
 .DS_Store
 node_modules
+.claude/
+memory/
+
+.vercel
