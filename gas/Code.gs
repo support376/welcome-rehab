@@ -10,7 +10,7 @@
  */
 
 // ===================== 설정 =====================
-const SHEET_ID = 'PUT_YOUR_SHEET_ID_HERE';       // Google Sheet URL 의 /d/ 와 /edit 사이 문자열
+const SHEET_ID = '1i-Mtl3GNZ-aNTM7I6JzSgjMGZFsg13godJGzXvEgqhs';
 const CALENDAR_ID = 'primary';                    // 'primary' = 기본 캘린더, 또는 공유 캘린더 이메일
 
 // 상담 운영 시간 (24시간제)
