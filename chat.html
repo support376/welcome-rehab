@@ -194,6 +194,74 @@
   .cb-submit:hover{transform:translateY(-1px);}
   .cb-submit:disabled{opacity:.4;cursor:not-allowed;transform:none;}
 
+  /* Contact form inside bubble */
+  .inline-form{margin-top:14px;display:flex;flex-direction:column;gap:10px;}
+  .inline-form label{font-size:11px;font-weight:700;color:var(--text-dim);letter-spacing:.02em;}
+  .inline-form input[type=text],
+  .inline-form input[type=tel]{
+    width:100%;padding:13px 16px;border-radius:12px;
+    background:rgba(255,255,255,.04);border:1px solid var(--border);
+    color:var(--text);font-family:inherit;font-size:14px;
+    outline:none;transition:border .2s;
+  }
+  .inline-form input:focus{border-color:rgba(0,184,255,.5);}
+  .inline-form .consent{
+    display:flex;gap:10px;align-items:flex-start;
+    padding:10px 14px;border-radius:10px;
+    background:rgba(255,255,255,.03);border:1px solid var(--border);
+    font-size:12px;color:var(--text-dim);line-height:1.5;cursor:pointer;
+  }
+  .inline-form .consent input{width:16px;height:16px;margin-top:2px;accent-color:var(--mint);flex-shrink:0;}
+  .inline-form .consent b{color:var(--text);}
+  .inline-form .fsubmit{
+    width:100%;padding:14px;border-radius:12px;
+    background:linear-gradient(90deg,var(--purple-bright),var(--cyan),var(--mint));
+    color:#0B0913;font-weight:800;font-size:14px;
+    transition:transform .15s,opacity .15s;
+  }
+  .inline-form .fsubmit:hover{transform:translateY(-1px);}
+  .inline-form .fsubmit:disabled{opacity:.4;cursor:not-allowed;transform:none;}
+
+  /* Chip for lead-sent confirmation */
+  .status-chip{
+    display:inline-flex;align-items:center;gap:8px;
+    margin-top:12px;padding:8px 14px;border-radius:999px;
+    background:rgba(30,245,202,.1);border:1px solid rgba(30,245,202,.35);
+    font-size:12px;color:var(--mint);font-weight:700;
+  }
+  .status-chip.err{
+    background:rgba(255,80,80,.08);border-color:rgba(255,80,80,.35);color:#FF9999;
+  }
+
+  /* Slot grid */
+  .slot-wrap{margin-top:14px;}
+  .slot-day{margin-bottom:16px;}
+  .slot-day .day-title{
+    font-size:12px;font-weight:800;color:var(--mint);
+    letter-spacing:.02em;margin-bottom:8px;
+  }
+  .slot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+  .slot-btn{
+    padding:12px 10px;border-radius:10px;
+    background:rgba(255,255,255,.04);border:1px solid var(--border);
+    font-size:12px;font-weight:700;color:var(--text);
+    transition:all .15s;cursor:pointer;
+  }
+  .slot-btn:hover{
+    background:rgba(30,245,202,.08);
+    border-color:rgba(30,245,202,.4);
+    color:var(--mint);
+  }
+  .slot-btn:disabled{opacity:.35;cursor:not-allowed;}
+  .slot-empty{
+    padding:16px;border-radius:12px;text-align:center;
+    background:rgba(255,255,255,.03);border:1px solid var(--border);
+    font-size:13px;color:var(--text-dim);
+  }
+  @media (max-width:460px){
+    .slot-grid{grid-template-columns:repeat(2,1fr);}
+  }
+
   /* Key modal */
   .modal-backdrop{
     position:fixed;inset:0;z-index:100;
@@ -436,8 +504,29 @@ const SYSTEM_PROMPT = `당신은 웰컴법률사무소(대표변호사 양홍수
 - 예: "세금 체납" 언급 시 → "국세청 송무국 경험·세무사 자격 기반 조세채권 편입 전략"
 - 예: "자영업" 언급 시 → "자영업 소득 변동성 반영 노하우"
 
-# 종결 절차
-[A]~[E]가 충분히 수집되면 연락처를 받고, 마지막 메시지에 "변호사 전달용 요약"이라고 짧게 안내한 뒤 다음 JSON을 출력:
+# 종결 절차 (UI 마커 기반 — 엄격 준수)
+
+체크박스 A~E 답변 + 후속 질문 1~2개로 상황 파악이 충분해지면 아래 순서대로 진행합니다.
+
+## 1단계 — 연락처 요청 (CONTACT_FORM 마커)
+
+먼저 짧게 말하세요:
+"선생님 상황 충분히 파악했어요. 마지막으로 변호사가 직접 연락드릴 수 있도록 연락처만 남겨주세요."
+
+그 다음 반드시 **단독 라인으로** 다음 마커를 출력합니다:
+
+[CONTACT_FORM]
+
+UI가 이 마커를 이름·휴대폰·개인정보 수집 동의 입력 폼으로 자동 변환합니다.
+사용자가 폼을 제출하면 "이름: 홍길동 / 휴대폰: 010-... / 동의: 예" 형식의 user 메시지가 자동으로 전송됩니다.
+**직접 "이름이 뭐세요?" "전화번호 주세요" 같은 자유 질문 금지.** 오직 [CONTACT_FORM] 마커로만.
+
+## 2단계 — 요약 JSON + 시간 슬롯 (TIME_SLOTS 마커)
+
+연락처를 받으면 한 문장 감사 인사:
+"감사합니다 선생님. 변호사에게 내용 전달하고, 아래에서 편하신 상담 시간을 선택해 주세요."
+
+그 다음 **JSON 요약 블록**을 출력합니다 (UI가 자동으로 숨기고 Google Sheet로 전송):
 
 \`\`\`json
 {
@@ -447,7 +536,6 @@ const SYSTEM_PROMPT = `당신은 웰컴법률사무소(대표변호사 양홍수
   "assets": {"real_estate":"","vehicle":"","financial":"","family_nominee":""},
   "additional_living": {"housing":false,"children":0,"dependents":"","medical":false,"education":false},
   "risk": {"delinquency":"","lawsuits":"","criminal":"","history":"","gambling":false,"nominee":false},
-  "contact": {"name":"","phone":"","consent":true},
   "case_classification": "Lite|Pro|HOT",
   "classification_reason": "한 줄 근거",
   "urgency": "high|medium|low",
@@ -456,19 +544,32 @@ const SYSTEM_PROMPT = `당신은 웰컴법률사무소(대표변호사 양홍수
 }
 \`\`\`
 
-# 분류별 마지막 멘트
-- **Lite**: "선생님 케이스는 비교적 단순한 구조로 보여요. 웰컴회생 Lite로 빠르게 진행하는 것이 유리해 보입니다. 양홍수 변호사가 24시간 이내에 직접 검토 후 연락드리겠습니다."
-- **Pro**: "선생님 케이스는 변제금을 더 낮출 여지가 있어 보여요. 양홍수 변호사가 직접 설계하는 Pro로 정밀 전략 검토가 필요해 보입니다. 24시간 이내 변호사가 직접 연락드리겠습니다."
-- **HOT**: "선생님 상황이 시급해 보여요. 빠른 대응이 변제금·인가에 큰 영향을 줍니다. 양홍수 변호사가 30분 이내 직접 연락드리도록 긴급 전달하겠습니다. 더 급하시면 1551-8016으로 먼저 연락 주셔도 됩니다."
+JSON 바로 뒤에 **단독 라인으로** 시간 슬롯 마커:
+
+[TIME_SLOTS]
+
+UI가 양홍수 변호사 Google Calendar의 빈 1시간 슬롯을 버튼 그리드로 표시합니다.
+
+## 3단계 — 예약 확정 (자동 처리)
+
+사용자가 시간 슬롯 버튼을 누르면 UI가 자동으로 "예약 확정: OO월 OO일 OO시" user 메시지를 전송합니다.
+이 메시지를 받으면 아래 분류별 마지막 멘트로 마무리:
+
+- **Lite**: "예약 확정되었습니다. 선생님 케이스는 비교적 단순한 구조로 보이니 웰컴회생 Lite로 빠르게 진행하는 것이 유리해 보여요. 해당 시간에 양홍수 변호사가 직접 전화드리겠습니다."
+- **Pro**: "예약 확정되었습니다. 선생님 케이스는 변제금을 더 낮출 여지가 있어 Pro로 정밀 전략 검토가 필요해 보여요. 해당 시간에 양홍수 변호사가 직접 전화드려 전략을 설계해 드리겠습니다."
+- **HOT**: "예약 확정되었습니다. 선생님 상황이 시급하니 해당 시간 전이라도 상황 변동이 있으면 1551-8016으로 바로 연락 주세요. 양홍수 변호사가 직접 응대하겠습니다."
 
 # 면책 문구 (첫 메시지 + 결과 제시 시 반드시 포함)
 "본 진단은 AI가 입력 정보 기반으로 추정한 개략 금액이며 법률 자문이 아닙니다. 실제 변제금·탕감률은 관할 법원·회생위원 판단, 추가 자료 검토, 채권자 이의 등에 따라 달라질 수 있습니다. 정확한 전략은 양홍수 변호사 검토가 필요합니다."`;
 
 const DEFAULT_MODEL = 'claude-sonnet-4-5';
 const STORAGE_MSGS = 'welcome_rehab_msgs';
+const STORAGE_STATE = 'welcome_rehab_state';
 
 let model = DEFAULT_MODEL;
 let messages = JSON.parse(localStorage.getItem(STORAGE_MSGS) || '[]');
+let leadState = JSON.parse(localStorage.getItem(STORAGE_STATE) || '{}');
+// leadState shape: { contact, summary, summarySent, booking }
 let isBusy = false;
 
 const $ = (id) => document.getElementById(id);
@@ -476,10 +577,21 @@ const messagesEl = $('messages');
 const errBox = $('errBox');
 
 function saveMsgs(){ localStorage.setItem(STORAGE_MSGS, JSON.stringify(messages)); }
+function saveState(){ localStorage.setItem(STORAGE_STATE, JSON.stringify(leadState)); }
 
 function escapeHTML(s){
   return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
+function stripDirectives(text){
+  // Strip json code blocks, [CONTACT_FORM] and [TIME_SLOTS] markers from display
+  return text
+    .replace(/```json[\s\S]*?```/g, '')
+    .replace(/\[CONTACT_FORM\]/g, '')
+    .replace(/\[TIME_SLOTS\]/g, '')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
 function renderMarkdown(text){
   const parts = text.split(/(```[\s\S]*?```)/g);
   return parts.map(p => {
@@ -500,7 +612,8 @@ function render(){
     const div = document.createElement('div');
     div.className = 'msg ' + (m.role === 'user' ? 'user' : 'bot');
     const avatar = m.role === 'assistant' ? '<div class="mini-avatar">AI</div>' : '';
-    div.innerHTML = avatar + '<div class="bubble">' + renderMarkdown(m.content) + '</div>';
+    const body = m.role === 'assistant' ? stripDirectives(m.content) : m.content;
+    div.innerHTML = avatar + '<div class="bubble">' + renderMarkdown(body) + '</div>';
     messagesEl.appendChild(div);
   });
   if(isBusy){
@@ -510,8 +623,11 @@ function render(){
     messagesEl.appendChild(div);
   }
 
-  // Enhance last assistant bubble with interactive checkboxes if it contains □
-  if(!isBusy) enhanceLastCheckboxes();
+  if(!isBusy){
+    enhanceLastCheckboxes();
+    enhanceLastMarkers();
+    processSummaryAndSend();
+  }
 
   messagesEl.scrollTop = messagesEl.scrollHeight;
 }
@@ -578,6 +694,223 @@ function enhanceLastCheckboxes(){
 function showErr(msg){
   errBox.innerHTML = '<div class="err">⚠️ ' + escapeHTML(msg) + '</div>';
   setTimeout(() => errBox.innerHTML = '', 6000);
+}
+
+/* ---------- Marker handling (CONTACT_FORM, TIME_SLOTS, JSON summary) ---------- */
+
+function lastAssistantIdx(){
+  for(let i = messages.length - 1; i >= 0; i--){
+    if(messages[i].role === 'assistant' && !messages[i]._hidden) return i;
+  }
+  return -1;
+}
+
+function getLastBotBubble(){
+  const bots = messagesEl.querySelectorAll('.msg.bot .bubble');
+  if(bots.length === 0) return null;
+  return bots[bots.length - 1];
+}
+
+function enhanceLastMarkers(){
+  const idx = lastAssistantIdx();
+  if(idx < 0) return;
+  const lastMsg = messages[idx];
+  const raw = lastMsg.content;
+  const bubble = getLastBotBubble();
+  if(!bubble || bubble.dataset.markerEnhanced) return;
+
+  if(raw.includes('[CONTACT_FORM]') && !leadState.contact){
+    bubble.dataset.markerEnhanced = '1';
+    appendContactForm(bubble);
+    return;
+  }
+  if(raw.includes('[TIME_SLOTS]') && !leadState.booking){
+    bubble.dataset.markerEnhanced = '1';
+    appendSlotGrid(bubble);
+    return;
+  }
+}
+
+function appendContactForm(bubble){
+  const form = document.createElement('div');
+  form.className = 'inline-form';
+  form.innerHTML = `
+    <div>
+      <label>이름</label>
+      <input type="text" id="lf_name" placeholder="홍길동" autocomplete="name"/>
+    </div>
+    <div>
+      <label>휴대폰</label>
+      <input type="tel" id="lf_phone" placeholder="010-0000-0000" autocomplete="tel"/>
+    </div>
+    <label class="consent">
+      <input type="checkbox" id="lf_consent"/>
+      <span><b>[필수]</b> 상담 목적의 개인정보(이름·연락처) 수집·이용에 동의합니다.</span>
+    </label>
+    <button type="button" class="fsubmit" id="lf_submit">상담 예약 단계로 이동 →</button>
+  `;
+  bubble.appendChild(form);
+
+  const nameEl = form.querySelector('#lf_name');
+  const phoneEl = form.querySelector('#lf_phone');
+  const consentEl = form.querySelector('#lf_consent');
+  const submitEl = form.querySelector('#lf_submit');
+
+  submitEl.onclick = async () => {
+    const name = nameEl.value.trim();
+    const phone = phoneEl.value.trim();
+    const consent = consentEl.checked;
+    if(!name){ nameEl.focus(); return; }
+    if(!/^[\d\-\s+]{9,}$/.test(phone)){ phoneEl.focus(); return; }
+    if(!consent){ alert('개인정보 수집·이용 동의가 필요합니다.'); return; }
+
+    leadState.contact = { name, phone, consent: true };
+    saveState();
+
+    // Disable form
+    [nameEl, phoneEl, consentEl, submitEl].forEach(el => el.disabled = true);
+    submitEl.textContent = '제출 완료';
+
+    const userMsg = `이름: ${name} / 휴대폰: ${phone} / 동의: 예`;
+    await sendMessage(userMsg);
+  };
+}
+
+async function appendSlotGrid(bubble){
+  const wrap = document.createElement('div');
+  wrap.className = 'slot-wrap';
+  wrap.innerHTML = '<div class="slot-empty">빈 시간 불러오는 중...</div>';
+  bubble.appendChild(wrap);
+
+  let data;
+  try {
+    const r = await fetch('/api/slots');
+    data = await r.json();
+  } catch(e){
+    wrap.innerHTML = '<div class="slot-empty">시간 정보를 불러오지 못했어요. 잠시 후 다시 시도하거나 1551-8016으로 전화 주세요.</div>';
+    return;
+  }
+  if(data.error || !Array.isArray(data.slots) || data.slots.length === 0){
+    wrap.innerHTML = '<div class="slot-empty">예약 가능한 시간이 없어요. 1551-8016으로 전화 주시면 빠르게 안내드리겠습니다.</div>';
+    return;
+  }
+
+  // Group by date
+  const byDay = {};
+  data.slots.forEach(s => {
+    const d = new Date(s.start);
+    const key = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+    (byDay[key] = byDay[key] || []).push(s);
+  });
+
+  wrap.innerHTML = '';
+  Object.keys(byDay).sort().forEach(key => {
+    const day = document.createElement('div');
+    day.className = 'slot-day';
+    const head = new Date(byDay[key][0].start);
+    const dayStr = formatDayHeader(head);
+    day.innerHTML = `<div class="day-title">${dayStr}</div><div class="slot-grid"></div>`;
+    const grid = day.querySelector('.slot-grid');
+    byDay[key].forEach(s => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'slot-btn';
+      btn.textContent = formatTimeOnly(new Date(s.start));
+      btn.onclick = () => handleSlotClick(s, wrap);
+      grid.appendChild(btn);
+    });
+    wrap.appendChild(day);
+  });
+}
+
+function formatDayHeader(d){
+  const days = ['일','월','화','수','목','금','토'];
+  return `${d.getMonth()+1}월 ${d.getDate()}일 (${days[d.getDay()]})`;
+}
+function formatTimeOnly(d){
+  const h = d.getHours();
+  const ampm = h < 12 ? '오전' : '오후';
+  const h12 = h === 0 ? 12 : (h > 12 ? h-12 : h);
+  return `${ampm} ${h12}시`;
+}
+
+async function handleSlotClick(slot, wrap){
+  // Disable all slot buttons
+  wrap.querySelectorAll('.slot-btn').forEach(b => b.disabled = true);
+  const chip = document.createElement('div');
+  chip.className = 'status-chip';
+  chip.textContent = '예약 중...';
+  wrap.appendChild(chip);
+
+  try {
+    const r = await fetch('/api/book', {
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body: JSON.stringify({
+        contact: leadState.contact,
+        summary: leadState.summary || {},
+        start: slot.start,
+        end: slot.end,
+      }),
+    });
+    const data = await r.json();
+    if(!data.ok){
+      chip.className = 'status-chip err';
+      chip.textContent = data.conflict ? '이미 예약된 시간이에요. 다른 시간 선택해 주세요.' : ('예약 실패: ' + (data.error || '알 수 없는 오류'));
+      // Re-enable buttons on failure
+      wrap.querySelectorAll('.slot-btn').forEach(b => b.disabled = false);
+      return;
+    }
+    leadState.booking = { start: slot.start, end: slot.end, label: slot.label };
+    saveState();
+    chip.textContent = '✓ ' + (data.label || slot.label) + ' 예약 확정';
+    const userMsg = `예약 확정: ${slot.label || formatDayHeader(new Date(slot.start)) + ' ' + formatTimeOnly(new Date(slot.start))}`;
+    await sendMessage(userMsg);
+  } catch(e){
+    chip.className = 'status-chip err';
+    chip.textContent = '네트워크 오류: ' + e.message;
+    wrap.querySelectorAll('.slot-btn').forEach(b => b.disabled = false);
+  }
+}
+
+/* ---------- Detect JSON summary in assistant message and send to /api/lead ---------- */
+
+function processSummaryAndSend(){
+  if(leadState.summarySent) return;
+  if(!leadState.contact) return; // need contact first
+
+  // Scan from latest assistant messages for ```json block
+  for(let i = messages.length - 1; i >= 0; i--){
+    const m = messages[i];
+    if(m.role !== 'assistant') continue;
+    const match = m.content.match(/```json\s*([\s\S]*?)```/);
+    if(!match) continue;
+    let summary;
+    try { summary = JSON.parse(match[1]); } catch(e){ break; }
+    leadState.summary = summary;
+    leadState.summarySent = true;
+    saveState();
+
+    // Append confirmation chip to last bot bubble
+    const bubble = getLastBotBubble();
+    if(bubble && !bubble.querySelector('.lead-sent-chip')){
+      const chip = document.createElement('div');
+      chip.className = 'status-chip lead-sent-chip';
+      chip.textContent = '✓ 변호사에게 전달 완료';
+      bubble.appendChild(chip);
+    }
+
+    // Fire-and-forget POST
+    fetch('/api/lead', {
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body: JSON.stringify({
+        contact: leadState.contact,
+        summary,
+      }),
+    }).catch(() => { /* silent */ });
+    break;
+  }
 }
 
 async function callClaude(){
@@ -666,7 +999,9 @@ async function kickoff(){
   // ctx가 URL에 있으면 항상 새 세션으로 시작 (이전 localStorage 대화 폐기)
   if(ctx){
     messages = [];
+    leadState = {};
     localStorage.removeItem(STORAGE_MSGS);
+    localStorage.removeItem(STORAGE_STATE);
     messages.push({role:'user', content: formatStep1Block(ctx), _hidden:true});
     saveMsgs();
     // URL에서 ctx 제거 (새로고침 시 루프 방지 없이 그냥 유지해도 됨, 여기선 유지)
@@ -712,7 +1047,9 @@ form.addEventListener('submit', async (e) => {
 $('resetBtn').onclick = () => {
   if(!confirm('대화를 처음부터 다시 시작할까요?')) return;
   messages = [];
+  leadState = {};
   localStorage.removeItem(STORAGE_MSGS);
+  localStorage.removeItem(STORAGE_STATE);
   render();
   kickoff();
 };
