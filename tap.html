@@ -436,10 +436,11 @@ function renderResult(){
     </div>
   ` : '';
 
-  const ctx = btoa(unescape(encodeURIComponent(JSON.stringify({
+  const ctxRaw = btoa(unescape(encodeURIComponent(JSON.stringify({
     answers: state.answers,
     result: r,
   }))));
+  const ctx = encodeURIComponent(ctxRaw);
 
   stage.innerHTML = `
     <div class="result">
@@ -464,7 +465,7 @@ function renderResult(){
         ⓘ 본 결과는 AI가 핵심 정보 5개로 계산한 <b>개략 추정</b>이며, 법률 자문이 아닙니다. 추가생계비·재산·부양가족 등을 반영하면 변제금이 더 낮아질 수 있어요. 정확한 전략은 양홍수 변호사 검토가 필요합니다.
       </div>
       <div class="cta-row">
-        <a class="cta-primary" href="chat.html?ctx=${ctx}">자세히 진단받기 (변제금 낮추기) →</a>
+        <a class="cta-primary" href="chat.html?ctx=${ctx}">탕감액 더 찾아보기 →</a>
         <a class="cta-secondary" href="tel:1551-8016">바로 상담 예약 · 1551-8016</a>
       </div>
     </div>
