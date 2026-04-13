@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title>1분 진단 · 웰컴회생</title>
+<link href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#0B0913; --bg-1:#161320;
+    --purple-bright:#6529FF; --cyan:#00B8FF; --mint:#1EF5CA;
+    --text:#F5F5FA; --text-dim:#A7A7A7;
+    --border:rgba(255,255,255,.08);
+    --border-strong:rgba(255,255,255,.14);
+    --card:rgba(255,255,255,.04);
+    --card-hover:rgba(255,255,255,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{
+    font-family:'Wanted Sans Variable','Wanted Sans',-apple-system,system-ui,sans-serif;
+    background:var(--bg-0); color:var(--text);
+    letter-spacing:-0.03em; -webkit-font-smoothing:antialiased;
+    overflow:hidden;
+  }
+  body::before{
+    content:'';position:fixed;inset:-20%;z-index:0;
+    background:
+      radial-gradient(50% 40% at 20% 10%,rgba(101,41,255,.32),transparent 70%),
+      radial-gradient(50% 40% at 80% 90%,rgba(0,184,255,.22),transparent 70%),
+      radial-gradient(40% 40% at 50% 50%,rgba(30,245,202,.1),transparent 70%);
+    filter:blur(80px);pointer-events:none;
+  }
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+
+  .app{
+    position:relative;z-index:1;
+    height:100vh;max-width:720px;margin:0 auto;
+    display:flex;flex-direction:column;
+    padding:24px 24px 32px;
+  }
+
+  /* Header */
+  .top{
+    display:flex;align-items:center;gap:14px;margin-bottom:28px;
+  }
+  .back{
+    width:40px;height:40px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--card);border:1px solid var(--border);
+    font-size:20px;flex-shrink:0;
+  }
+  .back:disabled{opacity:.3;cursor:not-allowed;}
+  .progress{
+    flex:1;height:6px;border-radius:3px;
+    background:rgba(255,255,255,.06);overflow:hidden;
+  }
+  .progress-bar{
+    height:100%;border-radius:3px;
+    background:linear-gradient(90deg,var(--purple-bright),var(--cyan),var(--mint));
+    transition:width .4s cubic-bezier(.2,.8,.2,1);
+  }
+  .counter{
+    font-size:12px;color:var(--text-dim);font-weight:700;
+    letter-spacing:.05em;min-width:40px;text-align:right;
+  }
+
+  /* Question */
+  .q-wrap{
+    flex:1;display:flex;flex-direction:column;justify-content:center;
+    animation:slideIn .45s cubic-bezier(.2,.8,.2,1);
+  }
+  @keyframes slideIn{
+    from{opacity:0;transform:translateX(20px);}
+    to{opacity:1;transform:translateX(0);}
+  }
+  .q-label{
+    font-size:12px;font-weight:800;color:var(--mint);
+    letter-spacing:.1em;margin-bottom:12px;
+  }
+  .q-title{
+    font-size:clamp(24px,5vw,32px);font-weight:800;
+    letter-spacing:-0.04em;line-height:1.3;margin-bottom:14px;
+  }
+  .q-desc{
+    font-size:14px;color:var(--text-dim);line-height:1.6;margin-bottom:32px;
+  }
+
+  /* Options */
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt{
+    width:100%;padding:18px 22px;text-align:left;
+    border-radius:14px;
+    background:var(--card);border:1px solid var(--border);
+    font-size:15px;font-weight:600;color:var(--text);
+    transition:all .18s;
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+  }
+  .opt:hover{background:var(--card-hover);border-color:var(--border-strong);transform:translateY(-1px);}
+  .opt .tag{
+    font-size:11px;font-weight:700;color:var(--text-dim);
+  }
+  .opt .arrow{
+    color:var(--text-dim);font-size:18px;transition:transform .18s;
+  }
+  .opt:hover .arrow{transform:translateX(3px);color:var(--cyan);}
+
+  /* Options grid (small items) */
+  .options.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .options.grid .opt{
+    flex-direction:column;align-items:center;justify-content:center;
+    padding:22px 14px;text-align:center;min-height:88px;
+  }
+  .options.grid .opt .arrow{display:none;}
+  .options.grid .opt .big{
+    font-size:22px;font-weight:800;letter-spacing:-0.04em;margin-bottom:4px;
+  }
+  .options.grid .opt .tag{font-size:11px;}
+
+  /* Footer hint */
+  .foot{
+    text-align:center;font-size:11px;color:var(--text-dim);
+    margin-top:20px;line-height:1.6;
+  }
+  .foot b{color:var(--mint);}
+
+  /* Result screen */
+  .result{
+    flex:1;display:flex;flex-direction:column;justify-content:center;
+    animation:fadeUp .5s cubic-bezier(.2,.8,.2,1);
+  }
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(16px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  .result-card{
+    padding:32px 28px;border-radius:24px;
+    background:
+      radial-gradient(60% 80% at 0% 0%,rgba(101,41,255,.22),transparent 70%),
+      radial-gradient(60% 80% at 100% 100%,rgba(30,245,202,.15),transparent 70%),
+      var(--card);
+    border:1px solid var(--border-strong);
+    margin-bottom:20px;
+  }
+  .result-card .eye{
+    font-size:12px;color:var(--mint);font-weight:800;
+    letter-spacing:.1em;margin-bottom:8px;
+  }
+  .result-card h2{
+    font-size:22px;font-weight:800;letter-spacing:-0.04em;
+    margin-bottom:24px;line-height:1.35;
+  }
+  .result-row{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding:14px 0;border-bottom:1px solid var(--border);
+  }
+  .result-row:last-of-type{border-bottom:none;}
+  .result-row .label{font-size:13px;color:var(--text-dim);}
+  .result-row .value{
+    font-size:18px;font-weight:800;
+    background:linear-gradient(120deg,#fff,var(--mint));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    letter-spacing:-0.03em;
+  }
+  .hot-alert{
+    margin-bottom:16px;padding:14px 18px;border-radius:14px;
+    background:rgba(255,107,136,.1);border:1px solid rgba(255,107,136,.3);
+    font-size:13px;color:#FFB6C6;line-height:1.5;
+  }
+  .hot-alert b{color:#FF6B88;}
+  .disclaim{
+    padding:14px 18px;border-radius:12px;
+    background:rgba(255,180,0,.05);border:1px solid rgba(255,180,0,.18);
+    font-size:11px;color:#FFD591;line-height:1.6;
+    margin-bottom:20px;
+  }
+  .cta-row{display:flex;flex-direction:column;gap:10px;}
+  .cta-primary{
+    display:block;padding:18px;border-radius:14px;text-align:center;
+    background:linear-gradient(90deg,var(--purple-bright),var(--cyan),var(--mint));
+    color:#0B0913;font-weight:800;font-size:15px;letter-spacing:-0.02em;
+    transition:transform .15s;
+  }
+  .cta-primary:hover{transform:translateY(-1px);}
+  .cta-secondary{
+    display:block;padding:16px;border-radius:14px;text-align:center;
+    background:var(--card);border:1px solid var(--border);
+    font-size:14px;color:var(--text-dim);
+  }
+  .cta-secondary:hover{border-color:var(--border-strong);color:var(--text);}
+
+  /* Loading */
+  .loading{
+    flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;
+    gap:20px;
+  }
+  .spinner{
+    width:44px;height:44px;border-radius:50%;
+    border:3px solid rgba(255,255,255,.1);
+    border-top-color:var(--mint);
+    animation:spin 1s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .loading p{font-size:13px;color:var(--text-dim);}
+
+  @media (max-width:420px){
+    .app{padding:18px 18px 24px;}
+    .options.grid{grid-template-columns:repeat(3,1fr);gap:8px;}
+    .options.grid .opt{min-height:74px;padding:16px 8px;}
+    .options.grid .opt .big{font-size:18px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <div class="top">
+    <button class="back" id="backBtn">←</button>
+    <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+    <div class="counter" id="counter">1 / 7</div>
+  </div>
+
+  <div id="stage"></div>
+</div>
+
+<script>
+const STEPS = [
+  {
+    key: 'region',
+    label: 'STEP 1 · 거주 권역',
+    title: '어디에 거주하고 계세요?',
+    desc: '지역에 따라 추가 주거비 인정 한도가 달라집니다.',
+    layout: 'list',
+    options: [
+      { v:'1', label:'1권역 · 서울 전역', tag:'서울' },
+      { v:'2', label:'2권역 · 수도권 과밀억제권역', tag:'세종·용인·화성 포함' },
+      { v:'3', label:'3권역 · 광역시', tag:'부산·대구·광주·대전·울산' },
+      { v:'4', label:'4권역 · 그 외 지역', tag:'지방 시·군' },
+    ]
+  },
+  {
+    key: 'household',
+    label: 'STEP 2 · 가구원 수',
+    title: '본인 포함 몇 분이 함께 사세요?',
+    desc: '부양가족 수에 따라 기본생계비 인정 금액이 달라집니다.',
+    layout: 'grid',
+    options: [
+      { v:'1', big:'1인', tag:'나 혼자' },
+      { v:'2', big:'2인', tag:'부부 등' },
+      { v:'3', big:'3인', tag:'' },
+      { v:'4', big:'4인', tag:'' },
+      { v:'5', big:'5인', tag:'' },
+      { v:'6', big:'6인+', tag:'' },
+    ]
+  },
+  {
+    key: 'income',
+    label: 'STEP 3 · 월 소득',
+    title: '월 실수령 소득은<br/>얼마 정도 되세요?',
+    desc: '세후 실제 통장에 들어오는 금액 기준. 구간으로 편하게 선택하세요.',
+    layout: 'list',
+    options: [
+      { v:'u200', label:'200만원 미만' },
+      { v:'200_300', label:'200 ~ 300만원' },
+      { v:'300_400', label:'300 ~ 400만원' },
+      { v:'400_500', label:'400 ~ 500만원' },
+      { v:'500_700', label:'500 ~ 700만원' },
+      { v:'700p', label:'700만원 이상' },
+    ]
+  },
+  {
+    key: 'unsecured',
+    label: 'STEP 4 · 무담보 채무',
+    title: '무담보 채무는<br/>얼마 정도 되세요?',
+    desc: '카드·신용대출·캐피탈·사채 등. 담보 없이 빌린 채무입니다.',
+    layout: 'list',
+    options: [
+      { v:'u3000', label:'3,000만원 이하' },
+      { v:'3000_5000', label:'3,000 ~ 5,000만원' },
+      { v:'5000_10000', label:'5,000만 ~ 1억' },
+      { v:'10000_30000', label:'1억 ~ 3억' },
+      { v:'30000p', label:'3억 이상' },
+    ]
+  },
+  {
+    key: 'secured',
+    label: 'STEP 5 · 담보 채무',
+    title: '담보 채무가 있으세요?',
+    desc: '주택담보대출·자동차담보·전세자금담보 등. 없으면 "없음"을 선택하세요.',
+    layout: 'list',
+    options: [
+      { v:'none', label:'없음' },
+      { v:'u5000', label:'5,000만원 미만' },
+      { v:'5000_10000', label:'5,000만 ~ 1억' },
+      { v:'10000_30000', label:'1억 ~ 3억' },
+      { v:'30000p', label:'3억 이상' },
+    ]
+  },
+  {
+    key: 'tax',
+    label: 'STEP 6 · 세금·건강보험 체납',
+    title: '세금이나 건강보험<br/>체납이 있으세요?',
+    desc: '국세·지방세·4대보험 체납 금액. 없으면 "없음"을 선택하세요.',
+    layout: 'list',
+    options: [
+      { v:'none', label:'없음' },
+      { v:'u500', label:'500만원 미만' },
+      { v:'500_3000', label:'500 ~ 3,000만원' },
+      { v:'3000p', label:'3,000만원 이상' },
+    ]
+  },
+  {
+    key: 'delinquency',
+    label: 'STEP 7 · 연체·추심 단계',
+    title: '지금 연체 상태가<br/>어느 단계인가요?',
+    desc: '현재 상황에 따라 대응 속도가 달라집니다.',
+    layout: 'list',
+    options: [
+      { v:'normal', label:'정상 · 연체 없음' },
+      { v:'short', label:'연체만 (3개월 이내)' },
+      { v:'long', label:'장기연체 (3개월 이상)' },
+      { v:'lawsuit', label:'압류·소송 진행 중', tag:'긴급' },
+      { v:'court', label:'법원 서류 받음', tag:'긴급' },
+    ]
+  },
+];
+
+const state = {
+  step: 0,
+  answers: {},
+  result: null,
+  mode: 'tap', // 'tap' | 'loading' | 'result'
+};
+
+const $ = (id) => document.getElementById(id);
+const stage = $('stage');
+const progressBar = $('progressBar');
+const counter = $('counter');
+const backBtn = $('backBtn');
+
+function render(){
+  if(state.mode === 'tap'){ renderTap(); }
+  else if(state.mode === 'loading'){ renderLoading(); }
+  else if(state.mode === 'result'){ renderResult(); }
+  updateProgress();
+}
+
+function updateProgress(){
+  const total = STEPS.length;
+  let done = state.step;
+  if(state.mode === 'loading' || state.mode === 'result') done = total;
+  progressBar.style.width = (done / total * 100) + '%';
+  counter.textContent = (state.mode === 'tap' ? (state.step + 1) : total) + ' / ' + total;
+  backBtn.disabled = (state.mode !== 'tap' || state.step === 0);
+}
+
+function renderTap(){
+  const q = STEPS[state.step];
+  const layoutClass = q.layout === 'grid' ? 'options grid' : 'options';
+  const optsHtml = q.options.map(o => {
+    if(q.layout === 'grid'){
+      return `<button class="opt" data-v="${o.v}">
+        <div class="big">${o.big}</div>
+        ${o.tag ? `<div class="tag">${o.tag}</div>` : ''}
+      </button>`;
+    }
+    return `<button class="opt" data-v="${o.v}">
+      <span>${o.label}</span>
+      <span style="display:flex;align-items:center;gap:10px;">
+        ${o.tag ? `<span class="tag">${o.tag}</span>` : ''}
+        <span class="arrow">→</span>
+      </span>
+    </button>`;
+  }).join('');
+
+  stage.innerHTML = `
+    <div class="q-wrap">
+      <div class="q-label">${q.label}</div>
+      <h1 class="q-title">${q.title}</h1>
+      <p class="q-desc">${q.desc}</p>
+      <div class="${layoutClass}">${optsHtml}</div>
+      <div class="foot">
+        약 <b>30초</b> 소요 · 이름·연락처 없이 진행
+      </div>
+    </div>
+  `;
+
+  stage.querySelectorAll('.opt').forEach(btn => {
+    btn.onclick = () => {
+      state.answers[q.key] = btn.dataset.v;
+      if(state.step < STEPS.length - 1){
+        state.step++;
+        render();
+      } else {
+        submit();
+      }
+    };
+  });
+}
+
+function renderLoading(){
+  stage.innerHTML = `
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>입력하신 정보로 1차 추정 중...</p>
+    </div>
+  `;
+}
+
+async function submit(){
+  state.mode = 'loading'; render();
+  try{
+    const res = await fetch('/api/estimate', {
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body: JSON.stringify(state.answers),
+    });
+    const data = await res.json();
+    state.result = data;
+  } catch(e){
+    state.result = { error: e.message };
+  }
+  state.mode = 'result'; render();
+}
+
+function renderResult(){
+  const r = state.result?.result;
+  if(!r){
+    stage.innerHTML = `<div class="loading"><p>계산 중 오류가 발생했어요. 다시 시도해 주세요.</p></div>`;
+    return;
+  }
+  const hotBlock = r.is_hot ? `
+    <div class="hot-alert">
+      <b>긴급 상황으로 보여요.</b> 압류·소송이나 법원 서류를 받으신 경우, 빠른 대응이 변제금과 인가에 큰 영향을 줍니다. 아래 "자세히 진단받기"로 정밀 진단을 받으시거나 1551-8016으로 직접 연락 주세요.
+    </div>
+  ` : '';
+
+  const ctx = btoa(unescape(encodeURIComponent(JSON.stringify({
+    answers: state.answers,
+    result: r,
+  }))));
+
+  stage.innerHTML = `
+    <div class="result">
+      ${hotBlock}
+      <div class="result-card">
+        <div class="eye">1차 추정 결과</div>
+        <h2>선생님의 개략 추정 결과예요</h2>
+        <div class="result-row">
+          <div class="label">월 변제액 (추정 구간)</div>
+          <div class="value">약 ${r.monthly_repayment_min_manwon} ~ ${r.monthly_repayment_max_manwon}만원</div>
+        </div>
+        <div class="result-row">
+          <div class="label">탕감률 (추정 구간)</div>
+          <div class="value">약 ${r.discharge_rate_min} ~ ${r.discharge_rate_max}%</div>
+        </div>
+        <div class="result-row">
+          <div class="label">변제기간</div>
+          <div class="value">${r.period_months}개월</div>
+        </div>
+      </div>
+      <div class="disclaim">
+        ⓘ 본 결과는 AI가 핵심 정보 5개로 계산한 <b>개략 추정</b>이며, 법률 자문이 아닙니다. 추가생계비·재산·부양가족 등을 반영하면 변제금이 더 낮아질 수 있어요. 정확한 전략은 양홍수 변호사 검토가 필요합니다.
+      </div>
+      <div class="cta-row">
+        <a class="cta-primary" href="chat.html?ctx=${ctx}">자세히 진단받기 (변제금 낮추기) →</a>
+        <a class="cta-secondary" href="tel:1551-8016">바로 상담 예약 · 1551-8016</a>
+      </div>
+    </div>
+  `;
+}
+
+backBtn.onclick = () => {
+  if(state.mode === 'tap' && state.step > 0){
+    state.step--; render();
+  } else if(state.mode === 'result'){
+    state.mode = 'tap'; render();
+  }
+};
+
+render();
+</script>
+</body>
+</html>
