@@ -524,13 +524,21 @@ function formatStep1Block(ctx){
 }
 
 async function kickoff(){
+  const ctx = parseStep1Ctx();
+
+  // ctx가 URL에 있으면 항상 새 세션으로 시작 (이전 localStorage 대화 폐기)
+  if(ctx){
+    messages = [];
+    localStorage.removeItem(STORAGE_MSGS);
+    messages.push({role:'user', content: formatStep1Block(ctx), _hidden:true});
+    saveMsgs();
+    // URL에서 ctx 제거 (새로고침 시 루프 방지 없이 그냥 유지해도 됨, 여기선 유지)
+    await callClaude();
+    return;
+  }
+
   if(messages.length === 0){
-    const ctx = parseStep1Ctx();
-    if(ctx){
-      messages.push({role:'user', content: formatStep1Block(ctx), _hidden:true});
-    } else {
-      messages.push({role:'user', content:'안녕하세요, 진단 받으러 왔어요.', _hidden:true});
-    }
+    messages.push({role:'user', content:'안녕하세요, 진단 받으러 왔어요.', _hidden:true});
     saveMsgs();
     await callClaude();
   } else {
