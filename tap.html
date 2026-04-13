@@ -210,6 +210,105 @@
     .options.grid .opt{min-height:74px;padding:16px 8px;}
     .options.grid .opt .big{font-size:18px;}
   }
+
+  /* Booking modal */
+  .book-backdrop{
+    position:fixed;inset:0;z-index:100;
+    background:rgba(11,9,19,.85);backdrop-filter:blur(12px);
+    display:flex;align-items:flex-end;justify-content:center;
+    animation:fadeBg .25s ease-out;
+  }
+  @keyframes fadeBg{from{opacity:0;}to{opacity:1;}}
+  .book-panel{
+    width:100%;max-width:720px;max-height:92vh;
+    border-radius:24px 24px 0 0;
+    background:linear-gradient(180deg,#1a1425,#0f0b18);
+    border:1px solid var(--border-strong);border-bottom:none;
+    overflow-y:auto;padding:24px 24px 40px;
+    animation:slideUp .35s cubic-bezier(.2,.8,.2,1);
+  }
+  @keyframes slideUp{from{transform:translateY(30px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+  .book-panel::-webkit-scrollbar{width:6px;}
+  .book-panel::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:3px;}
+  .book-head{
+    display:flex;align-items:center;justify-content:space-between;
+    margin-bottom:20px;
+  }
+  .book-head h3{
+    font-size:20px;font-weight:800;letter-spacing:-0.04em;
+  }
+  .book-head .x{
+    width:36px;height:36px;border-radius:10px;
+    background:var(--card);border:1px solid var(--border);
+    font-size:18px;color:var(--text-dim);
+  }
+  .book-section{margin-bottom:22px;}
+  .book-label{
+    font-size:11px;font-weight:800;color:var(--mint);
+    letter-spacing:.1em;margin-bottom:10px;
+  }
+  .book-input{
+    width:100%;padding:14px 16px;border-radius:12px;
+    background:rgba(255,255,255,.04);border:1px solid var(--border);
+    color:var(--text);font-family:inherit;font-size:14.5px;
+    outline:none;transition:border .2s;margin-bottom:10px;
+  }
+  .book-input:focus{border-color:rgba(0,184,255,.5);}
+  .book-consent{
+    display:flex;gap:10px;align-items:flex-start;
+    padding:12px 14px;border-radius:10px;
+    background:rgba(255,255,255,.03);border:1px solid var(--border);
+    font-size:12px;color:var(--text-dim);line-height:1.5;cursor:pointer;
+  }
+  .book-consent input{width:16px;height:16px;margin-top:2px;accent-color:var(--mint);flex-shrink:0;}
+  .book-consent b{color:var(--text);}
+  .slot-loading,.slot-empty{
+    padding:20px;border-radius:12px;text-align:center;
+    background:rgba(255,255,255,.03);border:1px solid var(--border);
+    font-size:13px;color:var(--text-dim);
+  }
+  .slot-day{margin-bottom:14px;}
+  .slot-day .day-title{
+    font-size:12px;font-weight:800;color:var(--text-dim);
+    margin-bottom:8px;letter-spacing:-0.01em;
+  }
+  .slot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+  .slot-btn{
+    padding:12px 8px;border-radius:10px;
+    background:rgba(255,255,255,.04);border:1px solid var(--border);
+    font-size:12px;font-weight:700;color:var(--text);
+    transition:all .15s;cursor:pointer;font-family:inherit;
+  }
+  .slot-btn:hover{background:rgba(30,245,202,.06);border-color:rgba(30,245,202,.3);}
+  .slot-btn.selected{
+    background:linear-gradient(135deg,rgba(101,41,255,.25),rgba(30,245,202,.2));
+    border-color:var(--mint);color:var(--mint);
+    box-shadow:0 0 0 1px var(--mint) inset;
+  }
+  .book-submit{
+    display:block;width:100%;padding:16px;border-radius:14px;
+    background:linear-gradient(90deg,var(--purple-bright),var(--cyan),var(--mint));
+    color:#0B0913;font-weight:800;font-size:15px;letter-spacing:-0.02em;
+    border:none;cursor:pointer;font-family:inherit;
+    transition:transform .15s,opacity .15s;margin-top:12px;
+  }
+  .book-submit:hover:not(:disabled){transform:translateY(-1px);}
+  .book-submit:disabled{opacity:.35;cursor:not-allowed;}
+  .book-err{
+    margin-top:12px;padding:12px 14px;border-radius:10px;
+    background:rgba(255,80,80,.08);border:1px solid rgba(255,80,80,.3);
+    color:#FF9999;font-size:12px;line-height:1.5;
+  }
+  .book-success{
+    padding:28px 24px;border-radius:16px;text-align:center;
+    background:rgba(30,245,202,.08);border:1px solid rgba(30,245,202,.35);
+  }
+  .book-success h4{
+    font-size:20px;font-weight:800;color:var(--mint);
+    margin-bottom:10px;letter-spacing:-0.03em;
+  }
+  .book-success p{font-size:13px;color:var(--text-dim);line-height:1.6;}
+  @media (max-width:460px){ .slot-grid{grid-template-columns:repeat(2,1fr);} }
 </style>
 </head>
 <body>
@@ -223,6 +322,8 @@
 
   <div id="stage"></div>
 </div>
+
+<div id="bookModal" style="display:none;"></div>
 
 <script>
 const STEPS = [
@@ -466,10 +567,201 @@ function renderResult(){
       </div>
       <div class="cta-row">
         <a class="cta-primary" href="chat.html?ctx=${ctx}">탕감액 더 찾아보기 →</a>
-        <a class="cta-secondary" href="tel:1551-8016">바로 상담 예약 · 1551-8016</a>
+        <button type="button" class="cta-secondary" id="quickBookBtn">바로 상담 예약하기</button>
       </div>
     </div>
   `;
+  document.getElementById('quickBookBtn').onclick = openBookingModal;
+}
+
+/* ---------- Quick booking modal ---------- */
+
+const bookState = { slot: null, loadingSlots: false, slots: [], submitting: false, done: false };
+
+function openBookingModal(){
+  bookState.slot = null; bookState.done = false;
+  const modal = document.getElementById('bookModal');
+  modal.style.display = 'flex';
+  modal.className = 'book-backdrop';
+  modal.innerHTML = `
+    <div class="book-panel">
+      <div class="book-head">
+        <h3>상담 예약</h3>
+        <button type="button" class="x" id="bookClose">✕</button>
+      </div>
+      <div class="book-section">
+        <div class="book-label">1 · 연락처 입력</div>
+        <input type="text" class="book-input" id="bkName" placeholder="이름 (예: 홍길동)" autocomplete="name"/>
+        <input type="tel" class="book-input" id="bkPhone" placeholder="휴대폰 (예: 010-0000-0000)" autocomplete="tel"/>
+        <label class="book-consent">
+          <input type="checkbox" id="bkConsent"/>
+          <span><b>[필수]</b> 상담 예약 목적으로 개인정보(이름·연락처) 수집·이용에 동의합니다.</span>
+        </label>
+      </div>
+      <div class="book-section">
+        <div class="book-label">2 · 상담 시간 선택 (1시간 단위)</div>
+        <div id="slotArea" class="slot-loading">빈 시간을 불러오는 중...</div>
+      </div>
+      <button type="button" class="book-submit" id="bkSubmit" disabled>상담 예약 확정</button>
+      <div id="bkErr"></div>
+    </div>
+  `;
+  document.getElementById('bookClose').onclick = closeBookingModal;
+  modal.onclick = (e) => { if(e.target === modal) closeBookingModal(); };
+  document.getElementById('bkName').addEventListener('input', updateSubmitState);
+  document.getElementById('bkPhone').addEventListener('input', updateSubmitState);
+  document.getElementById('bkConsent').addEventListener('change', updateSubmitState);
+  document.getElementById('bkSubmit').onclick = submitBooking;
+  loadSlots();
+}
+
+function closeBookingModal(){
+  document.getElementById('bookModal').style.display = 'none';
+}
+
+async function loadSlots(){
+  const area = document.getElementById('slotArea');
+  try{
+    const r = await fetch('/api/slots');
+    const data = await r.json();
+    if(data.error || !Array.isArray(data.slots)){
+      area.className = 'slot-empty';
+      area.textContent = '시간 정보를 불러올 수 없어요. 잠시 후 다시 시도하거나 1551-8016으로 전화 주세요.';
+      return;
+    }
+    if(data.slots.length === 0){
+      area.className = 'slot-empty';
+      area.textContent = '예약 가능한 시간이 없어요. 1551-8016으로 전화 주시면 빠르게 안내드리겠습니다.';
+      return;
+    }
+    bookState.slots = data.slots;
+    renderSlots();
+  } catch(e){
+    area.className = 'slot-empty';
+    area.textContent = '네트워크 오류: ' + e.message;
+  }
+}
+
+function renderSlots(){
+  const area = document.getElementById('slotArea');
+  area.className = '';
+  const byDay = {};
+  bookState.slots.forEach(s => {
+    const d = new Date(s.start);
+    const key = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+    (byDay[key] = byDay[key] || []).push(s);
+  });
+  const days = ['일','월','화','수','목','금','토'];
+  const out = Object.keys(byDay).sort().map(key => {
+    const first = new Date(byDay[key][0].start);
+    const header = `${first.getMonth()+1}월 ${first.getDate()}일 (${days[first.getDay()]})`;
+    const btns = byDay[key].map(s => {
+      const d = new Date(s.start);
+      const h = d.getHours();
+      const ampm = h < 12 ? '오전' : '오후';
+      const h12 = h === 0 ? 12 : (h > 12 ? h-12 : h);
+      return `<button type="button" class="slot-btn" data-start="${s.start}" data-end="${s.end}" data-label="${s.label}">${ampm} ${h12}시</button>`;
+    }).join('');
+    return `<div class="slot-day"><div class="day-title">${header}</div><div class="slot-grid">${btns}</div></div>`;
+  }).join('');
+  area.innerHTML = out;
+  area.querySelectorAll('.slot-btn').forEach(btn => {
+    btn.onclick = () => {
+      area.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      bookState.slot = {
+        start: btn.dataset.start,
+        end: btn.dataset.end,
+        label: btn.dataset.label,
+      };
+      updateSubmitState();
+    };
+  });
+}
+
+function updateSubmitState(){
+  const name = document.getElementById('bkName').value.trim();
+  const phone = document.getElementById('bkPhone').value.trim();
+  const consent = document.getElementById('bkConsent').checked;
+  const valid = name.length >= 2 && /^[\d\-\s+]{9,}$/.test(phone) && consent && bookState.slot && !bookState.submitting;
+  document.getElementById('bkSubmit').disabled = !valid;
+}
+
+async function submitBooking(){
+  const btn = document.getElementById('bkSubmit');
+  const errBox = document.getElementById('bkErr');
+  errBox.innerHTML = '';
+  bookState.submitting = true;
+  btn.disabled = true;
+  btn.textContent = '예약 중...';
+
+  const contact = {
+    name: document.getElementById('bkName').value.trim(),
+    phone: document.getElementById('bkPhone').value.trim(),
+    consent: true,
+  };
+  const r = state.result?.result || {};
+  const summary = {
+    source: 'tap_quick_book',
+    case_classification: 'Lite',
+    urgency: r.is_hot ? 'high' : 'medium',
+    classification_reason: 'tap 탭탭 직접 예약 (AI 상담 스킵)',
+    inputs: state.answers,
+    estimate: r,
+  };
+
+  try {
+    // 1) Save lead to sheet
+    fetch('/api/lead', {
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body: JSON.stringify({ contact, summary }),
+    }).catch(() => {});
+
+    // 2) Book calendar slot
+    const bookRes = await fetch('/api/book', {
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body: JSON.stringify({
+        contact, summary,
+        start: bookState.slot.start,
+        end: bookState.slot.end,
+      }),
+    });
+    const bookData = await bookRes.json();
+    if(!bookData.ok){
+      throw new Error(bookData.conflict ? '방금 다른 분이 예약하셨어요. 다른 시간을 선택해 주세요.' : (bookData.error || '예약 실패'));
+    }
+
+    bookState.done = true;
+    showBookingSuccess(bookData.label || bookState.slot.label, contact.name);
+  } catch(e){
+    errBox.innerHTML = `<div class="book-err">${e.message}</div>`;
+    btn.textContent = '상담 예약 확정';
+    bookState.submitting = false;
+    updateSubmitState();
+  }
+}
+
+function showBookingSuccess(label, name){
+  const modal = document.getElementById('bookModal');
+  modal.innerHTML = `
+    <div class="book-panel">
+      <div class="book-head">
+        <h3>예약 완료</h3>
+        <button type="button" class="x" id="bookClose2">✕</button>
+      </div>
+      <div class="book-success">
+        <h4>${label} 예약 확정</h4>
+        <p>
+          ${name} 선생님, 예약이 완료되었습니다.<br/>
+          해당 시간에 양홍수 변호사가 직접 전화드리겠습니다.<br/><br/>
+          급한 문의는 <b style="color:#fff">1551-8016</b> 으로 연락 주세요.
+        </p>
+      </div>
+    </div>
+  `;
+  document.getElementById('bookClose2').onclick = closeBookingModal;
 }
 
 backBtn.onclick = () => {
