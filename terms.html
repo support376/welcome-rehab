@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>이용약관 · 웰컴법률사무소</title>
+<link href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#0B0913; --bg-1:#161320;
+    --mint:#1EF5CA; --cyan:#00B8FF;
+    --text:#F5F5FA; --text-dim:#A7A7A7;
+    --border:rgba(255,255,255,.08);
+    --card:rgba(255,255,255,.04);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'Wanted Sans Variable','Wanted Sans',-apple-system,system-ui,sans-serif;
+    background:var(--bg-0); color:var(--text);
+    letter-spacing:-0.02em; -webkit-font-smoothing:antialiased;
+    line-height:1.7;
+  }
+  body::before{
+    content:'';position:fixed;inset:-20%;z-index:0;
+    background:
+      radial-gradient(50% 40% at 20% 10%,rgba(101,41,255,.15),transparent 70%),
+      radial-gradient(50% 40% at 80% 90%,rgba(0,184,255,.1),transparent 70%);
+    filter:blur(80px);pointer-events:none;
+  }
+  a{color:var(--cyan);text-decoration:none;}
+  a:hover{color:var(--mint);}
+  .wrap{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:48px 28px 80px;}
+  .back{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:10px 16px;border-radius:10px;
+    background:var(--card);border:1px solid var(--border);
+    font-size:13px;color:var(--text-dim);margin-bottom:32px;
+  }
+  h1{font-size:clamp(26px,4vw,36px);font-weight:800;letter-spacing:-0.04em;margin-bottom:8px;}
+  .sub{color:var(--text-dim);font-size:13px;margin-bottom:40px;}
+  h2{
+    font-size:18px;font-weight:800;letter-spacing:-0.03em;
+    margin:36px 0 12px;color:var(--text);
+  }
+  h2::before{
+    content:'';display:inline-block;width:4px;height:16px;
+    background:linear-gradient(180deg,var(--cyan),var(--mint));
+    border-radius:2px;margin-right:10px;vertical-align:middle;
+  }
+  p,li{font-size:14px;color:var(--text-dim);line-height:1.8;}
+  ul,ol{padding-left:22px;margin:8px 0 14px;}
+  li{margin-bottom:6px;}
+  b,strong{color:var(--text);font-weight:700;}
+  .muted{font-size:12px;color:var(--text-dim);margin-top:40px;padding-top:24px;border-top:1px solid var(--border);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a href="index.html" class="back">← 메인으로</a>
+  <h1>이용약관</h1>
+  <div class="sub">웰컴법률사무소 · 시행일 2026년 4월 14일</div>
+
+  <h2>제1조 (목적)</h2>
+  <p>본 약관은 웰컴법률사무소(대표변호사 양홍수, 이하 "사무소")가 운영하는 웹사이트(welcome-rehab.vercel.app 및 연관 도메인)에서 제공하는 AI 기반 개인회생 진단 및 상담 예약 서비스(이하 "서비스")의 이용과 관련하여 사무소와 이용자 간의 권리·의무 및 책임사항을 규정하는 것을 목적으로 합니다.</p>
+
+  <h2>제2조 (용어의 정의)</h2>
+  <ul>
+    <li><b>"서비스"</b>란 사무소가 제공하는 AI 진단, 상담 예약, 변호사 상담 연계 등 일체의 서비스를 말합니다.</li>
+    <li><b>"이용자"</b>란 본 약관에 따라 사무소가 제공하는 서비스를 이용하는 모든 자를 말합니다.</li>
+    <li><b>"AI 진단"</b>이란 이용자가 입력한 정보를 기반으로 인공지능 모델이 제공하는 개략적인 참고 정보를 말하며, 법률 자문이 아닙니다.</li>
+    <li><b>"노쇼방지금"</b>이란 상담 예약의 신뢰도 확보를 위해 사전에 결제하는 예약금을 말하며, 상담 완료 시 전액 환불되거나 착수금에서 차감됩니다.</li>
+  </ul>
+
+  <h2>제3조 (약관의 효력과 변경)</h2>
+  <ol>
+    <li>본 약관은 웹사이트에 게시함으로써 효력을 발생합니다.</li>
+    <li>사무소는 필요한 경우 관련 법령을 위배하지 않는 범위에서 본 약관을 변경할 수 있으며, 변경 시 시행일 7일 전부터 웹사이트에 공지합니다.</li>
+    <li>이용자가 변경된 약관에 동의하지 않는 경우 서비스 이용을 중단하고 이용 계약을 해지할 수 있습니다.</li>
+  </ol>
+
+  <h2>제4조 (서비스의 내용)</h2>
+  <ol>
+    <li>사무소는 다음 각 호의 서비스를 제공합니다.
+      <ul>
+        <li>AI 기반 개인회생 가능성 1차 진단</li>
+        <li>양홍수 변호사와의 상담 일정 예약</li>
+        <li>상담 전 사전 정보 수집 및 안내</li>
+      </ul>
+    </li>
+    <li>서비스의 구체적 내용은 사무소 정책에 따라 변경될 수 있으며, 변경 사항은 웹사이트를 통해 공지합니다.</li>
+  </ol>
+
+  <h2>제5조 (AI 진단의 한계 및 면책)</h2>
+  <ol>
+    <li>본 서비스에서 제공하는 AI 진단 결과는 이용자가 입력한 정보만을 기반으로 한 <b>개략적 추정</b>이며, 법률 자문이 아닙니다.</li>
+    <li>실제 변제금, 탕감률, 인가 가능성 등은 관할 법원 및 회생위원의 판단, 추가 자료 검토, 채권자 이의 등에 따라 달라질 수 있습니다.</li>
+    <li>이용자는 AI 진단 결과만을 근거로 법률적 결정을 내려서는 안 되며, 정확한 법률 판단이 필요한 경우 반드시 변호사의 직접 상담을 거쳐야 합니다.</li>
+    <li>사무소는 AI 진단 결과와 실제 법원 결정 간의 차이로 인해 발생한 손해에 대해 책임지지 않습니다.</li>
+  </ol>
+
+  <h2>제6조 (이용자의 의무)</h2>
+  <ol>
+    <li>이용자는 서비스 이용 시 다음 행위를 하여서는 안 됩니다.
+      <ul>
+        <li>타인의 개인정보나 연락처를 허위로 입력하는 행위</li>
+        <li>서비스의 운영을 방해하는 행위</li>
+        <li>서비스에서 얻은 정보를 사무소의 동의 없이 제3자에게 제공·판매하는 행위</li>
+        <li>기타 법령 또는 공공질서에 위반되는 행위</li>
+      </ul>
+    </li>
+    <li>이용자는 진단 및 상담 예약 시 정확한 정보를 제공할 의무가 있으며, 허위 정보로 인한 불이익은 이용자에게 귀속됩니다.</li>
+  </ol>
+
+  <h2>제7조 (상담 예약 및 노쇼방지금)</h2>
+  <ol>
+    <li>이용자는 웹사이트를 통해 상담 시간을 선택하여 예약할 수 있습니다.</li>
+    <li>상담 예약 시 노쇼방지금(20,000원)이 부과될 수 있으며, 이는 상담 완료 시 전액 환불되거나 수임료에서 차감됩니다.</li>
+    <li>노쇼(예약 후 사전 통지 없이 미참석) 시 노쇼방지금은 환불되지 않습니다.</li>
+    <li>결제 후 7일 이내에는 「전자상거래 등에서의 소비자보호에 관한 법률」에 따른 청약 철회가 가능합니다. 단, 이미 상담이 완료된 경우는 제외됩니다.</li>
+  </ol>
+
+  <h2>제8조 (개인정보 보호)</h2>
+  <p>사무소는 이용자의 개인정보를 보호하기 위해 노력하며, 개인정보의 수집·이용·제공·파기 등에 관한 사항은 <a href="privacy.html">개인정보처리방침</a>을 따릅니다.</p>
+
+  <h2>제9조 (서비스의 중단)</h2>
+  <ol>
+    <li>사무소는 시스템 점검, 교체, 기타 불가피한 사유로 서비스 제공이 일시 중단될 수 있음을 이용자에게 고지합니다.</li>
+    <li>천재지변, 비상사태, 기타 불가항력 사유로 인한 서비스 중단에 대해서는 사무소가 책임지지 않습니다.</li>
+  </ol>
+
+  <h2>제10조 (면책조항)</h2>
+  <ol>
+    <li>사무소는 이용자가 서비스를 통해 얻은 AI 진단 결과의 정확성, 완전성을 보장하지 않습니다.</li>
+    <li>사무소는 이용자 상호 간 또는 이용자와 제3자 상호 간에 서비스를 매개로 발생한 분쟁에 개입할 의무가 없습니다.</li>
+    <li>본 서비스 이용 자체가 변호사-의뢰인 관계를 성립시키지 않으며, 해당 관계는 별도의 수임 계약 체결 시점에 성립됩니다.</li>
+  </ol>
+
+  <h2>제11조 (준거법 및 재판관할)</h2>
+  <ol>
+    <li>본 약관의 해석 및 서비스 이용과 관련된 분쟁은 대한민국 법을 준거법으로 합니다.</li>
+    <li>본 서비스 이용과 관련하여 분쟁이 발생한 경우 서울중앙지방법원을 제1심 관할 법원으로 합니다.</li>
+  </ol>
+
+  <div class="muted">
+    웰컴법률사무소 · 대표변호사 양홍수 · 서울지방변호사회 소속<br/>
+    서울특별시 서초구 강남대로 525, 세영제이타워 10층 · 1551-8016<br/>
+    이메일: hsyang@welcomelaw.co.kr
+  </div>
+</div>
+</body>
+</html>

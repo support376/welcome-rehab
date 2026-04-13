@@ -334,6 +334,53 @@
     background:rgba(255,80,80,.08);border:1px solid rgba(255,80,80,.3);
     color:#FF9999;font-size:12px;line-height:1.5;
   }
+  /* Payment mockup */
+  .pay-hero{
+    padding:24px 24px 20px;border-radius:16px;margin-bottom:18px;
+    background:
+      radial-gradient(60% 80% at 0% 0%,rgba(101,41,255,.2),transparent 70%),
+      radial-gradient(60% 80% at 100% 100%,rgba(30,245,202,.14),transparent 70%),
+      rgba(255,255,255,.03);
+    border:1px solid var(--border-strong);
+  }
+  .pay-hero .row{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding:6px 0;font-size:13px;
+  }
+  .pay-hero .row .k{color:var(--text-dim);}
+  .pay-hero .row .v{color:var(--text);font-weight:700;}
+  .pay-hero .divider{height:1px;background:var(--border);margin:10px 0;}
+  .pay-hero .total{font-size:16px;}
+  .pay-hero .total .v{
+    font-size:22px;font-weight:800;letter-spacing:-0.04em;
+    background:linear-gradient(120deg,#fff,var(--mint));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .pay-methods{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px;}
+  .pay-method{
+    padding:14px 12px;border-radius:12px;text-align:center;
+    background:rgba(255,255,255,.04);border:1px solid var(--border);
+    font-size:13px;font-weight:700;color:var(--text);cursor:pointer;
+    transition:all .15s;font-family:inherit;
+  }
+  .pay-method:hover{background:rgba(30,245,202,.06);border-color:rgba(30,245,202,.3);}
+  .pay-method.selected{
+    background:linear-gradient(135deg,rgba(101,41,255,.22),rgba(30,245,202,.16));
+    border-color:var(--mint);box-shadow:0 0 0 1px var(--mint) inset;
+  }
+  .pay-method .emoji{display:block;font-size:18px;margin-bottom:4px;}
+  .pay-notice{
+    padding:12px 14px;border-radius:10px;
+    background:rgba(255,180,0,.05);border:1px solid rgba(255,180,0,.18);
+    font-size:11px;color:#FFD591;line-height:1.5;margin-bottom:12px;
+  }
+  .pay-notice b{color:#fff;}
+  .pay-back{
+    margin-top:10px;width:100%;padding:12px;border-radius:12px;
+    background:transparent;border:1px solid var(--border);
+    font-size:12px;color:var(--text-dim);font-family:inherit;cursor:pointer;
+  }
+
   .book-success{
     padding:28px 24px;border-radius:16px;text-align:center;
     background:rgba(30,245,202,.08);border:1px solid rgba(30,245,202,.35);
@@ -776,18 +823,114 @@ function updateSubmitState(){
 }
 
 async function submitBooking(){
-  const btn = document.getElementById('bkSubmit');
-  const errBox = document.getElementById('bkErr');
-  errBox.innerHTML = '';
-  bookState.submitting = true;
-  btn.disabled = true;
-  btn.textContent = '예약 중...';
-
+  // 노쇼방지금 결제 단계 먼저 띄움
   const contact = {
     name: document.getElementById('bkName').value.trim(),
     phone: document.getElementById('bkPhone').value.trim(),
     consent: true,
   };
+  showPaymentStep(contact);
+}
+
+function showPaymentStep(contact){
+  const modal = document.getElementById('bookModal');
+  const slotLabel = bookState.slot?.label || '';
+  modal.innerHTML = `
+    <div class="book-panel">
+      <div class="book-head">
+        <h3>노쇼방지금 결제</h3>
+        <button type="button" class="x" id="bookClose3">✕</button>
+      </div>
+
+      <div class="pay-hero">
+        <div class="row"><span class="k">상담 유형</span><span class="v">30분 무료 상담</span></div>
+        <div class="row"><span class="k">상담 일시</span><span class="v">${slotLabel}</span></div>
+        <div class="row"><span class="k">예약자</span><span class="v">${contact.name}</span></div>
+        <div class="divider"></div>
+        <div class="row total"><span class="k">노쇼방지금</span><span class="v">20,000원</span></div>
+      </div>
+
+      <div class="pay-notice">
+        <b>환불 정책</b><br/>
+        · 상담 완료 시 <b>전액 환불</b><br/>
+        · 수임 결정 시 착수금에서 차감<br/>
+        · 노쇼(사전 통지 없이 미참석) 시 환불 불가<br/>
+        · 결제 후 7일 이내 청약철회 가능 (전자상거래법)
+      </div>
+
+      <div class="book-label">결제 수단 선택</div>
+      <div class="pay-methods" id="payMethods">
+        <button type="button" class="pay-method" data-m="card"><span class="emoji">💳</span>신용·체크카드</button>
+        <button type="button" class="pay-method" data-m="kakao"><span class="emoji">🟡</span>카카오페이</button>
+        <button type="button" class="pay-method" data-m="toss"><span class="emoji">🔵</span>토스페이</button>
+        <button type="button" class="pay-method" data-m="bank"><span class="emoji">🏦</span>계좌이체</button>
+      </div>
+
+      <button type="button" class="book-submit" id="payConfirm" disabled>결제하고 예약 확정 →</button>
+      <button type="button" class="pay-back" id="payBack">← 시간 다시 선택</button>
+      <div id="bkErr"></div>
+    </div>
+  `;
+
+  document.getElementById('bookClose3').onclick = closeBookingModal;
+  document.getElementById('payBack').onclick = () => openBookingModal();
+
+  let selectedMethod = null;
+  const methodBtns = modal.querySelectorAll('.pay-method');
+  methodBtns.forEach(btn => {
+    btn.onclick = () => {
+      methodBtns.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedMethod = btn.dataset.m;
+      document.getElementById('payConfirm').disabled = false;
+    };
+  });
+
+  document.getElementById('payConfirm').onclick = async () => {
+    const confirmBtn = document.getElementById('payConfirm');
+    const errBox = document.getElementById('bkErr');
+    errBox.innerHTML = '';
+    confirmBtn.disabled = true;
+    confirmBtn.textContent = '결제 처리 중...';
+
+    try {
+      // ===== 결제 목업 =====
+      // TODO: 내일 PG사(토스페이먼츠/포트원 등) SDK 연동
+      // processPayment(amount, method, orderInfo) → returns {paymentKey, orderId, ok}
+      const payRes = await mockProcessPayment(20000, selectedMethod, {
+        contact, slot: bookState.slot,
+      });
+      if(!payRes.ok) throw new Error('결제 실패: ' + (payRes.error || '알 수 없는 오류'));
+
+      confirmBtn.textContent = '예약 확정 중...';
+      await confirmBookingAfterPayment(contact, payRes);
+    } catch(e){
+      errBox.innerHTML = `<div class="book-err">${e.message}</div>`;
+      confirmBtn.disabled = false;
+      confirmBtn.textContent = '결제하고 예약 확정 →';
+    }
+  };
+}
+
+// ===== 결제 목업 함수 (PG 연동 포인트) =====
+// 내일 실제 PG SDK로 교체:
+//   - 토스페이먼츠: https://docs.tosspayments.com
+//   - 포트원: https://portone.gitbook.io
+// 반환 형식: { ok, paymentKey, orderId, method, amount }
+async function mockProcessPayment(amount, method, orderInfo){
+  // 시뮬레이션: 1.5초 지연 후 성공 응답
+  await new Promise(r => setTimeout(r, 1500));
+  return {
+    ok: true,
+    paymentKey: 'MOCK_' + Date.now(),
+    orderId: 'WR_' + Date.now(),
+    method,
+    amount,
+    mock: true,
+  };
+}
+
+async function confirmBookingAfterPayment(contact, payRes){
   const r = state.result?.result || {};
   const summary = {
     source: 'tap_quick_book',
@@ -796,39 +939,39 @@ async function submitBooking(){
     classification_reason: 'tap 탭탭 직접 예약 (AI 상담 스킵)',
     inputs: state.answers,
     estimate: r,
+    payment: {
+      method: payRes.method,
+      amount: payRes.amount,
+      payment_key: payRes.paymentKey,
+      order_id: payRes.orderId,
+      mock: !!payRes.mock,
+    },
   };
 
-  try {
-    // 1) Save lead to sheet
-    fetch('/api/lead', {
-      method:'POST',
-      headers:{'content-type':'application/json'},
-      body: JSON.stringify({ contact, summary }),
-    }).catch(() => {});
+  // 1) Save lead to sheet (fire and forget)
+  fetch('/api/lead', {
+    method:'POST',
+    headers:{'content-type':'application/json'},
+    body: JSON.stringify({ contact, summary }),
+  }).catch(() => {});
 
-    // 2) Book calendar slot
-    const bookRes = await fetch('/api/book', {
-      method:'POST',
-      headers:{'content-type':'application/json'},
-      body: JSON.stringify({
-        contact, summary,
-        start: bookState.slot.start,
-        end: bookState.slot.end,
-      }),
-    });
-    const bookData = await bookRes.json();
-    if(!bookData.ok){
-      throw new Error(bookData.conflict ? '방금 다른 분이 예약하셨어요. 다른 시간을 선택해 주세요.' : (bookData.error || '예약 실패'));
-    }
-
-    bookState.done = true;
-    showBookingSuccess(bookData.label || bookState.slot.label, contact.name);
-  } catch(e){
-    errBox.innerHTML = `<div class="book-err">${e.message}</div>`;
-    btn.textContent = '상담 예약 확정';
-    bookState.submitting = false;
-    updateSubmitState();
+  // 2) Book calendar slot
+  const bookRes = await fetch('/api/book', {
+    method:'POST',
+    headers:{'content-type':'application/json'},
+    body: JSON.stringify({
+      contact, summary,
+      start: bookState.slot.start,
+      end: bookState.slot.end,
+    }),
+  });
+  const bookData = await bookRes.json();
+  if(!bookData.ok){
+    throw new Error(bookData.conflict ? '방금 다른 분이 예약하셨어요. 결제는 자동 환불되며, 다른 시간을 선택해 주세요.' : (bookData.error || '예약 실패'));
   }
+
+  bookState.done = true;
+  showBookingSuccess(bookData.label || bookState.slot.label, contact.name);
 }
 
 function showBookingSuccess(label, name){

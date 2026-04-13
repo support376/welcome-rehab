@@ -17,8 +17,11 @@ const CALENDAR_ID = 'primary';                    // 'primary' = 기본 캘린�
 const OPEN_HOUR = 10;    // 10:00 부터
 const CLOSE_HOUR = 21;   // 마지막 슬롯 시작 = 20:00 (20:00 ~ 21:00)
 const SLOT_HOURS = 1;    // 슬롯 길이
-const DAYS_AHEAD = 7;    // 앞으로 7일치 노출
+const DAYS_AHEAD = 7;    // 앞으로 7일치 노출 (1주)
 const MIN_LEAD_HOURS = 2;// 최소 2시간 전까지만 예약 가능
+
+// HOT 케이스 긴급 알림 수신자 (변호사 이메일)
+const HOT_ALERT_EMAIL = 'hsyang@welcomelaw.co.kr';
 // ===============================================
 
 
@@ -115,7 +118,65 @@ function saveLead(body) {
     JSON.stringify(summary),
   ];
   sheet.appendRow(row);
+  maybeSendHotAlert('lead', contact, summary, null);
   return { ok: true };
+}
+
+function isHotCase(summary) {
+  if (!summary) return false;
+  const c = (summary.case_classification || '').toUpperCase();
+  const u = (summary.urgency || '').toLowerCase();
+  if (c === 'HOT') return true;
+  if (u === 'high') return true;
+  // STEP 1 결과에 is_hot === true 인 경우도 긴급 처리
+  if (summary.estimate && summary.estimate.is_hot === true) return true;
+  if (summary.inputs && (summary.inputs.delinquency === 'lawsuit' || summary.inputs.delinquency === 'court')) return true;
+  return false;
+}
+
+function maybeSendHotAlert(kind, contact, summary, booking) {
+  try {
+    if (!isHotCase(summary)) return;
+    if (!HOT_ALERT_EMAIL) return;
+
+    const subject = '[웰컴회생 긴급] ' + (contact.name || '익명') + ' · ' + (summary.case_classification || 'HOT');
+    const lines = [
+      '🚨 긴급 HOT 케이스가 접수되었습니다.',
+      '',
+      '■ 접수 유형: ' + (kind === 'book' ? '상담 예약까지 완료' : '연락처 제출(예약 미완료)'),
+      '■ 이름: ' + (contact.name || '-'),
+      '■ 휴대폰: ' + (contact.phone || '-'),
+      '■ 분류: ' + (summary.case_classification || '-'),
+      '■ 긴급도: ' + (summary.urgency || '-'),
+      '■ 사유: ' + (summary.classification_reason || '-'),
+    ];
+    if (booking) {
+      lines.push('');
+      lines.push('■ 예약 일시: ' + (booking.label || booking.start));
+    }
+    if (summary.inputs) {
+      lines.push('');
+      lines.push('■ STEP 1 입력값:');
+      lines.push(JSON.stringify(summary.inputs, null, 2));
+    }
+    if (summary.estimate) {
+      lines.push('');
+      lines.push('■ 1차 추정:');
+      lines.push(JSON.stringify(summary.estimate, null, 2));
+    }
+    lines.push('');
+    lines.push('■ 전체 요약:');
+    lines.push(JSON.stringify(summary, null, 2));
+
+    MailApp.sendEmail({
+      to: HOT_ALERT_EMAIL,
+      subject: subject,
+      body: lines.join('\n'),
+    });
+  } catch (e) {
+    // 메일 실패는 전체 플로우 막지 않음
+    console.error('hot alert failed:', e.message);
+  }
 }
 
 function getLeadSheet() {
@@ -177,6 +238,7 @@ function bookSlot(body) {
     ]);
   } catch (e) { /* ignore sheet errors */ }
 
+  maybeSendHotAlert('book', contact, summary, { start: start, end: end, label: formatSlot(start) });
   return { ok: true, label: formatSlot(start) };
 }
 

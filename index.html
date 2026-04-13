@@ -661,6 +661,57 @@
   }
   .final p{color:var(--text-dim);font-size:17px;margin-bottom:40px;}
 
+  /* ---------- Blog grid ---------- */
+  .blog-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  }
+  .blog-card{
+    display:block;padding:26px 24px;border-radius:18px;
+    background:var(--card);border:1px solid var(--border);
+    transition:all .2s;position:relative;overflow:hidden;
+    text-decoration:none;color:inherit;
+  }
+  .blog-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,var(--cyan),var(--mint));
+    opacity:.5;transition:opacity .2s;
+  }
+  .blog-card:hover{
+    background:var(--card-hover);border-color:var(--border-strong);
+    transform:translateY(-2px);
+  }
+  .blog-card:hover::before{opacity:1;}
+  .blog-tag{
+    display:inline-block;font-size:10px;font-weight:800;
+    color:var(--mint);letter-spacing:.05em;margin-bottom:10px;
+    padding:4px 10px;border-radius:999px;
+    background:rgba(30,245,202,.08);border:1px solid rgba(30,245,202,.2);
+  }
+  .blog-card h4{
+    font-size:15px;font-weight:800;line-height:1.5;
+    letter-spacing:-0.03em;margin-bottom:14px;
+  }
+  .blog-more{
+    font-size:12px;color:var(--text-dim);
+    display:flex;align-items:center;gap:6px;
+  }
+  .blog-more::after{content:'→';transition:transform .2s;}
+  .blog-card:hover .blog-more{color:var(--cyan);}
+  .blog-card:hover .blog-more::after{transform:translateX(3px);}
+  .blog-all{
+    text-align:center;margin-top:36px;
+  }
+  .blog-all a{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:14px 28px;border-radius:14px;
+    background:var(--card);border:1px solid var(--border);
+    color:var(--text);font-weight:700;font-size:14px;
+    transition:all .15s;
+  }
+  .blog-all a:hover{background:var(--card-hover);border-color:var(--border-strong);}
+  @media (max-width:900px){ .blog-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .blog-grid{grid-template-columns:1fr;} }
+
   /* ---------- Defense pillars ---------- */
   .defense-grid{
     display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
@@ -1169,6 +1220,69 @@
   </div>
 </section>
 
+<!-- Blog -->
+<section>
+  <div class="container">
+    <div class="section-head-center">
+      <span class="section-label">웰컴리걸 BLOG</span>
+      <h2 class="section-title">실전 <span class="grad">회생 가이드</span></h2>
+      <p class="section-desc">양홍수 변호사가 직접 쓴 2026년 최신 개인회생 실무 가이드.</p>
+    </div>
+
+    <div class="blog-grid">
+      <a href="https://blog.naver.com/welcomelegal/224223685904" target="_blank" class="blog-card">
+        <span class="blog-tag">통신비 채무</span>
+        <h4>밀린 핸드폰 요금도 개인회생이 될까? 번호 정지 전 알아야 할 필수 전략</h4>
+        <span class="blog-more">자세히 보기</span>
+      </a>
+      <a href="https://blog.naver.com/welcomelegal/224223657650" target="_blank" class="blog-card">
+        <span class="blog-tag">차량 유지</span>
+        <h4>개인회생 신청하면 내 차 뺏기나요? 담보·리스·소유 상황별 유지 방법</h4>
+        <span class="blog-more">자세히 보기</span>
+      </a>
+      <a href="https://blog.naver.com/welcomelegal/224223407894" target="_blank" class="blog-card">
+        <span class="blog-tag">투자 주의</span>
+        <h4>개인회생 중 주식·코인 또 해도 될까요? 법원이 경계하는 최악의 행동</h4>
+        <span class="blog-more">자세히 보기</span>
+      </a>
+      <a href="https://blog.naver.com/welcomelegal/224223294001" target="_blank" class="blog-card">
+        <span class="blog-tag">금융 거래</span>
+        <h4>개인회생하면 통장 묶이고 카드 못 쓰나요? 2026년 신설 생계비계좌 활용법</h4>
+        <span class="blog-more">자세히 보기</span>
+      </a>
+      <a href="https://blog.naver.com/welcomelegal/224218339493" target="_blank" class="blog-card">
+        <span class="blog-tag">서류 간소화</span>
+        <h4>2026년 마이데이터 부채증명, 개인회생 접수가 확 달라집니다</h4>
+        <span class="blog-more">자세히 보기</span>
+      </a>
+      <a href="https://blog.naver.com/welcomelegal/224218249180" target="_blank" class="blog-card">
+        <span class="blog-tag">변제금 절감</span>
+        <h4>2026년 개인회생, 올해 신청해야 내 빚이 확 줄어드는 이유</h4>
+        <span class="blog-more">자세히 보기</span>
+      </a>
+      <a href="https://blog.naver.com/welcomelegal/224215387127" target="_blank" class="blog-card">
+        <span class="blog-tag">자산 보호</span>
+        <h4>"금값이 금값인데..." 개인회생하면 내 돌반지·골드바 다 뺏길까?</h4>
+        <span class="blog-more">자세히 보기</span>
+      </a>
+      <a href="https://blog.naver.com/welcomelegal/224215321149" target="_blank" class="blog-card">
+        <span class="blog-tag">압류 대응</span>
+        <h4>"새마을금고는 압류 안 당한다?" 지역 금융기관이 압류가 늦게 들어오는 이유</h4>
+        <span class="blog-more">자세히 보기</span>
+      </a>
+      <a href="https://blog.naver.com/welcomelegal/224218391137" target="_blank" class="blog-card">
+        <span class="blog-tag">가계 부채</span>
+        <h4>기름값 2000원 시대, 물가 폭등에 카드값까지… 개인회생을 고려할 때</h4>
+        <span class="blog-more">자세히 보기</span>
+      </a>
+    </div>
+
+    <div class="blog-all">
+      <a href="https://blog.naver.com/welcomelegal" target="_blank">웰컴리걸 블로그 전체 글 보기 →</a>
+    </div>
+  </div>
+</section>
+
 <!-- Knowhow -->
 <section class="knowhow" id="knowhow">
   <div class="container">
@@ -1330,8 +1444,8 @@
       <a href="#products">상품 비교</a>
       <a href="#knowhow">변호사 노하우</a>
       <a href="#cases">사례</a>
-      <a href="/privacy">개인정보처리방침</a>
-      <a href="/terms">이용약관</a>
+      <a href="privacy.html">개인정보처리방침</a>
+      <a href="terms.html">이용약관</a>
     </div>
   </div>
 </footer>
