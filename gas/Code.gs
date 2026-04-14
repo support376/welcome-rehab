@@ -107,6 +107,7 @@ function saveLead(body) {
   const sheet = getLeadSheet();
   const contact = body.contact || {};
   const summary = body.summary || {};
+  const booking = summary.booking_request || {};
   const row = [
     new Date(),
     contact.name || '',
@@ -115,6 +116,8 @@ function saveLead(body) {
     summary.case_classification || '',
     summary.urgency || '',
     summary.classification_reason || '',
+    booking.desired_date || '',
+    booking.desired_time_slot || '',
     JSON.stringify(summary),
   ];
   sheet.appendRow(row);
@@ -186,7 +189,9 @@ function getLeadSheet() {
     sheet = ss.insertSheet('leads');
     sheet.appendRow([
       '타임스탬프', '이름', '휴대폰', '동의',
-      '분류', '긴급도', '분류 사유', '전체 요약(JSON)',
+      '분류', '긴급도', '분류 사유',
+      '희망일자', '희망시간대',
+      '전체 요약(JSON)',
     ]);
   }
   return sheet;

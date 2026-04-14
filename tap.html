@@ -660,12 +660,21 @@ function renderResult(){
   document.getElementById('quickBookBtn').onclick = openBookingModal;
 }
 
-/* ---------- Quick booking modal ---------- */
+/* ---------- Simple booking modal (날짜 + 시간대) ---------- */
 
-const bookState = { slot: null, loadingSlots: false, slots: [], submitting: false, done: false };
+const bookState = { submitting: false, done: false };
+
+function todayISO(offset){
+  const d = new Date();
+  d.setDate(d.getDate() + (offset || 0));
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${dd}`;
+}
 
 function openBookingModal(){
-  bookState.slot = null; bookState.done = false;
+  bookState.done = false;
   const modal = document.getElementById('bookModal');
   modal.style.display = 'flex';
   modal.className = 'book-backdrop';
@@ -675,6 +684,7 @@ function openBookingModal(){
         <h3>상담 예약</h3>
         <button type="button" class="x" id="bookClose">✕</button>
       </div>
+
       <div class="book-section">
         <div class="book-label">1 · 연락처 입력</div>
         <input type="text" class="book-input" id="bkName" placeholder="이름 (예: 홍길동)" autocomplete="name"/>
@@ -684,11 +694,24 @@ function openBookingModal(){
           <span><b>[필수]</b> 상담 예약 목적으로 개인정보(이름·연락처) 수집·이용에 동의합니다.</span>
         </label>
       </div>
+
       <div class="book-section">
-        <div class="book-label">2 · 상담 시간 선택 (1시간 단위)</div>
-        <div id="slotArea" class="slot-loading">빈 시간을 불러오는 중...</div>
+        <div class="book-label">2 · 희망 상담 일자</div>
+        <input type="date" class="book-input" id="bkDate" min="${todayISO(0)}" max="${todayISO(30)}" value="${todayISO(1)}" />
       </div>
-      <button type="button" class="book-submit" id="bkSubmit" disabled>상담 예약 확정</button>
+
+      <div class="book-section">
+        <div class="book-label">3 · 희망 시간대</div>
+        <select class="book-input" id="bkTime">
+          <option value="오전 (10시~12시)">오전 (10시 ~ 12시)</option>
+          <option value="점심 (12시~14시)">점심 (12시 ~ 14시)</option>
+          <option value="오후 (14시~17시)" selected>오후 (14시 ~ 17시)</option>
+          <option value="저녁 (17시~20시)">저녁 (17시 ~ 20시)</option>
+          <option value="아무때나 가능">아무때나 가능 (변호사 판단)</option>
+        </select>
+      </div>
+
+      <button type="button" class="book-submit" id="bkSubmit" disabled>상담 신청하기</button>
       <div id="bkErr"></div>
     </div>
   `;
@@ -697,300 +720,91 @@ function openBookingModal(){
   document.getElementById('bkName').addEventListener('input', updateSubmitState);
   document.getElementById('bkPhone').addEventListener('input', updateSubmitState);
   document.getElementById('bkConsent').addEventListener('change', updateSubmitState);
+  document.getElementById('bkDate').addEventListener('change', updateSubmitState);
+  document.getElementById('bkTime').addEventListener('change', updateSubmitState);
   document.getElementById('bkSubmit').onclick = submitBooking;
-  loadSlots();
+  updateSubmitState();
 }
 
 function closeBookingModal(){
   document.getElementById('bookModal').style.display = 'none';
 }
 
-async function loadSlots(){
-  const area = document.getElementById('slotArea');
-  try{
-    const r = await fetch('/api/slots');
-    const data = await r.json();
-    if(data.error || !Array.isArray(data.slots)){
-      area.className = 'slot-empty';
-      area.textContent = '시간 정보를 불러올 수 없어요. 잠시 후 다시 시도하거나 1551-8016으로 전화 주세요.';
-      return;
-    }
-    if(data.slots.length === 0){
-      area.className = 'slot-empty';
-      area.textContent = '예약 가능한 시간이 없어요. 1551-8016으로 전화 주시면 빠르게 안내드리겠습니다.';
-      return;
-    }
-    bookState.slots = data.slots;
-    renderSlots();
-  } catch(e){
-    area.className = 'slot-empty';
-    area.textContent = '네트워크 오류: ' + e.message;
-  }
-}
-
-function renderSlots(){
-  const area = document.getElementById('slotArea');
-  area.className = '';
-
-  // Group slots by date key
-  const byDay = {};
-  bookState.slots.forEach(s => {
-    const d = new Date(s.start);
-    const key = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-    (byDay[key] = byDay[key] || []).push(s);
-  });
-  const dayKeys = Object.keys(byDay).sort();
-  bookState.byDay = byDay;
-  bookState.selectedDay = bookState.selectedDay && byDay[bookState.selectedDay] ? bookState.selectedDay : dayKeys[0];
-
-  // Build horizontal date strip
-  const dow = ['일','월','화','수','목','금','토'];
-  const strip = dayKeys.map(key => {
-    const d = new Date(byDay[key][0].start);
-    const dowIdx = d.getDay();
-    const dowCls = dowIdx === 0 ? ' sun' : (dowIdx === 6 ? ' sat' : '');
-    const sel = key === bookState.selectedDay ? ' selected' : '';
-    return `<button type="button" class="date-chip${dowCls}${sel}" data-key="${key}">
-      <div class="dow">${dow[dowIdx]}</div>
-      <div class="day">${d.getDate()}</div>
-    </button>`;
-  }).join('');
-
-  area.innerHTML = `
-    <div class="date-strip">${strip}</div>
-    <div id="timeArea"></div>
-  `;
-
-  area.querySelectorAll('.date-chip').forEach(chip => {
-    chip.onclick = () => {
-      bookState.selectedDay = chip.dataset.key;
-      // Clear previously selected time when date changes
-      bookState.slot = null;
-      updateSubmitState();
-      renderSlots();
-    };
-  });
-
-  renderTimesForSelectedDay();
-}
-
-function renderTimesForSelectedDay(){
-  const timeArea = document.getElementById('timeArea');
-  if(!timeArea) return;
-  const slots = bookState.byDay[bookState.selectedDay] || [];
-
-  // Bucket by time-of-day
-  const morning = [], afternoon = [], evening = [];
-  slots.forEach(s => {
-    const h = new Date(s.start).getHours();
-    if(h < 12) morning.push(s);
-    else if(h < 18) afternoon.push(s);
-    else evening.push(s);
-  });
-
-  const renderGroup = (label, arr) => {
-    if(arr.length === 0) return '';
-    const btns = arr.map(s => {
-      const h = new Date(s.start).getHours();
-      const h12 = h === 0 ? 12 : (h > 12 ? h-12 : h);
-      const selected = bookState.slot && bookState.slot.start === s.start ? ' selected' : '';
-      return `<button type="button" class="slot-btn${selected}" data-start="${s.start}" data-end="${s.end}" data-label="${s.label}">${h12}:00</button>`;
-    }).join('');
-    return `<div class="time-section"><div class="sec-label">${label}</div><div class="slot-grid">${btns}</div></div>`;
-  };
-
-  timeArea.innerHTML =
-    renderGroup('오전', morning) +
-    renderGroup('오후', afternoon) +
-    renderGroup('저녁', evening);
-
-  timeArea.querySelectorAll('.slot-btn').forEach(btn => {
-    btn.onclick = () => {
-      timeArea.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      bookState.slot = {
-        start: btn.dataset.start,
-        end: btn.dataset.end,
-        label: btn.dataset.label,
-      };
-      updateSubmitState();
-    };
-  });
-}
-
 function updateSubmitState(){
   const name = document.getElementById('bkName').value.trim();
   const phone = document.getElementById('bkPhone').value.trim();
   const consent = document.getElementById('bkConsent').checked;
-  const valid = name.length >= 2 && /^[\d\-\s+]{9,}$/.test(phone) && consent && bookState.slot && !bookState.submitting;
+  const date = document.getElementById('bkDate').value;
+  const time = document.getElementById('bkTime').value;
+  const valid = name.length >= 2 && /^[\d\-\s+]{9,}$/.test(phone) && consent && !!date && !!time && !bookState.submitting;
   document.getElementById('bkSubmit').disabled = !valid;
 }
 
 async function submitBooking(){
-  // 노쇼방지금 결제 단계 먼저 띄움
+  const submitBtn = document.getElementById('bkSubmit');
+  const errBox = document.getElementById('bkErr');
+  errBox.innerHTML = '';
+
   const contact = {
     name: document.getElementById('bkName').value.trim(),
     phone: document.getElementById('bkPhone').value.trim(),
     consent: true,
   };
-  showPaymentStep(contact);
-}
+  const desiredDate = document.getElementById('bkDate').value;
+  const desiredTime = document.getElementById('bkTime').value;
 
-function showPaymentStep(contact){
-  const modal = document.getElementById('bookModal');
-  const slotLabel = bookState.slot?.label || '';
-  modal.innerHTML = `
-    <div class="book-panel">
-      <div class="book-head">
-        <h3>노쇼방지금 결제</h3>
-        <button type="button" class="x" id="bookClose3">✕</button>
-      </div>
+  bookState.submitting = true;
+  submitBtn.disabled = true;
+  submitBtn.textContent = '신청 처리 중...';
 
-      <div class="pay-hero">
-        <div class="row"><span class="k">상담 유형</span><span class="v">30분 무료 상담</span></div>
-        <div class="row"><span class="k">상담 일시</span><span class="v">${slotLabel}</span></div>
-        <div class="row"><span class="k">예약자</span><span class="v">${contact.name}</span></div>
-        <div class="divider"></div>
-        <div class="row total"><span class="k">노쇼방지금</span><span class="v">20,000원</span></div>
-      </div>
-
-      <div class="pay-notice">
-        <b>환불 정책</b><br/>
-        · 상담 완료 시 <b>전액 환불</b><br/>
-        · 수임 결정 시 착수금에서 차감<br/>
-        · 노쇼(사전 통지 없이 미참석) 시 환불 불가<br/>
-        · 결제 후 7일 이내 청약철회 가능 (전자상거래법)
-      </div>
-
-      <div class="book-label">결제 수단 선택</div>
-      <div class="pay-methods" id="payMethods">
-        <button type="button" class="pay-method" data-m="card"><span class="emoji">💳</span>신용·체크카드</button>
-        <button type="button" class="pay-method" data-m="kakao"><span class="emoji">🟡</span>카카오페이</button>
-        <button type="button" class="pay-method" data-m="toss"><span class="emoji">🔵</span>토스페이</button>
-        <button type="button" class="pay-method" data-m="bank"><span class="emoji">🏦</span>계좌이체</button>
-      </div>
-
-      <button type="button" class="book-submit" id="payConfirm" disabled>결제하고 예약 확정 →</button>
-      <button type="button" class="pay-back" id="payBack">← 시간 다시 선택</button>
-      <div id="bkErr"></div>
-    </div>
-  `;
-
-  document.getElementById('bookClose3').onclick = closeBookingModal;
-  document.getElementById('payBack').onclick = () => openBookingModal();
-
-  let selectedMethod = null;
-  const methodBtns = modal.querySelectorAll('.pay-method');
-  methodBtns.forEach(btn => {
-    btn.onclick = () => {
-      methodBtns.forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      selectedMethod = btn.dataset.m;
-      document.getElementById('payConfirm').disabled = false;
-    };
-  });
-
-  document.getElementById('payConfirm').onclick = async () => {
-    const confirmBtn = document.getElementById('payConfirm');
-    const errBox = document.getElementById('bkErr');
-    errBox.innerHTML = '';
-    confirmBtn.disabled = true;
-    confirmBtn.textContent = '결제 처리 중...';
-
-    try {
-      // ===== 결제 목업 =====
-      // TODO: 내일 PG사(토스페이먼츠/포트원 등) SDK 연동
-      // processPayment(amount, method, orderInfo) → returns {paymentKey, orderId, ok}
-      const payRes = await mockProcessPayment(20000, selectedMethod, {
-        contact, slot: bookState.slot,
-      });
-      if(!payRes.ok) throw new Error('결제 실패: ' + (payRes.error || '알 수 없는 오류'));
-
-      confirmBtn.textContent = '예약 확정 중...';
-      await confirmBookingAfterPayment(contact, payRes);
-    } catch(e){
-      errBox.innerHTML = `<div class="book-err">${e.message}</div>`;
-      confirmBtn.disabled = false;
-      confirmBtn.textContent = '결제하고 예약 확정 →';
-    }
-  };
-}
-
-// ===== 결제 목업 함수 (PG 연동 포인트) =====
-// 내일 실제 PG SDK로 교체:
-//   - 토스페이먼츠: https://docs.tosspayments.com
-//   - 포트원: https://portone.gitbook.io
-// 반환 형식: { ok, paymentKey, orderId, method, amount }
-async function mockProcessPayment(amount, method, orderInfo){
-  // 시뮬레이션: 1.5초 지연 후 성공 응답
-  await new Promise(r => setTimeout(r, 1500));
-  return {
-    ok: true,
-    paymentKey: 'MOCK_' + Date.now(),
-    orderId: 'WR_' + Date.now(),
-    method,
-    amount,
-    mock: true,
-  };
-}
-
-async function confirmBookingAfterPayment(contact, payRes){
   const r = state.result?.result || {};
   const summary = {
     source: 'tap_quick_book',
     case_classification: 'Lite',
     urgency: r.is_hot ? 'high' : 'medium',
-    classification_reason: 'tap 탭탭 직접 예약 (AI 상담 스킵)',
+    classification_reason: 'tap 직접 상담 신청 (AI 상담 스킵)',
     inputs: state.answers,
     estimate: r,
-    payment: {
-      method: payRes.method,
-      amount: payRes.amount,
-      payment_key: payRes.paymentKey,
-      order_id: payRes.orderId,
-      mock: !!payRes.mock,
+    booking_request: {
+      desired_date: desiredDate,
+      desired_time_slot: desiredTime,
     },
   };
 
-  // 1) Save lead to sheet (fire and forget)
-  fetch('/api/lead', {
-    method:'POST',
-    headers:{'content-type':'application/json'},
-    body: JSON.stringify({ contact, summary }),
-  }).catch(() => {});
-
-  // 2) Book calendar slot
-  const bookRes = await fetch('/api/book', {
-    method:'POST',
-    headers:{'content-type':'application/json'},
-    body: JSON.stringify({
-      contact, summary,
-      start: bookState.slot.start,
-      end: bookState.slot.end,
-    }),
-  });
-  const bookData = await bookRes.json();
-  if(!bookData.ok){
-    throw new Error(bookData.conflict ? '방금 다른 분이 예약하셨어요. 결제는 자동 환불되며, 다른 시간을 선택해 주세요.' : (bookData.error || '예약 실패'));
+  try {
+    const res = await fetch('/api/lead', {
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body: JSON.stringify({ contact, summary }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if(!res.ok || data.error){
+      throw new Error(data.error || '서버 응답 오류');
+    }
+    bookState.done = true;
+    showBookingSuccess(desiredDate, desiredTime, contact.name);
+  } catch(e){
+    errBox.innerHTML = `<div class="book-err">${e.message}<br/>잠시 후 다시 시도하시거나 1551-8016으로 전화 주세요.</div>`;
+    bookState.submitting = false;
+    submitBtn.disabled = false;
+    submitBtn.textContent = '상담 신청하기';
   }
-
-  bookState.done = true;
-  showBookingSuccess(bookData.label || bookState.slot.label, contact.name);
 }
 
-function showBookingSuccess(label, name){
+function showBookingSuccess(dateStr, timeStr, name){
   const modal = document.getElementById('bookModal');
   modal.innerHTML = `
     <div class="book-panel">
       <div class="book-head">
-        <h3>예약 완료</h3>
+        <h3>신청 완료</h3>
         <button type="button" class="x" id="bookClose2">✕</button>
       </div>
       <div class="book-success">
-        <h4>${label} 예약 확정</h4>
+        <h4>상담 신청이 접수되었습니다</h4>
         <p>
-          ${name} 선생님, 예약이 완료되었습니다.<br/>
-          해당 시간에 양홍수 변호사가 직접 전화드리겠습니다.<br/><br/>
+          <b style="color:#fff">${name}</b> 선생님, 감사합니다.<br/>
+          희망하신 <b style="color:#fff">${dateStr} · ${timeStr}</b> 기준으로<br/>
+          담당자가 확인 후 24시간 이내 연락드립니다.<br/><br/>
           급한 문의는 <b style="color:#fff">1551-8016</b> 으로 연락 주세요.
         </p>
       </div>
