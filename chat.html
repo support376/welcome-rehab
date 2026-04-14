@@ -993,6 +993,8 @@ function formatStep1Block(ctx){
 순서로 진행할 것.`;
 }
 
+const INSTANT_GREETING = '안녕하세요! 웰컴 AI 상담사입니다. 😊\n\n무엇이든 편하게 물어보세요. 개인회생·파산 관련 고민을 빠짐없이 체크해드릴게요.';
+
 async function kickoff(){
   const ctx = parseStep1Ctx();
 
@@ -1002,17 +1004,21 @@ async function kickoff(){
     leadState = {};
     localStorage.removeItem(STORAGE_MSGS);
     localStorage.removeItem(STORAGE_STATE);
+    // 인사말을 즉시 렌더 (API 대기 없이)
+    messages.push({role:'assistant', content: INSTANT_GREETING});
     messages.push({role:'user', content: formatStep1Block(ctx), _hidden:true});
     saveMsgs();
-    // URL에서 ctx 제거 (새로고침 시 루프 방지 없이 그냥 유지해도 됨, 여기선 유지)
+    render();
+    // 이어서 Step1 결과 분석 요청 (백그라운드)
     await callClaude();
     return;
   }
 
   if(messages.length === 0){
-    messages.push({role:'user', content:'안녕하세요, 진단 받으러 왔어요.', _hidden:true});
+    // 인사말만 즉시 렌더 — API 호출 없이 사용자 입력 대기
+    messages.push({role:'assistant', content: INSTANT_GREETING});
     saveMsgs();
-    await callClaude();
+    render();
   } else {
     render();
   }
