@@ -22,8 +22,8 @@ const MIN_LEAD_HOURS = 2;// 최소 2시간 전까지만 예약 가능
 
 // HOT 케이스 긴급 알림 수신자 (변호사 이메일)
 const HOT_ALERT_EMAIL = 'hsyang@welcomelaw.co.kr';
-// 전체 리드 · 상담신청 실시간 알림 (모든 접수 건)
-const LEAD_ALERT_EMAIL = 'koreavisa@well-come.biz';
+// 전체 리드 · 상담신청 실시간 알림 (모든 접수 건) — 콤마로 여러 수신자 지정
+const LEAD_ALERT_EMAIL = 'koreavisa@well-come.biz,hsyang@welcomelaw.co.kr';
 // ===============================================
 
 
@@ -173,6 +173,10 @@ function sendLeadAlert(kind, contact, summary, booking) {
       lines.push('');
       lines.push('■ 캘린더 예약: ' + (booking.label || booking.start));
     }
+
+    lines.push('');
+    lines.push('■ 연결된 구글시트: https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/edit');
+
     if (summary.inputs) {
       lines.push('');
       lines.push('■ STEP 1 (탭탭) 입력값:');
