@@ -22,6 +22,8 @@ const MIN_LEAD_HOURS = 2;// 최소 2시간 전까지만 예약 가능
 
 // HOT 케이스 긴급 알림 수신자 (변호사 이메일)
 const HOT_ALERT_EMAIL = 'hsyang@welcomelaw.co.kr';
+// 전체 리드 · 상담신청 실시간 알림 (모든 접수 건)
+const LEAD_ALERT_EMAIL = 'koreavisa@well-come.biz';
 // ===============================================
 
 
@@ -121,6 +123,9 @@ function saveLead(body) {
     JSON.stringify(summary),
   ];
   sheet.appendRow(row);
+  // 전체 리드 알림 (매건)
+  sendLeadAlert('lead', contact, summary, null);
+  // HOT 케이스는 변호사에게도 긴급 알림
   maybeSendHotAlert('lead', contact, summary, null);
   return { ok: true };
 }
@@ -135,6 +140,64 @@ function isHotCase(summary) {
   if (summary.estimate && summary.estimate.is_hot === true) return true;
   if (summary.inputs && (summary.inputs.delinquency === 'lawsuit' || summary.inputs.delinquency === 'court')) return true;
   return false;
+}
+
+function sendLeadAlert(kind, contact, summary, booking) {
+  try {
+    if (!LEAD_ALERT_EMAIL) return;
+    const booking_req = (summary && summary.booking_request) || {};
+    const name = contact.name || '익명';
+    const cls = summary.case_classification || '미분류';
+    const urgency = summary.urgency || '-';
+
+    const subject = '[웰컴회생 접수] ' + name + ' · ' + cls + (urgency === 'high' ? ' · 🚨긴급' : '');
+
+    const lines = [
+      '웰컴회생 홈페이지에서 새 접수가 들어왔습니다.',
+      '',
+      '■ 접수 유형: ' + (kind === 'book' ? '상담 예약 확정' : '리드(상담신청)'),
+      '■ 접수 시각: ' + new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' }),
+      '■ 이름: ' + name,
+      '■ 휴대폰: ' + (contact.phone || '-'),
+      '■ 개인정보 동의: ' + (contact.consent ? 'O' : 'X'),
+      '',
+      '■ 희망 상담 일자: ' + (booking_req.desired_date || '-'),
+      '■ 희망 시간대: ' + (booking_req.desired_time_slot || '-'),
+      '',
+      '■ 케이스 분류: ' + cls,
+      '■ 긴급도: ' + urgency,
+      '■ 분류 사유: ' + (summary.classification_reason || '-'),
+    ];
+
+    if (booking) {
+      lines.push('');
+      lines.push('■ 캘린더 예약: ' + (booking.label || booking.start));
+    }
+    if (summary.inputs) {
+      lines.push('');
+      lines.push('■ STEP 1 (탭탭) 입력값:');
+      lines.push(JSON.stringify(summary.inputs, null, 2));
+    }
+    if (summary.estimate) {
+      lines.push('');
+      lines.push('■ 1차 추정 결과:');
+      lines.push(JSON.stringify(summary.estimate, null, 2));
+    }
+
+    lines.push('');
+    lines.push('-----');
+    lines.push('이 메일은 welcome-rehab.vercel.app 접수 시 자동 발송됩니다.');
+    lines.push('전체 원본 JSON:');
+    lines.push(JSON.stringify(summary, null, 2));
+
+    MailApp.sendEmail({
+      to: LEAD_ALERT_EMAIL,
+      subject: subject,
+      body: lines.join('\n'),
+    });
+  } catch (e) {
+    console.error('lead alert failed:', e.message);
+  }
 }
 
 function maybeSendHotAlert(kind, contact, summary, booking) {
@@ -243,7 +306,9 @@ function bookSlot(body) {
     ]);
   } catch (e) { /* ignore sheet errors */ }
 
-  maybeSendHotAlert('book', contact, summary, { start: start, end: end, label: formatSlot(start) });
+  const bookingInfo = { start: start, end: end, label: formatSlot(start) };
+  sendLeadAlert('book', contact, summary, bookingInfo);
+  maybeSendHotAlert('book', contact, summary, bookingInfo);
   return { ok: true, label: formatSlot(start) };
 }
 
