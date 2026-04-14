@@ -891,6 +891,8 @@ async function handleSlotClick(slot, wrap){
     }
     leadState.booking = { start: slot.start, end: slot.end, label: slot.label };
     saveState();
+    try { if(window.fbq) fbq('track', 'Schedule'); } catch(e){}
+    try { if(window.gtag) gtag('event', 'book_appointment', { method: 'chat_slot' }); } catch(e){}
     chip.textContent = '✓ ' + (data.label || slot.label) + ' 예약 확정';
     const userMsg = `예약 확정: ${slot.label || formatDayHeader(new Date(slot.start)) + ' ' + formatTimeOnly(new Date(slot.start))}`;
     await sendMessage(userMsg);
@@ -927,6 +929,10 @@ function processSummaryAndSend(){
       chip.textContent = '✓ 변호사에게 전달 완료';
       bubble.appendChild(chip);
     }
+
+    // Conversion tracking
+    try { if(window.fbq) fbq('track', 'Lead'); } catch(e){}
+    try { if(window.gtag) gtag('event', 'generate_lead', { method: 'chat_ai_summary' }); } catch(e){}
 
     // Fire-and-forget POST
     fetch('/api/lead', {

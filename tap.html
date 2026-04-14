@@ -812,6 +812,8 @@ async function submitBooking(){
       throw new Error(data.error || '서버 응답 오류');
     }
     bookState.done = true;
+    try { if(window.fbq) fbq('track', 'Lead'); } catch(e){}
+    try { if(window.gtag) gtag('event', 'generate_lead', { method: 'tap_direct_booking' }); } catch(e){}
     showBookingSuccess(desiredDate, desiredTime, contact.name);
   } catch(e){
     errBox.innerHTML = `<div class="book-err">${e.message}<br/>잠시 후 다시 시도하시거나 1551-8016으로 전화 주세요.</div>`;
