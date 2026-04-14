@@ -35,7 +35,8 @@ async function sendBookingEmail(body, upstreamData) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) return;
 
-  const from = process.env.RESEND_FROM || 'onboarding@resend.dev';
+  const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
+  const from = `웰컴회생 <${fromEmail}>`;
   const contact = body.contact || {};
   const summary = body.summary || {};
   const slotLabel = upstreamData?.label || body.start || '-';
