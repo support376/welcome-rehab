@@ -695,15 +695,19 @@
     border-radius:18px;
     overflow:hidden;
     border:1px solid var(--border-strong);
-    background:linear-gradient(160deg,rgba(101,41,255,.25),rgba(0,184,255,.15) 60%,rgba(30,245,202,.1));
+    background:#000 center/cover no-repeat;
     display:flex;align-items:flex-end;justify-content:flex-start;
-    padding:18px;
+    padding:14px;
     transition:transform .25s,border .25s,box-shadow .25s;
     cursor:pointer;
   }
+  .short-card img.thumb{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;z-index:0;
+  }
   .short-card::before{
-    content:'';position:absolute;inset:0;
-    background:radial-gradient(circle at 50% 40%,rgba(255,255,255,.08),transparent 60%);
+    content:'';position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.85) 100%);
     pointer-events:none;
   }
   .short-card .play{
@@ -726,8 +730,8 @@
   .short-card .meta{
     position:relative;z-index:2;
     font-size:12px;font-weight:700;color:#fff;
-    line-height:1.4;
-    text-shadow:0 2px 8px rgba(0,0,0,.6);
+    line-height:1.35;
+    text-shadow:0 2px 8px rgba(0,0,0,.8);
   }
   .short-card .meta .tag{
     display:inline-block;padding:3px 8px;border-radius:6px;
@@ -1330,23 +1334,66 @@
       <p class="section-desc">도산 전문 변호사가 직접 설명하는 60초 회생 실무. 쇼츠·언론 인터뷰를 순차 공개합니다.</p>
     </div>
 
-    <!-- TODO: 아래 a태그의 href에 유튜브 쇼츠 링크를 채워넣으면 됩니다. -->
     <div class="shorts-grid">
-      <a href="#" class="short-card placeholder" aria-label="쇼츠 영상 1">
+      <a href="https://youtube.com/shorts/Bn5DsyRVbUk" target="_blank" rel="noopener" class="short-card">
+        <img class="thumb" src="https://img.youtube.com/vi/Bn5DsyRVbUk/hqdefault.jpg" alt="집주인이 개인회생을 신청한다고?" loading="lazy" />
         <div class="play"></div>
-        <div class="meta"><span class="tag">쇼츠</span><br/>영상 준비 중</div>
+        <div class="meta"><span class="tag">임대차</span><br/>집주인이 개인회생을 신청한다고?</div>
       </a>
-      <a href="#" class="short-card placeholder" aria-label="쇼츠 영상 2">
+      <a href="https://youtube.com/shorts/mGfLjq5HJYM" target="_blank" rel="noopener" class="short-card">
+        <img class="thumb" src="https://img.youtube.com/vi/mGfLjq5HJYM/hqdefault.jpg" alt="집주인 개인회생 대응" loading="lazy" />
         <div class="play"></div>
-        <div class="meta"><span class="tag">쇼츠</span><br/>영상 준비 중</div>
+        <div class="meta"><span class="tag">임대차</span><br/>집주인이 개인회생을 신청한다고? 2부</div>
       </a>
-      <a href="#" class="short-card placeholder" aria-label="쇼츠 영상 3">
+      <a href="https://youtube.com/shorts/_gi7er7IrqM" target="_blank" rel="noopener" class="short-card">
+        <img class="thumb" src="https://img.youtube.com/vi/_gi7er7IrqM/hqdefault.jpg" alt="양육비 소득 산정" loading="lazy" />
         <div class="play"></div>
-        <div class="meta"><span class="tag">쇼츠</span><br/>영상 준비 중</div>
+        <div class="meta"><span class="tag">소득산정</span><br/>양육비도 내 소득으로 잡힐까?</div>
       </a>
-      <a href="#" class="short-card placeholder" aria-label="쇼츠 영상 4">
+      <a href="https://youtube.com/shorts/TT-nDIdmyt0" target="_blank" rel="noopener" class="short-card">
+        <img class="thumb" src="https://img.youtube.com/vi/TT-nDIdmyt0/hqdefault.jpg" alt="계좌·카드 사용" loading="lazy" />
         <div class="play"></div>
-        <div class="meta"><span class="tag">쇼츠</span><br/>영상 준비 중</div>
+        <div class="meta"><span class="tag">금융거래</span><br/>개인회생하면 계좌·카드 다 묶이나요?</div>
+      </a>
+      <a href="https://youtube.com/shorts/z72Ms5qAmI0" target="_blank" rel="noopener" class="short-card">
+        <img class="thumb" src="https://img.youtube.com/vi/z72Ms5qAmI0/hqdefault.jpg" alt="주식 코인 투자 경고" loading="lazy" />
+        <div class="play"></div>
+        <div class="meta"><span class="tag">투자 경고</span><br/>주식·코인 또 하시려고요? 🚨</div>
+      </a>
+      <a href="https://youtube.com/shorts/kly_j3bkxis" target="_blank" rel="noopener" class="short-card">
+        <img class="thumb" src="https://img.youtube.com/vi/kly_j3bkxis/hqdefault.jpg" alt="자동차 처리" loading="lazy" />
+        <div class="play"></div>
+        <div class="meta"><span class="tag">차량</span><br/>회생 앞두고 내 차는 어떻게?</div>
+      </a>
+      <a href="https://youtube.com/shorts/Zxuk4FdMsbQ" target="_blank" rel="noopener" class="short-card">
+        <img class="thumb" src="https://img.youtube.com/vi/Zxuk4FdMsbQ/hqdefault.jpg" alt="통신비 번호 정지" loading="lazy" />
+        <div class="play"></div>
+        <div class="meta"><span class="tag">통신비</span><br/>그 핸드폰번호 이제 못 써요 📱</div>
+      </a>
+      <a href="https://youtube.com/shorts/utvOjA4qTIY" target="_blank" rel="noopener" class="short-card">
+        <img class="thumb" src="https://img.youtube.com/vi/utvOjA4qTIY/hqdefault.jpg" alt="상속 대박 쪽박" loading="lazy" />
+        <div class="play"></div>
+        <div class="meta"><span class="tag">상속</span><br/>회생 중 상속받으면 쪽박?</div>
+      </a>
+      <a href="https://youtube.com/shorts/M2zIsZEriBk" target="_blank" rel="noopener" class="short-card">
+        <img class="thumb" src="https://img.youtube.com/vi/M2zIsZEriBk/hqdefault.jpg" alt="기각 방지" loading="lazy" />
+        <div class="play"></div>
+        <div class="meta"><span class="tag">기각 방지</span><br/>"신청만 하면 된다"는 착각</div>
+      </a>
+      <a href="https://youtube.com/shorts/ueaWPXBBulg" target="_blank" rel="noopener" class="short-card">
+        <img class="thumb" src="https://img.youtube.com/vi/ueaWPXBBulg/hqdefault.jpg" alt="상속 포기 위험" loading="lazy" />
+        <div class="play"></div>
+        <div class="meta"><span class="tag">상속</span><br/>상속 함부로 포기하면 회생 망합니다</div>
+      </a>
+      <a href="https://youtube.com/shorts/y1mzhL8X4IQ" target="_blank" rel="noopener" class="short-card">
+        <img class="thumb" src="https://img.youtube.com/vi/y1mzhL8X4IQ/hqdefault.jpg" alt="금지명령 기각" loading="lazy" />
+        <div class="play"></div>
+        <div class="meta"><span class="tag">금지명령</span><br/>금지명령 기각이라고요?</div>
+      </a>
+      <a href="https://youtube.com/shorts/K7ZRONvE_nU" target="_blank" rel="noopener" class="short-card">
+        <img class="thumb" src="https://img.youtube.com/vi/K7ZRONvE_nU/hqdefault.jpg" alt="변제금 부담 해결" loading="lazy" />
+        <div class="play"></div>
+        <div class="meta"><span class="tag">변제금</span><br/>변제금 부담 때문에 망설이셨다면 📣</div>
       </a>
     </div>
 
