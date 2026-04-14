@@ -21,11 +21,20 @@ const INCOME_MID = {
 
 const DEBT_UNSECURED_MID = {
   'none': 0,
-  'u3000': 15000000,
-  '3000_5000': 40000000,
-  '5000_10000': 75000000,
-  '10000_30000': 200000000,
-  '30000p': 400000000,
+  // 세분화된 브래킷 (신규)
+  'u1000':        6000000,    // 1,000만 이하 → 중간값 600만
+  '1000_2000':    15000000,   // 1,500만
+  '2000_3000':    25000000,   // 2,500만
+  '3000_5000':    40000000,   // 4,000만
+  '5000_7000':    60000000,   // 6,000만
+  '7000_10000':   85000000,   // 8,500만
+  '10000_15000':  125000000,  // 1.25억
+  '15000_30000':  225000000,  // 2.25억
+  '30000p':       400000000,  // 4억
+  // 하위호환 (구 브래킷)
+  'u3000':        15000000,
+  '5000_10000':   75000000,
+  '10000_30000':  200000000,
 };
 
 const DEBT_SECURED_MID = {
@@ -77,16 +86,30 @@ export default async function handler(req, res) {
   const taxDebt = DEBT_TAX_MID[tax] || 0;
 
   const availableIncome = Math.max(monthlyIncome - baseLiving, 0);
-  const repayment36m = availableIncome * 36;
+
+  // 최저 변제액 플로어: 법원 실무상 월 변제액은 최저 약 10만원 이상으로 결정되는 경우가 많음.
+  // availableIncome 이 0이어도 0원으로 표시하지 않고 최저 플로어를 노출해 오해를 방지.
+  const MONTHLY_FLOOR_MIN = 100000; // 10만원
+  const MONTHLY_FLOOR_MAX = 200000; // 20만원
+
+  let monthlyMin = Math.round(availableIncome * 0.8);
+  let monthlyMax = availableIncome;
+
+  if (monthlyMax < MONTHLY_FLOOR_MAX) {
+    monthlyMin = Math.max(monthlyMin, MONTHLY_FLOOR_MIN);
+    monthlyMax = Math.max(monthlyMax, MONTHLY_FLOOR_MAX);
+  }
+  if (monthlyMin > monthlyMax) monthlyMin = monthlyMax;
+
+  // 탕감률은 실제 플로어 반영된 월 변제액 중앙값으로 재계산
+  const effectiveMonthly = (monthlyMin + monthlyMax) / 2;
+  const repayment36m = effectiveMonthly * 36;
 
   let dischargeRate = 0;
   if (unsecuredDebt > 0) {
     dischargeRate = ((unsecuredDebt - repayment36m) / unsecuredDebt) * 100;
     dischargeRate = clamp(dischargeRate, 0, 95);
   }
-
-  const monthlyMin = Math.round(availableIncome * 0.8);
-  const monthlyMax = availableIncome;
   const rateMin = clamp(dischargeRate - 10, 0, 95);
   const rateMax = clamp(dischargeRate + 10, 0, 95);
 

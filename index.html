@@ -5,6 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 <title>웰컴회생 · 단순하면 20만원, 복잡하면 변호사 직접</title>
 <meta name="description" content="웰컴회생 Lite 20만원 즉시 착수 · 웰컴회생 Pro 법인·전문직·고액 케이스 변호사 직접 담당. 3분 AI 진단 후 24시간 내 연락." />
+
+<!-- Open Graph / SNS Preview -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="웰컴회생" />
+<meta property="og:title" content="웰컴회생 · 단순하면 20만원, 복잡하면 변호사 직접" />
+<meta property="og:description" content="도산·조세법 전문 변호사 직접 담당. Lite 20만원 즉시 착수 · Pro 법인·전문직·고액 케이스." />
+<meta property="og:url" content="https://welcome-rehab.vercel.app/" />
+<meta property="og:image" content="https://welcome-rehab.vercel.app/assets/logo.png" />
+<meta property="og:image:alt" content="웰컴회생 로고" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="웰컴회생 · 단순하면 20만원, 복잡하면 변호사 직접" />
+<meta name="twitter:description" content="도산·조세법 전문 변호사 직접 담당. Lite 20만원 즉시 착수." />
+<meta name="twitter:image" content="https://welcome-rehab.vercel.app/assets/logo.png" />
+<link rel="icon" type="image/png" href="assets/logo.png" />
+
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css" rel="stylesheet">
 <style>
@@ -662,6 +677,83 @@
   .final p{color:var(--text-dim);font-size:17px;margin-bottom:40px;}
 
   /* ---------- Blog grid ---------- */
+  /* ---------- Media (쇼츠 · 언론) ---------- */
+  .media-section{
+    background:linear-gradient(180deg,var(--bg-0) 0%,var(--bg-1) 50%,var(--bg-0) 100%);
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+  }
+  .shorts-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:28px;
+  }
+  .short-card{
+    position:relative;
+    aspect-ratio:9/16;
+    border-radius:18px;
+    overflow:hidden;
+    border:1px solid var(--border-strong);
+    background:linear-gradient(160deg,rgba(101,41,255,.25),rgba(0,184,255,.15) 60%,rgba(30,245,202,.1));
+    display:flex;align-items:flex-end;justify-content:flex-start;
+    padding:18px;
+    transition:transform .25s,border .25s,box-shadow .25s;
+    cursor:pointer;
+  }
+  .short-card::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(circle at 50% 40%,rgba(255,255,255,.08),transparent 60%);
+    pointer-events:none;
+  }
+  .short-card .play{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:56px;height:56px;border-radius:50%;
+    background:rgba(0,0,0,.55);backdrop-filter:blur(8px);
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid rgba(255,255,255,.3);
+    transition:transform .25s,background .25s;
+  }
+  .short-card .play::after{
+    content:'';width:0;height:0;
+    border-left:14px solid #fff;
+    border-top:9px solid transparent;
+    border-bottom:9px solid transparent;
+    margin-left:4px;
+  }
+  .short-card:hover{transform:translateY(-4px);border-color:var(--mint);box-shadow:0 20px 50px rgba(101,41,255,.25);}
+  .short-card:hover .play{transform:translate(-50%,-50%) scale(1.1);background:rgba(101,41,255,.6);}
+  .short-card .meta{
+    position:relative;z-index:2;
+    font-size:12px;font-weight:700;color:#fff;
+    line-height:1.4;
+    text-shadow:0 2px 8px rgba(0,0,0,.6);
+  }
+  .short-card .meta .tag{
+    display:inline-block;padding:3px 8px;border-radius:6px;
+    background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.2);
+    font-size:10px;margin-bottom:6px;color:var(--mint);
+  }
+  .short-card.placeholder{
+    background:repeating-linear-gradient(45deg,rgba(255,255,255,.02) 0 12px,rgba(255,255,255,.05) 12px 24px);
+    border-style:dashed;
+  }
+  .short-card.placeholder .play{opacity:.4;}
+  .short-card.placeholder .meta{color:var(--text-dim);}
+  .press-strip{
+    display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
+    margin-top:8px;
+  }
+  .press-strip .press-chip{
+    padding:10px 16px;border-radius:10px;
+    background:var(--card);border:1px solid var(--border);
+    font-size:12px;color:var(--text-dim);
+    font-weight:600;
+  }
+  .press-strip .press-chip b{color:var(--text);font-weight:700;}
+  @media (max-width:900px){ .shorts-grid{grid-template-columns:repeat(3,1fr);} }
+  @media (max-width:560px){ .shorts-grid{grid-template-columns:repeat(2,1fr);gap:12px;} .short-card{padding:12px;} }
+
   .blog-grid{
     display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
   }
@@ -822,13 +914,22 @@
   }
 
   @media (max-width:760px){
-    section{padding:80px 0;}
-    .hero{padding:120px 0 60px;}
-    .final{padding:96px 0;}
-    .header-cta{display:none;}
+    section{padding:64px 0;}
+    .hero{padding:112px 0 48px;}
+    .final{padding:80px 0;}
+    /* Mobile 상단 AI 진단 CTA 유지 (축소 스타일) */
+    .header-cta{display:inline-flex;padding:9px 14px;font-size:12px;}
+    .logo{font-size:15px;}
+    header .container{padding:0 16px;}
     .product{padding:36px 28px;}
     .product h3{font-size:26px;}
     .product .price{font-size:32px;}
+    /* Mobile 축약 — 텍스트 과다 섹션 숨김, CTA/핵심만 노출 */
+    .mobile-hide{display:none !important;}
+    .hero p.sub{font-size:14px;margin-bottom:28px;}
+    .section-desc{font-size:14px;margin-bottom:36px;}
+    .trust-strip{margin-top:32px;gap:6px 8px;}
+    .trust-strip .chip{padding:7px 12px;font-size:11px;}
   }
 </style>
 </head>
@@ -868,7 +969,7 @@
     <div class="trust-strip">
       <div class="chip">도산전문 <b>변호사 직접</b></div>
       <div class="chip">Lite 착수금 <b>20만원</b></div>
-      <div class="chip">1day <b>추심 중지</b></div>
+      <div class="chip">신청 당일 <b>사건번호 발급</b></div>
       <div class="chip">수임료 <b>분납 가능</b></div>
       <div class="chip">무방문 <b>비대면 진행</b></div>
     </div>
@@ -900,9 +1001,9 @@
         </div>
 
         <ul>
-          <li><b>신청 당일 추심 중지 접수</b> — 독촉 전화 그날로 차단</li>
+          <li><b>신청 당일 법원 사건번호 발급</b> — 절차 즉시 개시</li>
           <li>100% <b>비대면 진행</b> — 카톡·우편·전자서명으로 완결</li>
-          <li>부채증명서 등 서류 <b>99% 대리 발급</b></li>
+          <li>부채증명서 등 서류 <b>대부분 대리 발급</b> <span style="color:var(--text-dim);font-weight:400">(일부 서류는 본인 직접 발급이 필요할 수 있음)</span></li>
           <li>챗봇으로 진단 → 당일 계약 → 착수까지 <b>24시간 이내</b></li>
           <li>수임료 최대 <b>12개월 분납</b></li>
           <li>사건 진행은 담당 변호사 + 관리팀 배정</li>
@@ -1061,7 +1162,7 @@
 </section>
 
 <!-- Live Ticker -->
-<section class="ticker">
+<section class="ticker mobile-hide">
   <div class="container">
     <div class="ticker-head">
       <span class="live-dot"></span>
@@ -1150,7 +1251,7 @@
 
     <div class="services-grid">
       <div class="svc"><div class="num">SERVICE 01</div><h4>채권추심 즉시 방어</h4><p>계약 즉시 변호사가 대리인으로 독촉 전화를 대신 응대합니다.</p></div>
-      <div class="svc"><div class="num">SERVICE 02</div><h4>서류 99% 대리 발급</h4><p>부채증명서·금융권 서류까지 저희가 직접 발급합니다.</p></div>
+      <div class="svc"><div class="num">SERVICE 02</div><h4>서류 대부분 대리 발급</h4><p>부채증명서·금융권 서류까지 저희가 직접 발급합니다. 일부 서류는 본인 직접 발급이 필요할 수 있습니다.</p></div>
       <div class="svc"><div class="num">SERVICE 03</div><h4>신속 접수</h4><p>자체 발급 시스템으로 최단기간 법원 접수가 가능합니다.</p></div>
       <div class="svc"><div class="num">SERVICE 04</div><h4>수임료 분납</h4><p>Lite는 최대 12개월, Pro는 케이스별 분납 설계. 기초수급자 추가 지원.</p></div>
       <div class="svc"><div class="num">SERVICE 05</div><h4>도산전문 변호사 직접 관리</h4><p>양홍수 변호사가 전 과정을 검토·총괄합니다.</p></div>
@@ -1188,7 +1289,7 @@
 </section>
 
 <!-- Why 웰컴회생 -->
-<section>
+<section class="mobile-hide">
   <div class="container">
     <div class="section-head-center">
       <span class="section-label">WHY 웰컴회생</span>
@@ -1216,6 +1317,43 @@
         <h4>세금 방어<br/>까지</h4>
         <p>국세청 송무국 경험과 세무사 자격으로 조세채권까지 구조조정. 숫자에 강력한 방어를 제공합니다.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- Media: 쇼츠 · 언론자료 -->
+<section class="media-section" id="media">
+  <div class="container">
+    <div class="section-head-center">
+      <span class="section-label">SHORTS · PRESS</span>
+      <h2 class="section-title">현장의 <span class="grad">양홍수 변호사</span></h2>
+      <p class="section-desc">도산 전문 변호사가 직접 설명하는 60초 회생 실무. 쇼츠·언론 인터뷰를 순차 공개합니다.</p>
+    </div>
+
+    <!-- TODO: 아래 a태그의 href에 유튜브 쇼츠 링크를 채워넣으면 됩니다. -->
+    <div class="shorts-grid">
+      <a href="#" class="short-card placeholder" aria-label="쇼츠 영상 1">
+        <div class="play"></div>
+        <div class="meta"><span class="tag">쇼츠</span><br/>영상 준비 중</div>
+      </a>
+      <a href="#" class="short-card placeholder" aria-label="쇼츠 영상 2">
+        <div class="play"></div>
+        <div class="meta"><span class="tag">쇼츠</span><br/>영상 준비 중</div>
+      </a>
+      <a href="#" class="short-card placeholder" aria-label="쇼츠 영상 3">
+        <div class="play"></div>
+        <div class="meta"><span class="tag">쇼츠</span><br/>영상 준비 중</div>
+      </a>
+      <a href="#" class="short-card placeholder" aria-label="쇼츠 영상 4">
+        <div class="play"></div>
+        <div class="meta"><span class="tag">쇼츠</span><br/>영상 준비 중</div>
+      </a>
+    </div>
+
+    <div class="press-strip">
+      <span class="press-chip">📺 <b>언론 인터뷰</b> 준비 중</span>
+      <span class="press-chip">📰 <b>기고문</b> 준비 중</span>
+      <span class="press-chip">🎙️ <b>팟캐스트 출연</b> 준비 중</span>
     </div>
   </div>
 </section>
@@ -1318,7 +1456,7 @@
 </section>
 
 <!-- Secret consultation -->
-<section class="secret-section">
+<section class="secret-section mobile-hide">
   <div class="container">
     <div class="secret-card">
       <div>
@@ -1383,7 +1521,7 @@
 </section>
 
 <!-- Office Gallery -->
-<section>
+<section class="mobile-hide">
   <div class="container">
     <div class="section-head-center">
       <span class="section-label">OFFICE</span>
@@ -1418,7 +1556,7 @@
 </section>
 
 <!-- Map -->
-<section style="padding-top:0;">
+<section class="mobile-hide" style="padding-top:0;">
   <div class="container">
     <div class="section-head-center">
       <span class="section-label">LOCATION</span>
