@@ -20,9 +20,11 @@ export default async function handler(req, res) {
     const data = await upstream.json().catch(() => ({}));
 
     if (data && data.ok) {
-      sendBookingEmail(req.body || {}, data).catch((err) => {
+      try {
+        await sendBookingEmail(req.body || {}, data);
+      } catch (err) {
         console.error('resend email failed:', err?.message || err);
-      });
+      }
     }
 
     return res.status(200).json(data);

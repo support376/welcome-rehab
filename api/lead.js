@@ -19,9 +19,11 @@ export default async function handler(req, res) {
     });
     const data = await upstream.json().catch(() => ({}));
 
-    sendLeadEmail(req.body || {}).catch((err) => {
+    try {
+      await sendLeadEmail(req.body || {});
+    } catch (err) {
       console.error('resend email failed:', err?.message || err);
-    });
+    }
 
     return res.status(200).json(data);
   } catch (e) {
