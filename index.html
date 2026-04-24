@@ -233,10 +233,13 @@ p{line-height:1.65;}
 .shorts-head .hint{font-size:12px;color:var(--text-dim);}
 .shorts-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
 @media(max-width:720px){.shorts-grid{grid-template-columns:repeat(2,1fr);}}
-.short{aspect-ratio:9/16;border-radius:var(--radius-md);background:var(--text);position:relative;overflow:hidden;cursor:pointer;}
-.short .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.96);display:flex;align-items:center;justify-content:center;color:var(--text);font-size:14px;}
-.short .play::after{content:'▶';margin-left:2px;}
-.short .cap{position:absolute;left:12px;right:12px;bottom:12px;font-size:12px;color:#fff;line-height:1.4;font-weight:500;}
+.short{aspect-ratio:9/16;border-radius:var(--radius-md);background:var(--text);position:relative;overflow:hidden;cursor:pointer;display:block;transition:transform .2s,box-shadow .2s;}
+.short:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(9,54,135,.15);}
+.short .thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;}
+.short::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom, rgba(0,0,0,0) 45%, rgba(0,0,0,0.65) 100%);pointer-events:none;}
+.short::after{content:'▶';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.96);display:flex;align-items:center;justify-content:center;color:var(--text);font-size:14px;z-index:2;padding-left:2px;box-sizing:border-box;line-height:1;}
+.short .play{display:none;}
+.short .cap{position:absolute;left:12px;right:12px;bottom:12px;font-size:12px;color:#fff;line-height:1.4;font-weight:500;z-index:3;text-shadow:0 1px 4px rgba(0,0,0,.5);}
 .short .cap .num{opacity:.65;font-weight:400;}
 .short.empty{background:var(--bg-alt);border:1px dashed var(--line);cursor:default;}
 .short.empty .play{background:var(--bg-card);color:var(--text-dim);}
@@ -287,7 +290,13 @@ p{line-height:1.65;}
 .office-gallery img{width:100%;height:100%;object-fit:cover;display:block;}
 @media(max-width:720px){.office-gallery{grid-template-columns:repeat(3,1fr);gap:6px;}}
 @media(max-width:420px){.office-gallery{grid-template-columns:repeat(2,1fr);}}
-.office-meta{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius-lg);padding:8px 28px;}
+.office-meta{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius-lg);padding:8px 28px;margin-bottom:16px;}
+.office-map{margin-top:0;}
+.office-map iframe{display:block;background:var(--bg-alt);}
+.map-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+.map-btn{display:inline-flex;align-items:center;padding:10px 16px;border-radius:var(--radius-md);background:var(--bg-alt);color:var(--text);font-size:13px;font-weight:500;border:1px solid var(--line);transition:background .15s,border .15s;}
+.map-btn:hover{background:var(--primary-soft);border-color:var(--primary);color:var(--primary);}
+@media(max-width:720px){.office-map iframe{height:280px;} .map-actions{gap:6px;} .map-btn{flex:1;min-width:140px;justify-content:center;padding:11px 10px;font-size:12.5px;}}
 .office-meta .row{display:grid;grid-template-columns:1.3fr 1.1fr 1fr;gap:32px;padding:20px 0;}
 .office-meta .row+.row{border-top:1px solid var(--line);}
 .office-meta .cell{display:flex;flex-direction:column;gap:6px;}
@@ -932,41 +941,32 @@ fbq('init','1912072069447860');fbq('track','PageView');
       <h4>쇼츠 플레이리스트</h4>
       <div class="hint">쇼츠 URL 연결 대기</div>
     </div>
-    <!--
-      Shorts URL 등록 방법:
-        각 <a> 태그의 data-url="" 에 YouTube Shorts 링크를 붙여넣으면 자동으로 새 탭에서 열립니다.
-        예) data-url="https://www.youtube.com/shorts/ABCDEFGHIJ"
-        data-url 이 비어 있으면 자동으로 "준비 중" 상태로 표시되고 클릭이 차단됩니다.
-    -->
     <div class="shorts-grid">
-      <a class="short" data-url="" href="#"><div class="play"></div><div class="cap"><span class="num">01 ·</span> 상담원과 변호사 상담의 차이</div></a>
-      <a class="short" data-url="" href="#"><div class="play"></div><div class="cap"><span class="num">02 ·</span> 추가생계비에서 놓치는 항목들</div></a>
-      <a class="short" data-url="" href="#"><div class="play"></div><div class="cap"><span class="num">03 ·</span> 청산가치 방어 전략</div></a>
-      <a class="short" data-url="" href="#"><div class="play"></div><div class="cap"><span class="num">04 ·</span> 세금 채권 편입 실무</div></a>
-      <a class="short" data-url="" href="#"><div class="play"></div><div class="cap"><span class="num">05 ·</span> 자영업자 소득 증빙 전략</div></a>
-      <a class="short" data-url="" href="#"><div class="play"></div><div class="cap"><span class="num">06 ·</span> 반려된 케이스 재검토 포인트</div></a>
-      <a class="short" data-url="" href="#"><div class="play"></div><div class="cap"><span class="num">07 ·</span> 압류·소송 단계 대응법</div></a>
-      <a class="short" data-url="" href="#"><div class="play"></div><div class="cap"><span class="num">08 ·</span> 법인·개인회생 동시 진행</div></a>
+      <a class="short" data-vid="Bn5DsyRVbUk" href="https://youtube.com/shorts/Bn5DsyRVbUk" target="_blank" rel="noopener"><div class="cap"><span class="num">01 ·</span> 집주인이 개인회생을 신청한다고?</div></a>
+      <a class="short" data-vid="mGfLjq5HJYM" href="https://youtube.com/shorts/mGfLjq5HJYM" target="_blank" rel="noopener"><div class="cap"><span class="num">02 ·</span> 집주인 개인회생 대응</div></a>
+      <a class="short" data-vid="_gi7er7IrqM" href="https://youtube.com/shorts/_gi7er7IrqM" target="_blank" rel="noopener"><div class="cap"><span class="num">03 ·</span> 양육비 소득 산정</div></a>
+      <a class="short" data-vid="TT-nDIdmyt0" href="https://youtube.com/shorts/TT-nDIdmyt0" target="_blank" rel="noopener"><div class="cap"><span class="num">04 ·</span> 계좌·카드 사용</div></a>
+      <a class="short" data-vid="z72Ms5qAmI0" href="https://youtube.com/shorts/z72Ms5qAmI0" target="_blank" rel="noopener"><div class="cap"><span class="num">05 ·</span> 주식·코인 투자 경고</div></a>
+      <a class="short" data-vid="kly_j3bkxis" href="https://youtube.com/shorts/kly_j3bkxis" target="_blank" rel="noopener"><div class="cap"><span class="num">06 ·</span> 자동차 처리</div></a>
+      <a class="short" data-vid="Zxuk4FdMsbQ" href="https://youtube.com/shorts/Zxuk4FdMsbQ" target="_blank" rel="noopener"><div class="cap"><span class="num">07 ·</span> 통신비·번호 정지</div></a>
+      <a class="short" data-vid="utvOjA4qTIY" href="https://youtube.com/shorts/utvOjA4qTIY" target="_blank" rel="noopener"><div class="cap"><span class="num">08 ·</span> 상속 대박·쪽박</div></a>
+      <a class="short" data-vid="M2zIsZEriBk" href="https://youtube.com/shorts/M2zIsZEriBk" target="_blank" rel="noopener"><div class="cap"><span class="num">09 ·</span> 기각 방지</div></a>
+      <a class="short" data-vid="ueaWPXBBulg" href="https://youtube.com/shorts/ueaWPXBBulg" target="_blank" rel="noopener"><div class="cap"><span class="num">10 ·</span> 상속 포기 위험</div></a>
+      <a class="short" data-vid="y1mzhL8X4IQ" href="https://youtube.com/shorts/y1mzhL8X4IQ" target="_blank" rel="noopener"><div class="cap"><span class="num">11 ·</span> 금지명령 기각</div></a>
+      <a class="short" data-vid="K7ZRONvE_nU" href="https://youtube.com/shorts/K7ZRONvE_nU" target="_blank" rel="noopener"><div class="cap"><span class="num">12 ·</span> 변제금 부담 해결</div></a>
     </div>
     <script>
-      // data-url 이 있는 쇼츠는 새 탭 링크로, 비어있으면 "준비 중" 표시 + 클릭 차단
+      // 각 쇼츠 카드 앞에 YouTube 썸네일 자동 삽입 (data-vid 기반)
       document.querySelectorAll('.shorts-grid .short').forEach(function(a){
-        var url = (a.getAttribute('data-url') || '').trim();
-        if(url && url !== '#'){
-          a.setAttribute('href', url);
-          a.setAttribute('target', '_blank');
-          a.setAttribute('rel', 'noopener');
-          a.classList.remove('empty');
-        } else {
-          a.classList.add('empty');
-          a.addEventListener('click', function(e){ e.preventDefault(); });
-          // 캡션 뒤에 "준비 중" 뱃지
-          if(!a.querySelector('.pending')){
-            var badge = document.createElement('span');
-            badge.className = 'pending';
-            badge.textContent = '준비 중';
-            a.querySelector('.cap').appendChild(badge);
-          }
+        var vid = a.getAttribute('data-vid');
+        if(vid){
+          var img = document.createElement('img');
+          img.className = 'thumb';
+          img.loading = 'lazy';
+          img.alt = '';
+          img.src = 'https://img.youtube.com/vi/' + vid + '/hqdefault.jpg';
+          img.onerror = function(){ this.style.display='none'; };
+          a.insertBefore(img, a.firstChild);
         }
       });
     </script>
@@ -1003,8 +1003,8 @@ fbq('init','1912072069447860');fbq('track','PageView');
     <div class="pricing-grid">
       <div class="price-card">
         <div class="tag">Step 1 · 상담</div>
-        <div class="n">20,000<span class="unit">원</span></div>
-        <div class="d"><strong>상담 약속금</strong> · 상담 완료 시 전액 환불, 수임 시 착수금 차감. 30분 무료 상담.</div>
+        <div class="n">무료<span class="unit"></span></div>
+        <div class="d"><strong>30분 무료 상담</strong> · 예약금·상담료 일절 없음. 이름·연락처 없이 AI 진단부터 시작 가능.</div>
       </div>
       <div class="price-card">
         <div class="tag">Lite · 착수금</div>
@@ -1058,7 +1058,7 @@ fbq('init','1912072069447860');fbq('track','PageView');
 <!-- FINAL CTA -->
 <section class="final" id="final">
   <div class="container">
-    <h2>오늘 <span class="accent">한 번</span>의 정확한 진단이<br/>몇백만 원의 탕감 차이를 만듭니다.</h2>
+    <h2>오늘 <span class="accent">한 번</span>의 정확한 진단이<br/>수천만 원의 탕감 차이를 만듭니다.</h2>
     <p>AI 사전 진단 → 양홍수 변호사 직접 검토 → 케이스별 전략 설계.<br/>30분 상담만으로도 당신의 숫자가 새로 보일 수 있습니다.</p>
     <a href="tap.html" class="cta-primary">무료로 정밀 진단 시작 →</a>
     <div class="tel">전화 문의 · 상담실 직통 안내</div>
@@ -1087,12 +1087,28 @@ fbq('init','1912072069447860');fbq('track','PageView');
 
     <div class="office-meta">
       <div class="row">
-        <div class="cell"><div class="k">주소</div><div class="v">상담실 주소 (운영 정보 업데이트 예정)</div></div>
+        <div class="cell"><div class="k">주소</div><div class="v">서울 강남구 강남대로 525 세영제이타워 <strong>10층</strong></div></div>
         <div class="cell"><div class="k">상담 시간</div><div class="v">평일 09:30–18:30 · 토 예약제</div></div>
       </div>
       <div class="row">
-        <div class="cell"><div class="k">연락</div><div class="v">대표번호 · 대표 이메일 (운영 정보 업데이트 예정)</div></div>
+        <div class="cell"><div class="k">교통</div><div class="v">지하철 <strong>2호선 강남역</strong> 도보 5분</div></div>
         <div class="cell"><div class="k">상담 방식</div><div class="v">대면 · 화상 · 전화 모두 가능</div></div>
+      </div>
+    </div>
+
+    <!-- Google Maps embed · 강남대로 525 세영제이타워 -->
+    <div class="office-map">
+      <iframe
+        src="https://www.google.com/maps?q=서울%20강남구%20강남대로%20525%20세영제이타워&hl=ko&z=17&output=embed"
+        width="100%" height="360"
+        style="border:0;border-radius:var(--radius-md);"
+        loading="lazy" allowfullscreen=""
+        referrerpolicy="no-referrer-when-downgrade"
+        title="웰컴법률사무소 위치 지도"></iframe>
+      <div class="map-actions">
+        <a class="map-btn" href="https://map.naver.com/p/search/서울%20강남구%20강남대로%20525%20세영제이타워" target="_blank" rel="noopener">네이버 지도에서 길찾기 →</a>
+        <a class="map-btn" href="https://map.kakao.com/?q=서울%20강남구%20강남대로%20525%20세영제이타워" target="_blank" rel="noopener">카카오맵에서 길찾기 →</a>
+        <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&destination=%EC%84%9C%EC%9A%B8%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%EA%B0%95%EB%82%A8%EB%8C%80%EB%A1%9C%20525%20%EC%84%B8%EC%98%81%EC%A0%9C%EC%9D%B4%ED%83%80%EC%9B%8C" target="_blank" rel="noopener">Google 길찾기 →</a>
       </div>
     </div>
   </div>
@@ -1104,6 +1120,7 @@ fbq('init','1912072069447860');fbq('track','PageView');
     <div>
       <h5>웰컴법률사무소</h5>
       <p>대표변호사 양홍수 · 변호사 · 세무사<br/>대한변협 인증 도산법 · 조세법 전문</p>
+      <p>서울 강남구 강남대로 525 세영제이타워 10층<br/>2호선 강남역 도보 5분</p>
       <p>탕감의 크기는 누가 논리를 짜느냐로 갈립니다.</p>
     </div>
     <div>
