@@ -842,39 +842,26 @@ function renderResult(){
 }
 
 /* ──────────────────────────────────────────────────────────────
- *  Router
+ *  Back button + initial render
  * ──────────────────────────────────────────────────────────────*/
-function render(){
-  if(state.mode === 'intro') renderIntro();
-  else if(state.mode === 'result') renderResult();
-  else renderStep();
-  updateProgress();
-}
-
-function updateProgress(){
-  let pct;
-  if(state.mode === 'intro') pct = 0;
-  else if(state.mode === 'result') pct = 100;
-  else pct = Math.round(((state.step + 1) / STEPS.length) * 100);
-  progressBar.style.width = pct + '%';
-  counter.textContent = state.mode === 'intro'
-    ? '시작'
-    : state.mode === 'result'
-      ? '완료'
-      : `${state.step + 1} / ${STEPS.length}`;
-  backBtn.disabled = (state.mode === 'intro');
-}
-
 backBtn.addEventListener('click', () => {
+  if(state.mode === 'loading') return;
   if(state.mode === 'result'){
-    state.mode = 'step'; state.step = STEPS.length - 1;
-    render(); return;
-  }
-  if(state.mode === 'step'){
-    if(state.step === 0){ state.mode = 'intro'; }
-    else { state.step -= 1; }
+    state.mode = 'tap';
+    state.step = STEPS.length - 1;
     render();
+    return;
   }
+  if(state.mode === 'tap'){
+    if(state.step === 0){
+      state.mode = 'intro';
+    } else {
+      state.step -= 1;
+    }
+    render();
+    return;
+  }
+  // intro 면 아무것도 안 함
 });
 
 render();
