@@ -2,1739 +2,1129 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-<title>웰컴회생 · AI 시대의 개인회생, 압도적인 탕감률</title>
-<meta name="description" content="AI가 탕감액을 결정짓는 모든 항목을 먼저 샅샅이 질문하고, 도산·조세법 전문 양홍수 변호사가 직접 마무리합니다. 직장인부터 의사·법인대표·전문직까지 — 놓치는 탕감률 단 1%도 없습니다." />
-
-<!-- Open Graph / SNS Preview -->
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="웰컴회생" />
-<meta property="og:title" content="웰컴회생 · AI 시대의 개인회생, 압도적인 탕감률" />
-<meta property="og:description" content="AI가 모든 항목을 먼저 샅샅이 질문, 양홍수 변호사가 직접 마무리. 직장인부터 의사·법인대표·전문직까지 — 놓치는 탕감률 단 1%도 없습니다." />
-<meta property="og:url" content="https://welcome-rehab.vercel.app/" />
-<meta property="og:image" content="https://welcome-rehab.vercel.app/assets/yang-hongsu.jpg" />
-<meta property="og:image:type" content="image/jpeg" />
-<meta property="og:image:width" content="790" />
-<meta property="og:image:height" content="1049" />
-<meta property="og:image:alt" content="양홍수 변호사 · 웰컴회생" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="웰컴회생 · AI 시대의 개인회생, 압도적인 탕감률" />
-<meta name="twitter:description" content="AI가 모든 항목을 먼저 샅샅이 질문, 변호사가 직접 마무리. 의사·법인대표·전문직까지 커버." />
-<meta name="twitter:image" content="https://welcome-rehab.vercel.app/assets/yang-hongsu.jpg" />
-<link rel="icon" type="image/png" href="assets/logo.png" />
-<!-- analytics verified: Meta Pixel + GA4 active -->
-
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
-<link href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>웰컴법률사무소 · 양홍수 변호사 | 변호사 직접 상담 개인회생</title>
+<meta name="description" content="탕감의 크기는 누가 논리를 설계하느냐로 갈립니다. 웰컴은 AI가 먼저 낱낱이 파악하고, 양홍수 변호사가 탕감 핵심 전략·법리를 직접 설계합니다." />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
 <style>
-  :root{
-    --bg-0:#0B0913;
-    --bg-1:#161320;
-    --bg-2:#1C182B;
-    --purple-deep:#382080;
-    --purple:#6041a3;
-    --purple-bright:#6529FF;
-    --cyan:#00B8FF;
-    --mint:#1EF5CA;
-    --gold:#FFD591;
-    --text:#F5F5FA;
-    --text-dim:#A7A7A7;
-    --border:rgba(255,255,255,.08);
-    --border-strong:rgba(255,255,255,.14);
-    --card:rgba(255,255,255,.04);
-    --card-hover:rgba(255,255,255,.07);
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    font-family:'Wanted Sans Variable','Wanted Sans',-apple-system,system-ui,'Segoe UI',sans-serif;
-    background:var(--bg-0);
-    color:var(--text);
-    line-height:1.5;
-    letter-spacing:-0.03em;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-    padding-bottom:72px;
-    word-break:keep-all;
-    overflow-wrap:break-word;
-  }
-  /* 조건부 줄바꿈: PC에서만 <br class="br-pc"/> 가 강제 개행 */
-  .br-pc{display:inline;}
-  @media (max-width:760px){ .br-pc{display:none;} }
-  a{color:inherit;text-decoration:none;}
-  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
-  img{max-width:100%;display:block;}
+:root{
+  --bg:#FFFFFF;
+  --bg-alt:#F9FAFB;
+  --bg-card:#FFFFFF;
+  --text:#14151A;
+  --text-muted:#72767F;
+  --text-dim:#A0A3AA;
+  --line:rgba(20,21,26,.08);
+  --line-soft:rgba(20,21,26,.04);
+  --primary:#093687;
+  --primary-accent:#1261C4;
+  --primary-soft:#EEF4FF;
+  --danger:#D44D4D;
+  --danger-soft:#FDEEEE;
+  --success:#147E52;
+  --success-soft:#E6F2EC;
+  --warning:#B87900;
+  --warning-soft:#FFF4DD;
+  --radius-sm:6px;
+  --radius-md:10px;
+  --radius-lg:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{background:var(--bg);color:var(--text);}
+body{
+  font-family:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,system-ui,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+  font-weight:400;line-height:1.6;letter-spacing:-0.015em;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+  word-break:keep-all;overflow-wrap:break-word;
+}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+img{max-width:100%;display:block;}
+h1,h2,h3,h4{color:var(--text);font-weight:700;letter-spacing:-0.03em;line-height:1.2;}
+p{line-height:1.65;}
 
-  .container{max-width:1180px;margin:0 auto;padding:0 24px;}
+.container{max-width:960px;margin:0 auto;padding:0 24px;}
 
-  /* ---------- Header ---------- */
-  header{
-    position:fixed;top:0;left:0;right:0;z-index:50;
-    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-    background:rgba(11,9,19,.6);
-    border-bottom:1px solid var(--border);
-  }
-  header .container{display:flex;align-items:center;justify-content:space-between;height:64px;}
-  .logo{font-weight:800;font-size:17px;letter-spacing:-0.04em;}
-  .logo span{background:linear-gradient(90deg,var(--cyan),var(--mint));-webkit-background-clip:text;background-clip:text;color:transparent;}
-  .nav-links{display:flex;gap:28px;font-size:13px;color:var(--text-dim);font-weight:600;}
-  .nav-links a:hover{color:var(--mint);}
-  .header-cta{
-    padding:10px 18px;border-radius:999px;font-size:13px;font-weight:700;
-    background:linear-gradient(90deg,var(--purple-bright),var(--cyan));
-    color:#fff;transition:transform .2s;
-  }
-  .header-cta:hover{transform:scale(1.04);}
-  @media (max-width:760px){ .nav-links{display:none;} }
+/* NAV */
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:saturate(1.3) blur(8px);border-bottom:1px solid var(--line);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;}
+.logo{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:700;color:var(--text);letter-spacing:-0.02em;}
+.logo .brand{color:var(--primary);}
+.nav-links{display:flex;gap:28px;font-size:13px;color:var(--text-muted);font-weight:500;}
+.nav-links a:hover{color:var(--text);}
+.nav .cta{padding:9px 16px;border-radius:var(--radius-sm);background:var(--primary);color:#fff;font-size:13px;font-weight:600;letter-spacing:-0.01em;}
+.nav .cta:hover{background:var(--primary-accent);}
+@media(max-width:720px){.nav-links{display:none;}}
 
-  /* ---------- Hero ---------- */
-  .hero{
-    position:relative;
-    padding:160px 0 80px;
-    overflow:hidden;
-  }
-  .hero::before{
-    content:'';position:absolute;inset:-20% -10% auto -10%;height:130%;
-    background:
-      radial-gradient(60% 50% at 20% 20%,rgba(101,41,255,.45),transparent 70%),
-      radial-gradient(50% 45% at 80% 30%,rgba(0,184,255,.35),transparent 70%),
-      radial-gradient(50% 50% at 50% 90%,rgba(30,245,202,.22),transparent 70%);
-    filter:blur(60px);
-    z-index:0;
-  }
-  .hero::after{
-    content:'';position:absolute;inset:0;
-    background:radial-gradient(ellipse at center,transparent 50%,var(--bg-0) 100%);
-    z-index:1;pointer-events:none;
-  }
-  .hero .container{position:relative;z-index:2;text-align:center;}
-  .eyebrow{
-    display:inline-block;
-    padding:8px 16px;border-radius:999px;
-    border:1px solid var(--border-strong);
-    background:rgba(255,255,255,.04);
-    font-size:12px;font-weight:600;color:var(--mint);
-    margin-bottom:28px;
-  }
-  .hero h1{
-    font-size:clamp(34px,6vw,66px);
-    font-weight:800;
-    line-height:1.12;
-    letter-spacing:-0.05em;
-    margin-bottom:24px;
-  }
-  .hero h1 .grad{
-    background:linear-gradient(120deg,#fff 0%,var(--cyan) 45%,var(--mint) 100%);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  .hero h1 .red{
-    color:#FF4757;
-    text-shadow:0 0 40px rgba(255,71,87,.35);
-  }
-  .hero p.sub .red{
-    color:#FF6B7A;
-    font-weight:700;
-  }
-  .hero p.sub{
-    font-size:clamp(15px,2vw,19px);
-    color:var(--text-dim);
-    max-width:640px;margin:0 auto 40px;
-  }
-  .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
-  .cta-primary{
-    display:inline-flex;align-items:center;gap:10px;
-    padding:20px 40px;border-radius:999px;
-    font-size:17px;font-weight:800;
-    background:linear-gradient(90deg,var(--purple-bright),var(--cyan) 60%,var(--mint));
-    color:#0B0913;
-    box-shadow:0 10px 40px rgba(101,41,255,.4),0 0 0 1px rgba(255,255,255,.1) inset;
-    transition:transform .2s,box-shadow .2s;
-  }
-  .cta-primary:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 14px 50px rgba(0,184,255,.5);}
-  .cta-secondary{
-    display:inline-flex;align-items:center;gap:10px;
-    padding:20px 34px;border-radius:999px;
-    font-size:15px;font-weight:700;
-    background:var(--card);
-    border:1px solid var(--border-strong);
-    color:var(--text);
-    backdrop-filter:blur(10px);
-    transition:border .2s,background .2s;
-  }
-  .cta-secondary:hover{border-color:var(--mint);background:var(--card-hover);}
-  .cta-note{margin-top:16px;font-size:12px;color:var(--text-dim);}
-  .trust-strip{
-    margin-top:56px;
-    display:flex;flex-wrap:wrap;justify-content:center;gap:10px 16px;
-  }
-  .trust-strip .chip{
-    padding:10px 18px;border-radius:12px;
-    border:1px solid var(--border);
-    background:var(--card);
-    font-size:13px;color:var(--text-dim);
-    backdrop-filter:blur(10px);
-  }
-  .trust-strip .chip b{color:var(--text);font-weight:700;}
+/* HERO */
+.hero{padding:72px 0 64px;}
+@media(max-width:720px){.hero{padding:48px 0 40px;}}
 
-  /* ---------- Section base ---------- */
-  section{padding:110px 0;position:relative;}
-  .section-label{
-    display:block;font-size:13px;font-weight:700;
-    color:var(--cyan);letter-spacing:.05em;
-    margin-bottom:14px;text-transform:uppercase;
-  }
-  .section-title{
-    font-size:clamp(28px,4.2vw,44px);
-    font-weight:800;letter-spacing:-0.04em;
-    line-height:1.2;margin-bottom:20px;
-  }
-  .section-title .grad{
-    background:linear-gradient(120deg,var(--cyan),var(--mint));
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  .section-desc{color:var(--text-dim);font-size:16px;max-width:640px;margin-bottom:56px;}
-  .section-head-center{text-align:center;margin-bottom:64px;}
-  .section-head-center .section-desc{margin:20px auto 0;}
+/* Hero 중앙 단일 컬럼 · 사진 상단 중앙 */
+.hero-center{max-width:680px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px;}
+.hero-photo{width:180px;height:220px;border-radius:var(--radius-lg);overflow:hidden;background:var(--bg-alt);flex-shrink:0;box-shadow:0 4px 20px rgba(9,54,135,.08);}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+.hero-name{font-size:13px;font-weight:600;color:var(--primary);letter-spacing:-0.01em;margin-top:-6px;}
+@media(max-width:720px){.hero-photo{width:140px;height:180px;}}
 
-  /* ---------- PRODUCTS: Lite vs Pro (Barbell) ---------- */
-  .products{
-    background:var(--bg-1);
-    border-top:1px solid var(--border);
-    border-bottom:1px solid var(--border);
-  }
-  .barbell-tag{
-    display:inline-flex;align-items:center;gap:8px;
-    padding:8px 16px;border-radius:999px;
-    background:rgba(255,213,145,.08);
-    border:1px solid rgba(255,213,145,.25);
-    color:var(--gold);
-    font-size:12px;font-weight:700;
-    margin-bottom:20px;
-  }
-  .products-grid{
-    display:grid;gap:24px;
-    grid-template-columns:repeat(2,1fr);
-    margin-top:48px;
-  }
-  @media (max-width:860px){ .products-grid{grid-template-columns:1fr;} }
+/* Hero 2컬럼 · 모바일(≤640px)만 1열로 접힘 */
+.hero-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center;}
+@media(max-width:980px){.hero-grid{gap:36px;}}
+@media(max-width:820px){.hero-grid{gap:28px;grid-template-columns:1.1fr 1fr;}}
+@media(max-width:640px){.hero-grid{grid-template-columns:1fr;gap:24px;}}
+.hero .eyebrow{display:inline-block;font-size:12px;font-weight:600;color:var(--primary-accent);margin-bottom:20px;letter-spacing:0.02em;}
+.hero h1{font-size:clamp(34px,5.2vw,56px);font-weight:700;letter-spacing:-0.035em;line-height:1.15;margin-bottom:24px;}
+.hero h1 .accent{color:var(--primary);}
+.hero p.sub{font-size:clamp(16px,1.9vw,18px);color:var(--text-muted);margin-bottom:32px;line-height:1.6;max-width:620px;}
+.hero p.sub em{color:var(--text);font-style:normal;font-weight:600;}
+.hero .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;}
+.cta-primary{display:inline-flex;align-items:center;gap:6px;padding:15px 24px;border-radius:var(--radius-md);background:var(--primary);color:#fff;font-size:15px;font-weight:600;letter-spacing:-0.01em;transition:background .15s;}
+.cta-primary:hover{background:var(--primary-accent);color:#fff;}
+.cta-secondary{display:inline-flex;align-items:center;padding:15px 22px;border-radius:var(--radius-md);background:var(--bg-alt);color:var(--text);font-size:14px;font-weight:500;transition:background .15s;}
+.cta-secondary:hover{background:#F0F1F4;}
+.hero .note{font-size:13px;color:var(--text-dim);margin-bottom:28px;}
+.trust{display:flex;flex-wrap:wrap;gap:18px 28px;font-size:13px;color:var(--text-muted);}
+.trust .item{display:flex;align-items:center;gap:6px;}
+.trust .item strong{color:var(--text);font-weight:600;}
+.trust .item .dot{width:4px;height:4px;border-radius:50%;background:var(--primary);}
+.hero-visual{max-width:440px;justify-self:center;width:100%;min-width:260px;}
+.hero-visual img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center top;border-radius:var(--radius-lg);background:var(--bg-alt);display:block;box-shadow:0 4px 20px rgba(9,54,135,.08);}
+.hero-visual .caption{margin-top:14px;padding:14px 16px;border-radius:var(--radius-md);background:var(--bg-alt);border:1px solid var(--line);text-align:left;}
+.hero-visual .caption .name{font-size:15px;font-weight:700;color:var(--text);letter-spacing:-0.02em;}
+.hero-visual .caption .desc{font-size:12.5px;color:var(--text-muted);line-height:1.6;margin-top:4px;}
 
-  .product{
-    position:relative;
-    padding:44px 40px 40px;
-    border-radius:28px;
-    background:var(--card);
-    border:1px solid var(--border-strong);
-    backdrop-filter:blur(12px);
-    overflow:hidden;
-    display:flex;flex-direction:column;
-  }
-  .product::before{
-    content:'';position:absolute;inset:-40% -20% auto auto;
-    width:500px;height:400px;
-    pointer-events:none;z-index:0;
-  }
-  .product.lite::before{
-    background:radial-gradient(circle,rgba(0,184,255,.18),transparent 60%);
-  }
-  .product.pro::before{
-    background:radial-gradient(circle,rgba(255,213,145,.18),rgba(101,41,255,.12) 40%,transparent 70%);
-  }
-  .product > *{position:relative;z-index:1;}
-  .product .tier{
-    display:inline-flex;align-items:center;gap:8px;
-    padding:6px 14px;border-radius:999px;
-    font-size:11px;font-weight:800;letter-spacing:.08em;
-    margin-bottom:20px;width:fit-content;
-  }
-  .product.lite .tier{
-    background:rgba(30,245,202,.12);color:var(--mint);
-    border:1px solid rgba(30,245,202,.3);
-  }
-  .product.pro .tier{
-    background:rgba(255,213,145,.12);color:var(--gold);
-    border:1px solid rgba(255,213,145,.3);
-  }
-  .product h3{
-    font-size:32px;font-weight:800;letter-spacing:-0.04em;
-    margin-bottom:8px;
-  }
-  .product h3 .accent{
-    background:linear-gradient(120deg,var(--cyan),var(--mint));
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  .product.pro h3 .accent{
-    background:linear-gradient(120deg,var(--gold),#fff);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  .product .pitch{
-    font-size:14px;color:var(--text-dim);
-    margin-bottom:28px;line-height:1.7;
-  }
-  .product .price-row{
-    display:flex;align-items:baseline;gap:8px;
-    padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-    margin-bottom:24px;
-  }
-  .product .price-label{font-size:11px;color:var(--text-dim);font-weight:700;letter-spacing:.08em;}
-  .product .price{
-    font-size:38px;font-weight:800;letter-spacing:-0.04em;line-height:1;
-  }
-  .product.lite .price{
-    background:linear-gradient(120deg,#fff,var(--mint));
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  .product.pro .price{
-    font-size:22px;color:var(--gold);
-  }
-  .product .price-sub{font-size:12px;color:var(--text-dim);margin-left:auto;}
-  .product ul{list-style:none;margin-bottom:32px;flex:1;}
-  .product li{
-    position:relative;padding-left:26px;
-    font-size:14px;line-height:1.6;margin-bottom:14px;
-    color:var(--text);
-  }
-  .product li::before{
-    content:'';position:absolute;left:0;top:8px;
-    width:16px;height:16px;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .product.lite li::before{
-    background:linear-gradient(135deg,var(--cyan),var(--mint));
-    box-shadow:0 0 10px rgba(30,245,202,.4);
-  }
-  .product.pro li::before{
-    background:linear-gradient(135deg,var(--gold),var(--purple-bright));
-  }
-  .product li::after{
-    content:'✓';position:absolute;left:3px;top:4px;
-    font-size:11px;font-weight:900;color:#0B0913;
-  }
-  .product .btn{
-    display:block;text-align:center;
-    padding:18px;border-radius:14px;
-    font-size:15px;font-weight:800;
-    transition:transform .2s,box-shadow .2s;
-  }
-  .product.lite .btn{
-    background:linear-gradient(90deg,var(--cyan),var(--mint));
-    color:#0B0913;
-    box-shadow:0 8px 30px rgba(30,245,202,.25);
-  }
-  .product.pro .btn{
-    background:linear-gradient(90deg,var(--purple-bright),var(--gold));
-    color:#0B0913;
-    box-shadow:0 8px 30px rgba(255,213,145,.2);
-  }
-  .product .btn:hover{transform:translateY(-2px);}
-  .product .sub-btn{
-    display:block;text-align:center;margin-top:10px;
-    font-size:12px;color:var(--text-dim);
-  }
-  .barbell-note{
-    margin-top:36px;text-align:center;
-    color:var(--text-dim);font-size:13px;
-  }
-  .barbell-note b{color:var(--gold);font-weight:700;}
+/* SECTION base */
+.section{padding:96px 0;}
+.section.alt{background:var(--bg-alt);}
+@media(max-width:720px){.section{padding:64px 0;}}
+.section-head{max-width:720px;margin-bottom:48px;}
+.section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+.section-label{display:inline-block;font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--primary-accent);margin-bottom:16px;text-transform:uppercase;}
+.section-title{font-size:clamp(26px,3.4vw,36px);font-weight:700;letter-spacing:-0.032em;line-height:1.25;margin-bottom:14px;}
+.section-title .accent{color:var(--primary);}
+.section-desc{font-size:16px;color:var(--text-muted);line-height:1.7;}
+.section-desc em{color:var(--text);font-style:normal;font-weight:600;}
 
-  /* ---------- Audience ---------- */
-  .audience-grid{
-    display:grid;gap:20px;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  }
-  .aud-card{
-    position:relative;padding:32px 26px;border-radius:20px;
-    background:var(--card);border:1px solid var(--border);
-    backdrop-filter:blur(12px);
-    transition:transform .3s,background .3s;
-    overflow:hidden;
-  }
-  .aud-card:hover{transform:translateY(-4px);background:var(--card-hover);}
-  .aud-icon{
-    width:48px;height:48px;border-radius:14px;
-    background:linear-gradient(135deg,rgba(101,41,255,.3),rgba(0,184,255,.2));
-    border:1px solid var(--border);
-    display:flex;align-items:center;justify-content:center;
-    margin-bottom:20px;color:var(--mint);
-  }
-  .aud-card h3{font-size:18px;font-weight:800;margin-bottom:8px;letter-spacing:-0.03em;}
-  .aud-card p{color:var(--text-dim);font-size:13px;line-height:1.6;}
-  .aud-card .tier-chip{
-    display:inline-block;margin-top:14px;padding:4px 10px;
-    border-radius:6px;font-size:10px;font-weight:800;letter-spacing:.05em;
-  }
-  .tier-lite{background:rgba(30,245,202,.12);color:var(--mint);border:1px solid rgba(30,245,202,.3);}
-  .tier-pro{background:rgba(255,213,145,.12);color:var(--gold);border:1px solid rgba(255,213,145,.3);}
+/* COMPARE */
+.compare-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--bg-card);}
+.compare-table{width:100%;min-width:560px;border-collapse:collapse;font-size:14px;}
+.compare-table th,.compare-table td{padding:16px 20px;text-align:left;vertical-align:top;line-height:1.55;}
+.compare-table thead th{background:var(--bg-alt);font-weight:600;font-size:12px;color:var(--text-muted);letter-spacing:0.02em;}
+.compare-table thead th.after{color:var(--primary);}
+.compare-table tbody tr+tr td{border-top:1px solid var(--line);}
+.compare-table td.axis{color:var(--text-muted);font-size:13px;width:26%;font-weight:500;}
+.compare-table td.before{color:var(--text-muted);}
+.compare-table td.after{color:var(--text);}
+.compare-table td.after strong{color:var(--primary);font-weight:600;}
 
-  /* ---------- Process ---------- */
-  .process-wrap{
-    display:grid;gap:24px;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    counter-reset:step;
-  }
-  .step{
-    position:relative;padding:40px 28px 32px;border-radius:20px;
-    background:linear-gradient(180deg,rgba(101,41,255,.08),transparent 70%),var(--card);
-    border:1px solid var(--border);
-  }
-  .step::before{
-    counter-increment:step;content:"0" counter(step);
-    font-size:44px;font-weight:800;letter-spacing:-0.05em;
-    background:linear-gradient(120deg,var(--cyan),var(--mint));
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-    display:block;margin-bottom:14px;line-height:1;
-  }
-  .step h3{font-size:20px;font-weight:800;margin-bottom:10px;}
-  .step p{color:var(--text-dim);font-size:14px;line-height:1.6;}
-  .step .time{
-    display:inline-block;margin-top:16px;padding:6px 12px;border-radius:999px;
-    font-size:11px;font-weight:700;color:var(--mint);
-    background:rgba(30,245,202,.08);border:1px solid rgba(30,245,202,.25);
-  }
+.infographic{margin-top:36px;padding:28px;border-radius:var(--radius-lg);background:var(--bg-card);border:1px solid var(--line);}
+.infographic .info-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;letter-spacing:-0.01em;}
+.infographic .info-sub{font-size:13px;color:var(--text-muted);margin-bottom:20px;}
+.infographic svg{width:100%;height:auto;max-width:820px;margin:0 auto;display:block;}
 
-  /* ---------- Live stats ---------- */
-  .stats{
-    background:linear-gradient(180deg,var(--bg-0),var(--bg-1));
-    border-top:1px solid var(--border);
-  }
-  .stats-grid{
-    display:grid;gap:20px;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-    margin-top:40px;
-  }
-  .stat{
-    padding:36px 30px;border-radius:20px;
-    background:var(--card);border:1px solid var(--border);
-    text-align:center;position:relative;overflow:hidden;
-  }
-  .stat::before{
-    content:'';position:absolute;inset:auto auto -50% -20%;
-    width:180px;height:180px;
-    background:radial-gradient(circle,rgba(0,184,255,.15),transparent 70%);
-  }
-  .stat .stat-label{
-    font-size:11px;font-weight:700;color:var(--text-dim);
-    letter-spacing:.08em;margin-bottom:16px;
-    position:relative;
-  }
-  .stat .stat-value{
-    font-size:clamp(36px,6vw,58px);font-weight:800;
-    letter-spacing:-0.05em;line-height:1;
-    background:linear-gradient(120deg,#fff,var(--cyan),var(--mint));
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-    position:relative;
-  }
-  .stat .stat-unit{
-    font-size:18px;font-weight:700;margin-left:4px;
-    background:linear-gradient(120deg,var(--cyan),var(--mint));
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  .stat .stat-sub{
-    margin-top:10px;font-size:11px;color:var(--text-dim);
-    position:relative;
-  }
+.recheck{margin-top:28px;padding:28px;border-radius:var(--radius-lg);background:var(--primary-soft);}
+.recheck .label{font-size:11px;font-weight:600;color:var(--primary);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;}
+.recheck .title{font-size:20px;font-weight:700;margin-bottom:8px;color:var(--text);letter-spacing:-0.025em;}
+.recheck .title .accent{color:var(--primary);}
+.recheck .desc{font-size:14px;color:var(--text-muted);line-height:1.7;}
 
-  /* ---------- Live ticker ---------- */
-  .ticker{padding:90px 0;}
-  .ticker-head{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
-  .live-dot{
-    width:10px;height:10px;border-radius:50%;background:#FF3B6B;
-    animation:pulse 1.5s ease-in-out infinite;
-    box-shadow:0 0 12px rgba(255,59,107,.8);
-  }
-  @keyframes pulse{0%,100%{opacity:.4;transform:scale(.85);}50%{opacity:1;transform:scale(1.15);}}
-  .ticker-head .label{font-size:12px;font-weight:800;letter-spacing:.1em;color:#FF6B88;}
-  .ticker-box{
-    position:relative;height:340px;overflow:hidden;
-    border-radius:20px;border:1px solid var(--border);
-    background:var(--card);backdrop-filter:blur(10px);
-  }
-  .ticker-box::before,.ticker-box::after{
-    content:'';position:absolute;left:0;right:0;height:60px;z-index:2;pointer-events:none;
-  }
-  .ticker-box::before{top:0;background:linear-gradient(180deg,var(--bg-0) 0%,transparent 100%);}
-  .ticker-box::after{bottom:0;background:linear-gradient(0deg,var(--bg-0) 0%,transparent 100%);}
-  .ticker-track{
-    animation:scroll 40s linear infinite;
-    padding:20px 0;
-  }
-  @keyframes scroll{
-    0%{transform:translateY(0);}
-    100%{transform:translateY(-50%);}
-  }
-  .ticker-row{
-    display:grid;grid-template-columns:90px 90px 140px 1fr 80px 60px;
-    align-items:center;gap:16px;
-    padding:14px 28px;font-size:13px;
-    border-bottom:1px dashed rgba(255,255,255,.05);
-  }
-  .ticker-row .stage{
-    padding:4px 10px;border-radius:6px;font-size:10px;font-weight:800;
-    letter-spacing:.04em;text-align:center;
-  }
-  .stage-인가{background:rgba(30,245,202,.15);color:var(--mint);border:1px solid rgba(30,245,202,.3);}
-  .stage-개시{background:rgba(0,184,255,.15);color:var(--cyan);border:1px solid rgba(0,184,255,.3);}
-  .stage-금지{background:rgba(101,41,255,.2);color:#B19CFF;border:1px solid rgba(101,41,255,.4);}
-  .stage-신청{background:rgba(255,255,255,.06);color:var(--text-dim);border:1px solid var(--border);}
-  .ticker-row .date{font-size:11px;color:var(--text-dim);font-variant-numeric:tabular-nums;}
-  .ticker-row .court{font-size:12px;color:var(--text-dim);}
-  .ticker-row .caseno{font-size:11px;color:var(--text-dim);font-family:ui-monospace,monospace;}
-  .ticker-row .type{font-size:11px;color:var(--text);font-weight:700;}
-  .ticker-row .name{font-size:12px;color:var(--text-dim);}
-  @media (max-width:760px){
-    .ticker-row{grid-template-columns:70px 70px 1fr 60px;gap:10px;padding:12px 18px;font-size:11px;}
-    .ticker-row .caseno,.ticker-row .type{display:none;}
-  }
+.segments{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin-top:24px;}
+.seg{padding:18px 20px;border-radius:var(--radius-md);background:var(--bg-card);border:1px solid var(--line);color:var(--text);transition:background .15s,border .15s;}
+.seg:hover{border-color:var(--primary);background:var(--primary-soft);}
+.seg .t{font-size:14px;font-weight:600;margin-bottom:3px;}
+.seg .d{font-size:12.5px;color:var(--text-muted);}
+.seg.urgent .t{color:var(--danger);}
 
-  /* ---------- Cases ---------- */
-  .cases{background:var(--bg-1);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
-  .case-grid{
-    display:grid;gap:20px;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  }
-  .case{
-    padding:32px 28px;border-radius:22px;
-    background:var(--card);border:1px solid var(--border);
-    position:relative;overflow:hidden;
-  }
-  .case::after{
-    content:'';position:absolute;top:-40%;right:-30%;width:260px;height:260px;
-    background:radial-gradient(circle,rgba(0,184,255,.15),transparent 70%);
-    pointer-events:none;
-  }
-  .case .tag{
-    display:inline-block;font-size:11px;font-weight:800;
-    color:var(--cyan);letter-spacing:.08em;margin-bottom:14px;
-  }
-  .case h3{font-size:17px;font-weight:700;margin-bottom:6px;color:var(--text);}
-  .case .profile{color:var(--text-dim);font-size:13px;margin-bottom:18px;line-height:1.5;}
-  .case .arrow{font-size:20px;color:var(--mint);margin-bottom:10px;}
-  .case .result{
-    font-size:20px;font-weight:800;letter-spacing:-0.03em;
-    background:linear-gradient(90deg,#fff,var(--mint));
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-    margin-bottom:6px;
-  }
-  .case .status{font-size:12px;color:var(--text-dim);}
-  .case .tier-chip{
-    position:absolute;top:28px;right:28px;
-    padding:4px 10px;border-radius:6px;font-size:10px;font-weight:800;letter-spacing:.05em;
-  }
+/* WHY-END */
+.why-end-hero{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center;margin-bottom:32px;}
+@media(max-width:720px){.why-end-hero{grid-template-columns:1fr;gap:24px;}}
+.why-end-hero img{width:100%;height:auto;border-radius:var(--radius-lg);aspect-ratio:4/3;object-fit:cover;background:var(--bg-alt);}
+.why-end-hero .text h3{font-size:24px;font-weight:700;margin-bottom:16px;letter-spacing:-0.025em;line-height:1.3;}
+.why-end-hero .text h3 .accent{color:var(--primary);}
+.why-end-hero .text p{font-size:15px;color:var(--text-muted);line-height:1.75;margin-bottom:10px;}
+.why-end-hero .text p strong{color:var(--text);font-weight:600;}
+.why-end-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:720px){.why-end-grid{grid-template-columns:1fr;}}
+.why-card{padding:28px;border-radius:var(--radius-lg);background:var(--bg-card);border:1px solid var(--line);}
+.why-card.emph{background:var(--primary);color:#fff;border-color:transparent;}
+.why-card .t{font-size:18px;font-weight:700;margin-bottom:12px;letter-spacing:-0.02em;line-height:1.35;}
+.why-card.emph .t{color:#fff;}
+.why-card .t .accent{color:var(--primary);}
+.why-card.emph .t .accent{color:#fff;}
+.why-card p{font-size:14px;color:var(--text-muted);line-height:1.75;}
+.why-card.emph p{color:rgba(255,255,255,.85);}
+.why-card p strong{color:var(--text);font-weight:600;}
+.why-card.emph p strong{color:#fff;}
 
-  /* ---------- 10 Services ---------- */
-  .services-grid{
-    display:grid;gap:16px;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  }
-  .svc{
-    padding:28px 24px;border-radius:18px;
-    background:var(--card);border:1px solid var(--border);
-    transition:transform .3s,border .3s;
-  }
-  .svc:hover{transform:translateY(-3px);border-color:rgba(0,184,255,.3);}
-  .svc .num{
-    font-size:13px;font-weight:800;color:var(--cyan);
-    letter-spacing:.05em;margin-bottom:12px;
-  }
-  .svc h4{font-size:16px;font-weight:800;margin-bottom:8px;letter-spacing:-0.03em;}
-  .svc p{font-size:13px;color:var(--text-dim);line-height:1.6;}
+/* PRODUCTS */
+.products{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:720px){.products{grid-template-columns:1fr;}}
+.product{padding:36px 32px;border-radius:var(--radius-lg);background:var(--bg-card);border:1px solid var(--line);display:flex;flex-direction:column;}
+.product.pro{border-color:var(--primary);}
+.product .tier{font-size:12px;font-weight:600;letter-spacing:0.04em;color:var(--text-muted);text-transform:uppercase;margin-bottom:14px;}
+.product.pro .tier{color:var(--primary);}
+.product h3{font-size:26px;font-weight:700;margin-bottom:14px;letter-spacing:-0.03em;}
+.product h3 .accent{color:var(--primary);}
+.product p.pitch{font-size:14px;color:var(--text-muted);line-height:1.75;margin-bottom:24px;}
+.product p.pitch strong{color:var(--text);font-weight:600;}
+.product ul{list-style:none;padding:0;margin:0 0 32px;}
+.product ul li{font-size:14px;padding:8px 0 8px 24px;position:relative;line-height:1.5;color:var(--text-muted);}
+.product ul li::before{content:'';position:absolute;left:0;top:14px;width:10px;height:2px;background:var(--primary);border-radius:1px;}
+.product .btn{display:block;padding:14px;border-radius:var(--radius-md);text-align:center;font-size:14px;font-weight:600;margin-top:auto;letter-spacing:-0.01em;transition:background .15s;}
+.product.lite .btn{background:var(--bg-alt);color:var(--text);}
+.product.lite .btn:hover{background:#F0F1F4;}
+.product.pro .btn{background:var(--primary);color:#fff;}
+.product.pro .btn:hover{background:var(--primary-accent);}
+.price-hint{text-align:center;margin-top:28px;font-size:13px;color:var(--text-muted);}
+.price-hint a{color:var(--primary);font-weight:600;}
 
-  /* ---------- Attorney ---------- */
-  .attorney-card{
-    display:grid;grid-template-columns:1fr 1.4fr;gap:48px;align-items:center;
-    padding:56px;border-radius:32px;
-    background:
-      radial-gradient(60% 80% at 0% 50%,rgba(101,41,255,.25),transparent 70%),
-      radial-gradient(60% 80% at 100% 50%,rgba(0,184,255,.2),transparent 70%),
-      var(--card);
-    border:1px solid var(--border);
-  }
-  .attorney-photo{
-    aspect-ratio:1/1.1;border-radius:24px;
-    background:linear-gradient(135deg,var(--purple-deep),var(--purple));
-    border:1px solid var(--border);
-    position:relative;overflow:hidden;
-  }
-  .attorney-photo img{
-    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  }
-  .attorney-photo::after{
-    content:'';position:absolute;inset:0;pointer-events:none;
-    background:radial-gradient(circle at 30% 20%,rgba(30,245,202,.15),transparent 60%);
-  }
-  .attorney-card h3{font-size:13px;color:var(--mint);font-weight:700;margin-bottom:10px;letter-spacing:.05em;}
-  .attorney-card h2{font-size:36px;font-weight:800;letter-spacing:-0.04em;margin-bottom:20px;}
-  .attorney-card p{color:var(--text-dim);font-size:15px;line-height:1.75;margin-bottom:24px;}
-  .attorney-meta{display:flex;flex-wrap:wrap;gap:10px;}
-  .attorney-meta .tag{
-    padding:8px 14px;border-radius:10px;font-size:12px;
-    background:rgba(255,255,255,.04);border:1px solid var(--border);
-    color:var(--text-dim);
-  }
-  @media (max-width:760px){
-    .attorney-card{grid-template-columns:1fr;padding:36px 28px;gap:32px;}
-    .attorney-photo{max-width:220px;margin:0 auto;}
-  }
+/* HOW */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+@media(max-width:720px){.steps{grid-template-columns:1fr;}}
+.step{padding:32px 28px;border-radius:var(--radius-lg);background:var(--bg-card);border:1px solid var(--line);}
+.step .num{display:inline-flex;width:32px;height:32px;border-radius:50%;background:var(--primary);color:#fff;font-size:13px;font-weight:600;align-items:center;justify-content:center;margin-bottom:18px;letter-spacing:0;}
+.step h3{font-size:18px;font-weight:700;margin-bottom:10px;letter-spacing:-0.02em;}
+.step p{font-size:13.5px;color:var(--text-muted);line-height:1.75;}
 
-  /* ---------- Knowhow ---------- */
-  .knowhow{background:var(--bg-1);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
-  .knowhow-list{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:16px;}
-  .kh{
-    padding:32px 36px;border-radius:20px;
-    background:var(--card);border:1px solid var(--border);
-    position:relative;overflow:hidden;
-  }
-  .kh::before{
-    content:'';position:absolute;inset:0 auto 0 0;width:4px;
-    background:linear-gradient(180deg,var(--cyan),var(--mint));
-  }
-  .kh .q{
-    font-size:17px;font-weight:800;margin-bottom:14px;
-    padding-left:32px;position:relative;letter-spacing:-0.03em;
-  }
-  .kh .q::before{
-    content:'Q';position:absolute;left:0;top:-2px;
-    font-size:20px;font-weight:800;color:var(--cyan);
-  }
-  .kh .a{
-    font-size:14px;line-height:1.75;color:var(--text-dim);
-    padding-left:32px;position:relative;
-  }
-  .kh .a::before{
-    content:'A';position:absolute;left:0;top:-2px;
-    font-size:16px;font-weight:800;color:var(--mint);
-  }
-  .kh .a b{color:var(--text);font-weight:700;}
-  @media (max-width:760px){ .kh{padding:26px 24px;} .kh .q,.kh .a{padding-left:26px;} }
+/* RECORD */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:40px;}
+@media(max-width:720px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
+.stat{padding:28px 20px;border-radius:var(--radius-lg);background:var(--bg-card);border:1px solid var(--line);}
+.stat .n{font-size:36px;font-weight:700;color:var(--text);margin-bottom:4px;letter-spacing:-0.04em;line-height:1;}
+.stat .l{font-size:13px;color:var(--text-muted);margin-top:8px;}
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+@media(max-width:720px){.cases{grid-template-columns:1fr;}}
+.case{padding:28px 24px;border-radius:var(--radius-lg);background:var(--bg-card);border:1px solid var(--line);display:flex;flex-direction:column;}
+.case .case-tag{display:inline-block;padding:4px 10px;border-radius:999px;background:var(--primary-soft);color:var(--primary);font-size:11px;font-weight:600;letter-spacing:0.02em;margin-bottom:16px;align-self:flex-start;}
+.case .case-tag.pro{background:#F0EBFA;color:#5B3DBE;}
+.case .case-tag.hot{background:var(--danger-soft);color:var(--danger);}
+.case h4{font-size:16px;font-weight:700;margin-bottom:4px;letter-spacing:-0.02em;}
+.case .meta{font-size:12.5px;color:var(--text-dim);margin-bottom:20px;}
+.case .metric{display:flex;justify-content:space-between;font-size:13.5px;padding:10px 0;border-top:1px solid var(--line);}
+.case .metric:first-of-type{border-top:none;padding-top:4px;}
+.case .k{color:var(--text-muted);}
+.case .v{font-weight:600;color:var(--text);}
+.case .v.hi{color:var(--primary);font-weight:700;}
+.cases-disclaim{font-size:12px;color:var(--text-dim);margin-top:20px;}
 
-  /* ---------- Secret consultation ---------- */
-  .secret-section{padding:110px 0;}
-  .secret-card{
-    position:relative;
-    padding:64px 56px;border-radius:32px;
-    background:
-      radial-gradient(80% 100% at 20% 0%,rgba(255,59,107,.18),transparent 70%),
-      radial-gradient(80% 100% at 100% 100%,rgba(101,41,255,.3),transparent 70%),
-      linear-gradient(135deg,#1a0f2e,#0f0820);
-    border:1px solid var(--border-strong);
-    overflow:hidden;
-    display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;
-  }
-  .secret-card::before{
-    content:'🤫';position:absolute;top:30px;right:40px;
-    font-size:160px;opacity:.07;transform:rotate(-10deg);
-  }
-  .secret-card .sec-eye{
-    font-size:12px;font-weight:800;color:#FF6B88;
-    letter-spacing:.1em;margin-bottom:16px;
-  }
-  .secret-card h2{
-    font-size:clamp(26px,3.6vw,40px);font-weight:800;
-    letter-spacing:-0.04em;line-height:1.25;margin-bottom:18px;
-  }
-  .secret-card h2 .grad{
-    background:linear-gradient(120deg,#fff,#FF6B88 60%,var(--purple-bright));
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  .secret-card p{color:var(--text-dim);font-size:15px;line-height:1.7;margin-bottom:28px;}
-  .secret-features{list-style:none;display:flex;flex-direction:column;gap:12px;position:relative;z-index:1;}
-  .secret-features li{
-    padding:14px 18px;border-radius:12px;
-    background:rgba(255,255,255,.04);
-    border:1px solid var(--border);
-    font-size:13px;
-  }
-  .secret-features li b{color:var(--gold);}
-  @media (max-width:760px){
-    .secret-card{grid-template-columns:1fr;padding:44px 32px;gap:28px;}
-    .secret-card::before{font-size:100px;top:20px;right:20px;}
-  }
+/* ATTORNEY */
+.attorney{display:grid;grid-template-columns:280px 1fr;gap:40px;align-items:center;padding:40px 0;margin-bottom:40px;}
+@media(max-width:720px){.attorney{grid-template-columns:1fr;gap:28px;padding:24px 0;}}
+.attorney img{width:100%;height:auto;border-radius:var(--radius-lg);background:var(--bg-alt);aspect-ratio:3/4;object-fit:cover;}
+.attorney .tag{font-size:12px;color:var(--primary-accent);font-weight:600;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px;}
+.attorney h3{font-size:28px;font-weight:700;margin-bottom:16px;letter-spacing:-0.03em;}
+.attorney h3 .accent{color:var(--primary);}
+.attorney .bio{font-size:15px;color:var(--text-muted);line-height:1.75;margin-bottom:18px;}
+.attorney .bio strong{color:var(--text);font-weight:600;}
+.attorney ul{list-style:none;padding:0;margin:0;}
+.attorney ul li{font-size:13.5px;color:var(--text-muted);padding:5px 0 5px 16px;position:relative;line-height:1.5;}
+.attorney ul li::before{content:'';position:absolute;left:0;top:13px;width:6px;height:1px;background:var(--primary);}
+.attorney.credentials-only{grid-template-columns:240px 1fr;gap:32px;align-items:start;padding:24px 0;margin-bottom:0;}
+.cred-badges{display:flex;flex-direction:column;gap:10px;}
+.cred-stat{padding:16px 18px;border-radius:var(--radius-md);background:var(--bg-card);border:1px solid var(--line);}
+.cred-stat .n{font-size:11.5px;font-weight:700;color:var(--primary);letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px;}
+.cred-stat .l{font-size:14.5px;font-weight:600;color:var(--text);letter-spacing:-0.015em;line-height:1.4;}
+.cred-stat .l .sub{font-size:12px;color:var(--text-muted);font-weight:500;display:inline-block;margin-top:2px;}
+@media(max-width:820px){.attorney.credentials-only{grid-template-columns:1fr;gap:24px;}.cred-badges{flex-direction:row;flex-wrap:wrap;}.cred-badges .cred-stat{flex:1;min-width:180px;}}
 
-  /* ---------- FAQ ---------- */
-  .faq-list{max-width:760px;margin:0 auto;}
-  details{
-    border:1px solid var(--border);border-radius:16px;
-    background:var(--card);margin-bottom:12px;overflow:hidden;
-    transition:background .2s;
-  }
-  details[open]{background:var(--card-hover);}
-  summary{
-    list-style:none;padding:22px 26px;cursor:pointer;
-    display:flex;align-items:center;justify-content:space-between;gap:20px;
-    font-size:16px;font-weight:700;
-  }
-  summary::-webkit-details-marker{display:none;}
-  summary::after{
-    content:'+';font-size:24px;font-weight:400;color:var(--cyan);
-    transition:transform .3s;
-  }
-  details[open] summary::after{transform:rotate(45deg);}
-  details p{padding:0 26px 24px;color:var(--text-dim);font-size:14px;line-height:1.75;}
-  details p b{color:var(--mint);font-weight:600;}
+.shorts-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;}
+.shorts-head h4{font-size:16px;font-weight:700;letter-spacing:-0.02em;}
+.shorts-head .hint{font-size:12px;color:var(--text-dim);}
+.shorts-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+@media(max-width:720px){.shorts-grid{grid-template-columns:repeat(2,1fr);}}
+.short{aspect-ratio:9/16;border-radius:var(--radius-md);background:var(--text);position:relative;overflow:hidden;cursor:pointer;}
+.short .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.96);display:flex;align-items:center;justify-content:center;color:var(--text);font-size:14px;}
+.short .play::after{content:'▶';margin-left:2px;}
+.short .cap{position:absolute;left:12px;right:12px;bottom:12px;font-size:12px;color:#fff;line-height:1.4;font-weight:500;}
+.short .cap .num{opacity:.65;font-weight:400;}
+.short.empty{background:var(--bg-alt);border:1px dashed var(--line);cursor:default;}
+.short.empty .play{background:var(--bg-card);color:var(--text-dim);}
+.short.empty .cap{color:var(--text-dim);}
+.short .cap .pending{display:inline-block;margin-left:6px;padding:2px 7px;border-radius:99px;background:rgba(255,255,255,.18);font-size:10.5px;font-weight:700;letter-spacing:.02em;vertical-align:middle;}
+.short.empty .cap .pending{background:var(--bg-card);color:var(--text-dim);border:1px solid var(--line);}
 
-  /* ---------- Final CTA ---------- */
-  .final{
-    text-align:center;padding:140px 0;position:relative;overflow:hidden;
-  }
-  .final::before{
-    content:'';position:absolute;inset:0;
-    background:
-      radial-gradient(50% 60% at 50% 40%,rgba(101,41,255,.3),transparent 70%),
-      radial-gradient(40% 50% at 50% 60%,rgba(30,245,202,.15),transparent 70%);
-    filter:blur(40px);
-  }
-  .final > *{position:relative;z-index:1;}
-  .final h2{
-    font-size:clamp(32px,5vw,54px);font-weight:800;
-    letter-spacing:-0.05em;line-height:1.2;margin-bottom:20px;
-  }
-  .final h2 .grad{
-    background:linear-gradient(120deg,var(--cyan),var(--mint));
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  .final p{color:var(--text-dim);font-size:17px;margin-bottom:40px;}
+/* FAQ */
+.faqs{max-width:760px;margin:0 auto;}
+.faq{border-bottom:1px solid var(--line);}
+.faq summary{padding:24px 4px;font-size:16px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;color:var(--text);letter-spacing:-0.015em;}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{content:'+';color:var(--text-dim);font-size:22px;font-weight:300;margin-left:10px;}
+.faq[open] summary::after{content:'−';}
+.faq .body{padding:0 4px 24px;font-size:14.5px;color:var(--text-muted);line-height:1.8;}
+.faq .body strong{color:var(--text);font-weight:600;}
 
-  /* ---------- Blog grid ---------- */
-  /* ---------- Media (쇼츠 · 언론) ---------- */
-  .media-section{
-    background:linear-gradient(180deg,var(--bg-0) 0%,var(--bg-1) 50%,var(--bg-0) 100%);
-    border-top:1px solid var(--border);
-    border-bottom:1px solid var(--border);
-  }
-  .shorts-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:16px;
-    margin-bottom:28px;
-  }
-  .short-card{
-    position:relative;
-    aspect-ratio:9/16;
-    border-radius:18px;
-    overflow:hidden;
-    border:1px solid var(--border-strong);
-    background:#000 center/cover no-repeat;
-    display:flex;align-items:flex-end;justify-content:flex-start;
-    padding:14px;
-    transition:transform .25s,border .25s,box-shadow .25s;
-    cursor:pointer;
-  }
-  .short-card img.thumb{
-    position:absolute;inset:0;width:100%;height:100%;
-    object-fit:cover;z-index:0;
-  }
-  .short-card::before{
-    content:'';position:absolute;inset:0;z-index:1;
-    background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.85) 100%);
-    pointer-events:none;
-  }
-  .short-card .play{
-    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-    width:56px;height:56px;border-radius:50%;
-    background:rgba(0,0,0,.55);backdrop-filter:blur(8px);
-    display:flex;align-items:center;justify-content:center;
-    border:1px solid rgba(255,255,255,.3);
-    transition:transform .25s,background .25s;
-  }
-  .short-card .play::after{
-    content:'';width:0;height:0;
-    border-left:14px solid #fff;
-    border-top:9px solid transparent;
-    border-bottom:9px solid transparent;
-    margin-left:4px;
-  }
-  .short-card:hover{transform:translateY(-4px);border-color:var(--mint);box-shadow:0 20px 50px rgba(101,41,255,.25);}
-  .short-card:hover .play{transform:translate(-50%,-50%) scale(1.1);background:rgba(101,41,255,.6);}
-  .short-card .meta{
-    position:relative;z-index:2;
-    font-size:12px;font-weight:700;color:#fff;
-    line-height:1.35;
-    text-shadow:0 2px 8px rgba(0,0,0,.8);
-  }
-  .short-card .meta .tag{
-    display:inline-block;padding:3px 8px;border-radius:6px;
-    background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.2);
-    font-size:10px;margin-bottom:6px;color:var(--mint);
-  }
-  .short-card.placeholder{
-    background:repeating-linear-gradient(45deg,rgba(255,255,255,.02) 0 12px,rgba(255,255,255,.05) 12px 24px);
-    border-style:dashed;
-  }
-  .short-card.placeholder .play{opacity:.4;}
-  .short-card.placeholder .meta{color:var(--text-dim);}
-  .press-strip{
-    display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
-    margin-top:8px;
-  }
-  .press-strip .press-chip{
-    padding:10px 16px;border-radius:10px;
-    background:var(--card);border:1px solid var(--border);
-    font-size:12px;color:var(--text-dim);
-    font-weight:600;
-  }
-  .press-strip .press-chip b{color:var(--text);font-weight:700;}
-  @media (max-width:900px){ .shorts-grid{grid-template-columns:repeat(3,1fr);} }
-  @media (max-width:560px){ .shorts-grid{grid-template-columns:repeat(2,1fr);gap:12px;} .short-card{padding:12px;} }
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+@media(max-width:720px){.pricing-grid{grid-template-columns:1fr;}}
+.price-card{padding:32px 28px;border-radius:var(--radius-lg);background:var(--bg-card);border:1px solid var(--line);}
+.price-card .tag{font-size:12px;color:var(--text-muted);font-weight:600;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:16px;}
+.price-card .n{font-size:32px;font-weight:700;color:var(--text);margin-bottom:6px;letter-spacing:-0.03em;line-height:1;}
+.price-card .n .unit{font-size:14px;font-weight:500;color:var(--text-muted);}
+.price-card .d{font-size:13.5px;color:var(--text-muted);line-height:1.7;margin-top:14px;}
+.price-card .d strong{color:var(--text);font-weight:600;}
+.price-note{margin-top:28px;font-size:13px;color:var(--text-dim);line-height:1.7;}
 
-  .blog-grid{
-    display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
-  }
-  .blog-card{
-    display:block;padding:26px 24px;border-radius:18px;
-    background:var(--card);border:1px solid var(--border);
-    transition:all .2s;position:relative;overflow:hidden;
-    text-decoration:none;color:inherit;
-  }
-  .blog-card::before{
-    content:'';position:absolute;top:0;left:0;right:0;height:2px;
-    background:linear-gradient(90deg,var(--cyan),var(--mint));
-    opacity:.5;transition:opacity .2s;
-  }
-  .blog-card:hover{
-    background:var(--card-hover);border-color:var(--border-strong);
-    transform:translateY(-2px);
-  }
-  .blog-card:hover::before{opacity:1;}
-  .blog-tag{
-    display:inline-block;font-size:10px;font-weight:800;
-    color:var(--mint);letter-spacing:.05em;margin-bottom:10px;
-    padding:4px 10px;border-radius:999px;
-    background:rgba(30,245,202,.08);border:1px solid rgba(30,245,202,.2);
-  }
-  .blog-card h4{
-    font-size:15px;font-weight:800;line-height:1.5;
-    letter-spacing:-0.03em;margin-bottom:14px;
-  }
-  .blog-more{
-    font-size:12px;color:var(--text-dim);
-    display:flex;align-items:center;gap:6px;
-  }
-  .blog-more::after{content:'→';transition:transform .2s;}
-  .blog-card:hover .blog-more{color:var(--cyan);}
-  .blog-card:hover .blog-more::after{transform:translateX(3px);}
-  .blog-all{
-    text-align:center;margin-top:36px;
-  }
-  .blog-all a{
-    display:inline-flex;align-items:center;gap:8px;
-    padding:14px 28px;border-radius:14px;
-    background:var(--card);border:1px solid var(--border);
-    color:var(--text);font-weight:700;font-size:14px;
-    transition:all .15s;
-  }
-  .blog-all a:hover{background:var(--card-hover);border-color:var(--border-strong);}
-  @media (max-width:900px){ .blog-grid{grid-template-columns:repeat(2,1fr);} }
-  @media (max-width:560px){ .blog-grid{grid-template-columns:1fr;} }
+/* FINAL */
+.final{text-align:center;padding:120px 0;background:var(--bg-alt);border-top:1px solid var(--line);}
+@media(max-width:720px){.final{padding:80px 0;}}
+.final h2{font-size:clamp(28px,4vw,42px);font-weight:700;letter-spacing:-0.035em;line-height:1.2;margin-bottom:16px;}
+.final h2 .accent{color:var(--primary);}
+.final p{font-size:16px;color:var(--text-muted);margin-bottom:32px;max-width:560px;margin-left:auto;margin-right:auto;line-height:1.7;}
+.final .cta-primary{padding:16px 32px;font-size:16px;}
+.final .tel{margin-top:20px;font-size:13.5px;color:var(--text-muted);}
+.final .tel a{color:var(--danger);font-weight:600;}
 
-  /* ---------- Defense pillars ---------- */
-  .defense-grid{
-    display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
-  }
-  .defense-card{
-    padding:32px 28px;border-radius:20px;
-    background:var(--card);border:1px solid var(--border);
-    position:relative;overflow:hidden;
-  }
-  .defense-card::before{
-    content:'';position:absolute;top:0;left:0;right:0;height:2px;
-    background:linear-gradient(90deg,var(--cyan),var(--mint));
-  }
-  .defense-card .num{
-    font-size:12px;font-weight:800;color:var(--mint);
-    letter-spacing:.1em;margin-bottom:14px;
-  }
-  .defense-card h4{
-    font-size:18px;font-weight:800;letter-spacing:-0.03em;
-    margin-bottom:12px;line-height:1.35;
-  }
-  .defense-card p{
-    font-size:13px;line-height:1.7;color:var(--text-dim);
-  }
-  @media (max-width:980px){ .defense-grid{grid-template-columns:repeat(2,1fr);} }
-  @media (max-width:560px){ .defense-grid{grid-template-columns:1fr;} }
+/* OFFICE */
+.office-photo-full{border-radius:var(--radius-lg);overflow:hidden;background:var(--bg-alt);aspect-ratio:21/9;margin-bottom:14px;}
+@media(max-width:820px){.office-photo-full{aspect-ratio:16/10;}}
+.office-photo-full img{width:100%;height:100%;object-fit:cover;display:block;}
 
-  /* ---------- Office Gallery ---------- */
-  .office-gallery{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    grid-auto-rows:240px;
-    gap:14px;margin-bottom:40px;
-  }
-  .office-gallery .g{
-    position:relative;border-radius:18px;overflow:hidden;
-    border:1px solid var(--border);background:var(--card);
-  }
-  .office-gallery .g img{
-    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-    transition:transform .6s ease;
-  }
-  .office-gallery .g:hover img{transform:scale(1.04);}
-  .office-gallery .g::after{
-    content:'';position:absolute;inset:0;
-    background:linear-gradient(180deg,transparent 60%,rgba(11,9,19,.5));
-    pointer-events:none;
-  }
-  .office-info{
-    padding:32px 36px;border-radius:20px;
-    border:1px solid var(--border);background:var(--card);
-    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
-  }
-  .office-info .item .label{
-    font-size:11px;font-weight:800;color:var(--mint);
-    letter-spacing:.1em;margin-bottom:8px;
-  }
-  .office-info .item .val{font-size:15px;color:var(--text);line-height:1.6;}
-  .office-info .item .val b{color:#fff;}
-  @media (max-width:860px){
-    .office-gallery{
-      grid-template-columns:1fr 1fr;
-      grid-auto-rows:180px;
-    }
-    .office-info{grid-template-columns:1fr;padding:28px 24px;gap:18px;}
-  }
+/* Office 사진 갤러리 (썸네일 여러 장) */
+.office-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px;}
+.office-gallery a{border-radius:var(--radius-md);overflow:hidden;aspect-ratio:4/3;background:var(--bg-alt);display:block;transition:opacity .15s;}
+.office-gallery a:hover{opacity:.85;}
+.office-gallery img{width:100%;height:100%;object-fit:cover;display:block;}
+@media(max-width:720px){.office-gallery{grid-template-columns:repeat(3,1fr);gap:6px;}}
+@media(max-width:420px){.office-gallery{grid-template-columns:repeat(2,1fr);}}
+.office-meta{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius-lg);padding:8px 28px;}
+.office-meta .row{display:grid;grid-template-columns:1.3fr 1.1fr 1fr;gap:32px;padding:20px 0;}
+.office-meta .row+.row{border-top:1px solid var(--line);}
+.office-meta .cell{display:flex;flex-direction:column;gap:6px;}
+.office-meta .cell .k{font-size:11px;color:var(--text-dim);letter-spacing:0.06em;text-transform:uppercase;font-weight:600;}
+.office-meta .cell .v{font-size:14px;color:var(--text);font-weight:500;line-height:1.5;}
+@media(max-width:720px){
+  .office-meta{padding:8px 20px;}
+  .office-meta .row{grid-template-columns:1fr;gap:6px;padding:14px 0;}
+  .office-meta .cell{flex-direction:row;align-items:baseline;justify-content:space-between;gap:10px;}
+  .office-meta .cell .k{letter-spacing:0.04em;}
+}
 
-  /* ---------- Map section ---------- */
-  .map-wrap{
-    position:relative;border-radius:20px;overflow:hidden;
-    border:1px solid var(--border);background:var(--card);
-    height:420px;
-  }
-  .map-wrap iframe{
-    position:absolute;inset:0;width:100%;height:100%;border:0;
-    filter:grayscale(.3) contrast(1.05);
-  }
-  @media (max-width:760px){ .map-wrap{height:340px;} }
+/* FOOTER */
+.footer{padding:56px 0 64px;border-top:1px solid var(--line);background:var(--bg);font-size:13px;color:var(--text-dim);line-height:1.8;}
+.footer .container{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px;}
+@media(max-width:720px){.footer .container{grid-template-columns:1fr;gap:28px;}}
+.footer h5{font-size:13px;color:var(--text);font-weight:700;margin-bottom:12px;letter-spacing:-0.02em;}
+.footer a{color:var(--text-muted);}
+.footer a:hover{color:var(--text);}
+.footer .fine{grid-column:1/-1;margin-top:28px;padding-top:28px;border-top:1px solid var(--line);font-size:12px;color:var(--text-dim);}
 
-  /* ---------- Footer ---------- */
-  footer{
-    border-top:1px solid var(--border);
-    padding:40px 0 60px;font-size:12px;color:var(--text-dim);
-    background:var(--bg-1);
-  }
-  footer .container{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;}
-  footer a{margin-right:16px;}
-  footer a:hover{color:var(--mint);}
+/* ═══════════════════════════════════════════
+   모바일 전용 블록 · display 스위치
+   ═══════════════════════════════════════════ */
+/* 기본: 모바일 전용 컴포넌트는 PC에서 숨김 */
+.mobile-only{display:none!important;}
+.attorney-m{display:none;}
+.msummary{display:none;}
+.mvs-stack{display:none;}
 
-  /* ---------- Sticky mobile CTA ---------- */
-  .sticky-cta{
-    position:fixed;bottom:0;left:0;right:0;z-index:40;
-    display:flex;gap:8px;padding:12px 16px;
-    background:rgba(11,9,19,.85);
-    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-    border-top:1px solid var(--border);
-  }
-  .sticky-cta a{
-    flex:1;padding:16px;border-radius:12px;text-align:center;
-    font-size:14px;font-weight:800;letter-spacing:-0.02em;
-    display:flex;align-items:center;justify-content:center;gap:6px;
-  }
-  .sticky-cta .call{
-    background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--text);
-  }
-  .sticky-cta .diag{
-    background:linear-gradient(90deg,var(--purple-bright),var(--cyan));color:#0B0913;
-  }
+@media(max-width:640px){
+  /* 모바일: PC 전용 숨김, 모바일 전용 표시 (각 컴포넌트 고유 display 복원) */
+  .pc-only{display:none!important;}
+  .mobile-only{display:revert!important;}
+  .attorney-m{display:flex;}
+  .msummary{display:block;}
+  .mvs-stack{display:flex;}
+  .infographic{display:none!important;}
+  #pricing{display:none!important;}  /* 모바일에선 가격표 숨김 */
+}
 
-  @media (max-width:760px){
-    section{padding:64px 0;}
-    .hero{padding:112px 0 48px;}
-    .final{padding:80px 0;}
-    /* Mobile 상단 AI 진단 CTA 유지 (축소 스타일) */
-    .header-cta{display:inline-flex;padding:9px 14px;font-size:12px;}
-    .logo{font-size:15px;}
-    header .container{padding:0 16px;}
-    .product{padding:36px 28px;}
-    .product h3{font-size:26px;}
-    .product .price{font-size:32px;}
-    /* Mobile 축약 — 텍스트 과다 섹션 숨김, CTA/핵심만 노출 */
-    .mobile-hide{display:none !important;}
-    .hero p.sub{font-size:14px;margin-bottom:28px;}
-    .section-desc{font-size:14px;margin-bottom:36px;}
-    .trust-strip{margin-top:32px;gap:6px 8px;}
-    .trust-strip .chip{padding:7px 12px;font-size:11px;}
+/* 모바일 Compare · 1카드 요약 리스트 */
+.msummary{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;}
+.msummary-head{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:16px 18px;background:var(--bg-alt);border-bottom:1px solid var(--line);font-size:12px;font-weight:700;letter-spacing:0.02em;}
+.msummary-head .h-before{color:var(--text-dim);}
+.msummary-head .h-after{color:var(--primary);text-align:right;}
+.msummary-list{list-style:none;padding:0;margin:0;}
+.msummary-list li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;padding:14px 18px;border-top:1px solid var(--line);align-items:start;}
+.msummary-list li:first-child{border-top:none;}
+.msummary-list .k{grid-column:1/-1;font-size:11px;color:var(--text-dim);letter-spacing:0.04em;text-transform:uppercase;font-weight:700;margin-bottom:6px;}
+.msummary-list .before{font-size:13.5px;color:var(--text-muted);line-height:1.45;position:relative;padding-left:18px;}
+.msummary-list .before::before{content:'✕';position:absolute;left:0;top:0;color:var(--text-dim);font-weight:700;font-size:12px;}
+.msummary-list .after{font-size:14px;color:var(--text);font-weight:500;line-height:1.45;position:relative;padding-left:18px;}
+.msummary-list .after::before{content:'✓';position:absolute;left:0;top:0;color:var(--primary);font-weight:700;}
+.msummary-list .after strong{color:var(--primary);font-weight:700;}
+
+/* 모바일 Compare · 핵심 3축 대비 카드 (효율형) */
+.mvs-stack{display:flex;flex-direction:column;gap:10px;}
+.mvs-card{
+  padding:22px 20px;border-radius:var(--radius-lg);
+  background:var(--bg-card);border:1px solid var(--line);
+}
+.mvs-num{
+  font-size:11px;font-weight:700;color:var(--primary);
+  letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px;
+}
+.mvs-title{
+  font-size:16px;font-weight:700;color:var(--text);
+  letter-spacing:-0.02em;margin-bottom:14px;line-height:1.3;
+}
+.mvs-row{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:stretch;}
+.mvs-bad,.mvs-good{
+  padding:12px 10px;border-radius:var(--radius-sm);
+  font-size:13px;text-align:center;line-height:1.4;
+  display:flex;align-items:center;justify-content:center;
+}
+.mvs-bad{background:var(--bg-alt);color:var(--text-muted);}
+.mvs-good{background:var(--primary-soft);color:var(--primary);font-weight:600;}
+.mvs-arrow{color:var(--primary);font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;}
+.mvs-footer{
+  text-align:center;font-size:12.5px;color:var(--text-muted);
+  padding:14px 10px 4px;line-height:1.55;
+}
+.mvs-footer strong{color:var(--text);font-weight:700;}
+
+/* Attorney · Hero 직후 컴팩트 프로필 */
+.attorney-hero{padding:48px 0 56px;background:var(--bg-alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+@media(max-width:720px){.attorney-hero{padding:28px 0 32px;}}
+/* PC 전용 프로필 */
+.attorney-hero .attorney{background:transparent;border:none;padding:0;}
+/* 모바일 컴팩트 카드 · display는 미디어쿼리에서 제어 */
+.attorney-m{
+  align-items:center;gap:16px;
+  padding:18px;border-radius:var(--radius-lg);
+  background:var(--bg-card);border:1px solid var(--line);
+}
+.attorney-m img{
+  width:128px;height:170px;flex-shrink:0;
+  border-radius:var(--radius-md);object-fit:cover;object-position:center top;
+  background:var(--bg-alt);
+}
+.attorney-m-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;}
+.attorney-m-tag{font-size:10.5px;color:var(--primary);font-weight:700;letter-spacing:.04em;text-transform:uppercase;}
+.attorney-m h3{font-size:18px;font-weight:700;letter-spacing:-0.02em;margin:2px 0 2px;}
+.attorney-m .meta{font-size:12px;color:var(--text-muted);line-height:1.5;}
+.attorney-m .punch{font-size:13.5px;color:var(--text);font-weight:500;line-height:1.5;margin-top:4px;}
+.attorney-m .punch strong{color:var(--primary);font-weight:700;}
+.attorney-m-btn{display:inline-flex;align-items:center;gap:4px;margin-top:8px;padding:9px 14px;border-radius:var(--radius-md);background:var(--primary);color:#fff;font-size:12.5px;font-weight:600;align-self:flex-start;}
+.attorney-m-btn:hover{background:var(--primary-ink);color:#fff;}
+
+/* ═══════════════════════════════════════════
+   모바일 전용 스타일 (≤640px)
+   ═══════════════════════════════════════════ */
+@media(max-width:640px){
+  body{font-size:15.5px;line-height:1.7;}
+  .container{padding:0 20px;}
+
+  /* HERO */
+  .hero{padding:56px 0 48px;}
+  .hero h1{font-size:34px;line-height:1.2;letter-spacing:-0.032em;margin-bottom:18px;}
+  .hero p.sub{font-size:16.5px;line-height:1.65;margin-bottom:24px;}
+  .hero .note{font-size:13.5px;margin-bottom:20px;}
+  .hero .eyebrow{font-size:12.5px;margin-bottom:16px;}
+  .trust{gap:12px 20px;font-size:13.5px;}
+  .trust .item strong{font-weight:700;}
+  .hero .cta-row{flex-direction:column;gap:8px;}
+  .cta-primary,.cta-secondary{width:100%;justify-content:center;padding:16px 20px;font-size:15.5px;}
+  .hero-visual{display:none;}  /* 모바일은 Attorney 섹션의 얼굴로 대체 */
+
+  /* SECTION base */
+  .section{padding:56px 0;}
+  .section-head{margin-bottom:32px;}
+  .section-label{font-size:12.5px;margin-bottom:12px;}
+  .section-title{font-size:27px;line-height:1.25;letter-spacing:-0.03em;}
+  .section-desc{font-size:15.5px;line-height:1.75;}
+
+  /* COMPARE TABLE → 모바일 카드 스택 (가로 스크롤 제거) */
+  .compare-wrap{border:none;border-radius:0;background:transparent;overflow:visible;}
+  .compare-table{min-width:0;display:block;}
+  .compare-table thead{display:none;}
+  .compare-table tbody,.compare-table tr{display:block;}
+  .compare-table tr{
+    padding:18px 18px 20px;background:var(--bg-card);
+    border:1px solid var(--line);border-radius:var(--radius-md);
+    margin-bottom:10px;
   }
+  .compare-table td{display:block;padding:0;border:none;font-size:15px;}
+  .compare-table td.axis{
+    font-size:11.5px;color:var(--text-dim);text-transform:uppercase;
+    letter-spacing:0.05em;margin-bottom:12px;font-weight:700;width:auto;
+  }
+  .compare-table td.before{
+    color:var(--text-muted);padding:10px 14px 10px 72px;
+    background:var(--bg-alt);border-radius:var(--radius-sm);
+    margin-bottom:6px;position:relative;font-size:14px;line-height:1.55;
+  }
+  .compare-table td.before::before{
+    content:'다른 로펌';position:absolute;left:14px;top:10px;
+    color:var(--text-dim);font-size:11px;font-weight:700;letter-spacing:0.02em;
+  }
+  .compare-table td.after{
+    color:var(--text);padding:12px 14px 12px 72px;
+    background:var(--primary-soft);border-radius:var(--radius-sm);
+    position:relative;font-size:14.5px;line-height:1.55;font-weight:500;
+  }
+  .compare-table td.after::before{
+    content:'웰컴';position:absolute;left:14px;top:12px;
+    color:var(--primary);font-size:11px;font-weight:700;letter-spacing:0.02em;
+  }
+  .compare-table td.after strong{font-weight:700;}
+
+  /* Infographic - 모바일 패딩 축소, SVG는 스케일 */
+  .infographic{padding:20px 16px;margin-top:28px;}
+  .infographic .info-title{font-size:14px;}
+  .infographic .info-sub{font-size:13px;margin-bottom:14px;}
+
+  /* RECHECK + SEGMENTS */
+  .recheck{padding:22px 20px;margin-top:20px;}
+  .recheck .label{font-size:11.5px;}
+  .recheck .title{font-size:19px;line-height:1.35;letter-spacing:-0.02em;}
+  .recheck .desc{font-size:14.5px;}
+  .segments{grid-template-columns:1fr;gap:8px;margin-top:18px;}
+  .seg{padding:16px 18px;}
+  .seg .t{font-size:15px;}
+  .seg .d{font-size:13.5px;}
+
+  /* WHY-END · 모바일에선 hero 이미지 숨기고, 2 카드 중 emph 만 */
+  .why-end-hero img{display:none;}
+  .why-end-hero{grid-template-columns:1fr;gap:0;margin-bottom:20px;}
+  .why-end-hero .text h3{font-size:24px;line-height:1.3;margin-bottom:14px;}
+  .why-end-hero .text p{font-size:15px;line-height:1.75;}
+  .why-end-grid .why-card:not(.emph){display:none;}
+  .why-end-grid{grid-template-columns:1fr;}
+  .why-card.emph{padding:28px 24px;}
+  .why-card.emph .t{font-size:20px;line-height:1.35;margin-bottom:12px;}
+  .why-card.emph p{font-size:15px;line-height:1.75;}
+
+  /* ATTORNEY · 리스트 상위 3개만 */
+  .attorney ul li:nth-child(n+4){display:none;}
+
+  /* PRODUCTS */
+  .products{gap:12px;}
+  .product{padding:28px 24px;}
+  .product .tier{font-size:12.5px;margin-bottom:12px;}
+  .product h3{font-size:25px;margin-bottom:12px;}
+  .product p.pitch{font-size:15px;line-height:1.75;margin-bottom:20px;}
+  .product ul{margin:0 0 24px;}
+  .product ul li{font-size:14.5px;padding:9px 0 9px 22px;line-height:1.55;}
+  .product ul li::before{top:16px;}
+  .product .btn{padding:15px;font-size:15px;}
+  .price-hint{font-size:13.5px;margin-top:24px;}
+
+  /* HOW */
+  .steps{gap:10px;}
+  .step{padding:26px 22px;}
+  .step .num{width:34px;height:34px;font-size:14px;margin-bottom:16px;}
+  .step h3{font-size:18.5px;margin-bottom:8px;}
+  .step p{font-size:14.5px;line-height:1.75;}
+
+  /* RECORD */
+  .stats-grid{gap:8px;margin-bottom:32px;}
+  .stat{padding:22px 14px;}
+  .stat .n{font-size:30px;letter-spacing:-0.035em;}
+  .stat .l{font-size:13px;margin-top:6px;}
+  .cases{gap:10px;}
+  .case{padding:24px 22px;}
+  .case .case-tag{font-size:11.5px;padding:4px 11px;margin-bottom:14px;}
+  .case h4{font-size:17px;line-height:1.35;}
+  .case .meta{font-size:13px;margin-bottom:18px;}
+  .case .metric{font-size:14.5px;padding:11px 0;}
+  .cases-disclaim{font-size:12.5px;margin-top:16px;}
+
+  /* ATTORNEY */
+  .attorney{grid-template-columns:1fr;gap:22px;padding:16px 0;margin-bottom:32px;}
+  .attorney img{max-width:240px;margin:0 auto;aspect-ratio:3/4;}
+  .attorney .tag{font-size:12.5px;margin-bottom:10px;}
+  .attorney h3{font-size:26px;margin-bottom:14px;}
+  .attorney .bio{font-size:15px;line-height:1.75;margin-bottom:16px;}
+  .attorney ul li{font-size:14px;padding:6px 0 6px 18px;}
+  .attorney ul li::before{top:15px;}
+  .shorts-head{flex-direction:column;align-items:flex-start;gap:4px;margin-bottom:14px;}
+  .shorts-head h4{font-size:16.5px;}
+  .shorts-head .hint{font-size:12px;}
+  .shorts-grid{grid-template-columns:repeat(3,1fr);gap:6px;}
+  .short .cap{font-size:11px;bottom:8px;left:8px;right:8px;}
+  .short .play{width:38px;height:38px;font-size:12px;}
+
+  /* FAQ */
+  .faq summary{font-size:16px;padding:22px 4px;line-height:1.45;}
+  .faq summary::after{font-size:22px;}
+  .faq .body{font-size:15px;line-height:1.8;padding-bottom:22px;}
+
+  /* PRICING */
+  .pricing-grid{gap:10px;}
+  .price-card{padding:28px 24px;}
+  .price-card .tag{font-size:12.5px;margin-bottom:14px;}
+  .price-card .n{font-size:30px;}
+  .price-card .n .unit{font-size:14px;}
+  .price-card .d{font-size:14px;line-height:1.7;margin-top:12px;}
+  .price-note{font-size:13px;margin-top:24px;}
+
+  /* FINAL */
+  .final{padding:80px 0;}
+  .final h2{font-size:30px;line-height:1.22;letter-spacing:-0.035em;}
+  .final p{font-size:16px;}
+  .final .cta-primary{padding:17px 28px;font-size:16px;width:100%;max-width:420px;}
+  .final .tel{font-size:14px;margin-top:18px;}
+
+  /* OFFICE */
+  .office-photo-full{aspect-ratio:16/10;margin-bottom:14px;}
+  .office-meta{padding:4px 18px;}
+  .office-meta .row{gap:4px;padding:14px 0;}
+  .office-meta .cell .k{font-size:11.5px;}
+  .office-meta .cell .v{font-size:14.5px;}
+
+  /* FOOTER */
+  .footer{padding:40px 0 56px;font-size:13.5px;}
+  .footer h5{font-size:14px;margin-bottom:10px;}
+  .footer .fine{font-size:12.5px;line-height:1.75;margin-top:24px;padding-top:24px;}
+}
+
+/* 아주 작은 화면 */
+@media(max-width:380px){
+  body{font-size:15px;}
+  .container{padding:0 16px;}
+  .hero h1{font-size:30px;letter-spacing:-0.028em;}
+  .section-title{font-size:24px;}
+  .final h2{font-size:27px;}
+  .product h3,.attorney h3{font-size:23px;}
+  .stat .n{font-size:27px;}
+  .price-card .n{font-size:27px;}
+}
 </style>
 
-<!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1912072069447860');
-fbq('track', 'PageView');
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1912072069447860');fbq('track','PageView');
 </script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1912072069447860&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-
-<!-- Google tag (gtag.js) -->
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1912072069447860&ev=PageView&noscript=1"/></noscript>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-KBF6LCG2VD"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-KBF6LCG2VD');
-</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-KBF6LCG2VD');</script>
 </head>
 <body>
 
-<header>
-  <div class="container">
-    <div class="logo">웰컴회생 <span>/ WELCOME</span></div>
-    <nav class="nav-links">
-      <a href="#products">상품</a>
-      <a href="#knowhow">변호사 노하우</a>
-      <a href="#cases">사례</a>
+<!-- NAV -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="/" class="logo"><img src="assets/logo.png" alt="웰컴" style="height:22px;width:auto;" onerror="this.style.display='none'"/><span><span class="brand">웰컴</span>법률사무소</span></a>
+    <div class="nav-links">
+      <a href="#compare">왜 웰컴인가</a>
+      <a href="#products">Lite · Pro</a>
+      <a href="#attorney">변호사</a>
       <a href="#faq">FAQ</a>
-    </nav>
-    <a href="tap.html" class="header-cta">무료 AI 진단</a>
+      <a href="#pricing">가격</a>
+      <a href="#office">오시는 길</a>
+    </div>
+    <a href="tap.html" class="cta">변호사 직접 상담</a>
   </div>
-</header>
+</nav>
 
-<!-- Hero -->
+<!-- HERO · PC 2컬럼 (좌 텍스트 | 우 사진) · 모바일은 사진 숨김 -->
 <section class="hero">
-  <div class="container">
-    <span class="eyebrow">AI가 샅샅이 · 변호사가 직접 마무리</span>
-    <h1>
-      놓치는 탕감률,<br/>
-      <span class="red">단 1%</span>도 없습니다.
-    </h1>
-    <p class="sub">
-      전화 상담은 고객 기억에만 의존합니다. 말씀 안 하신 한 마디가 <span class="red">수백만원의 탕감액 차이</span>로 돌아옵니다.<br class="br-pc"/>
-      웰컴은 AI가 모든 항목을 먼저 묻고, 양홍수 변호사가 직접 마무리합니다.
-    </p>
-    <div class="cta-row">
-      <a href="tap.html" class="cta-primary">3분 AI 진단 시작 →</a>
-      <a href="#products" class="cta-secondary">상품 비교 보기</a>
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">탕감 전략 · 양홍수 변호사 직접 설계</span>
+      <h1>탕감의 크기는<br/><span class="accent">누가 논리를 짜느냐</span>로 갈립니다.</h1>
+      <p class="sub">대부분의 로펌은 상담원 구두 판단으로 끝냅니다. 웰컴은 AI가 모든 항목을 사전 수집하고, <em>양홍수 변호사가 탕감 논리를 직접 설계</em>합니다.</p>
+      <div class="cta-row">
+        <a href="tap.html" class="cta-primary">무료로 정밀 진단하기 →</a>
+      </div>
+      <div class="note">이름·연락처 없이 시작 · 대면·화상·전화 모두 가능</div>
+      <div class="trust">
+        <div class="item"><span class="dot"></span><strong>변호사 직접</strong> 상담</div>
+        <div class="item"><span class="dot"></span>도산·조세법 <strong>전문</strong></div>
+        <div class="item"><span class="dot"></span><strong>세무사</strong> 복수 자격</div>
+        <div class="item"><span class="dot"></span>회생 <strong>9,000건+</strong></div>
+      </div>
     </div>
-    <div class="cta-note">진단은 이름·연락처 없이 시작 · 결과는 문자 발송</div>
-
-    <div class="trust-strip">
-      <div class="chip">도산전문 <b>변호사 직접</b></div>
-      <div class="chip">Lite 착수금 <b>20만원</b></div>
-      <div class="chip">신청 당일 <b>사건번호 발급</b></div>
-      <div class="chip">수임료 <b>분납 가능</b></div>
-      <div class="chip">무방문 <b>비대면 진행</b></div>
+    <div class="hero-visual">
+      <img src="assets/yang-hongsu.webp" alt="양홍수 변호사" onerror="this.src='assets/yang-hongsu.jpg';this.onerror=null;" style="display:block;width:100%;height:auto;"/>
+      <div class="caption">
+        <div class="name">양홍수 변호사 · 세무사</div>
+        <div class="desc">대한변협 도산법 · 조세법 전문 · 회생 상담 9,000건+<br/>탕감의 핵심 논리를 직접 설계합니다.</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- PRODUCTS: Lite vs Pro -->
-<section class="products" id="products">
+<!-- ATTORNEY · Hero 직후 · 얼굴부터 -->
+<section class="attorney-hero" id="attorney">
   <div class="container">
-    <div class="section-head-center">
-      <span class="barbell-tag">◆ BARBELL STRATEGY</span>
-      <h2 class="section-title">직장인부터 <span class="grad">전문직</span>까지,<br class="br-pc"/>한 케이스도 <span class="grad">놓치지 않습니다</span>.</h2>
-      <p class="section-desc">중간 가격·중간 품질 상품은 운영하지 않습니다. 표준화로 비용을 압축한 Lite와, 변호사가 처음부터 끝까지 직접 담당하는 Pro 두 가지만 운영합니다.</p>
+    <!-- 모바일: 얼굴 + 이름 + 한 줄 -->
+    <div class="attorney-m mobile-only">
+      <img src="assets/yang-hongsu.webp" alt="양홍수 변호사" onerror="this.src='assets/yang-hongsu.jpg';this.onerror=null;"/>
+      <div class="attorney-m-info">
+        <div class="attorney-m-tag">탕감 전략 · 직접 설계</div>
+        <h3>양홍수 변호사</h3>
+        <div class="meta">대한변협 도산·조세법 전문 · 세무사 복수 자격</div>
+        <div class="punch">탕감의 핵심 논리를 <strong>제가 직접 짭니다.</strong></div>
+        <a href="tap.html" class="attorney-m-btn">변호사 직접 상담 →</a>
+      </div>
     </div>
 
-    <div class="products-grid">
-      <!-- LITE -->
+    <!-- PC: 섹션 헤드 + 큰 증명사진 + 프로필 -->
+    <div class="pc-only">
+      <div class="section-head center">
+        <span class="section-label">Attorney</span>
+        <h2 class="section-title">기본생계비·청산가치·세금 채권 — <span class="accent">전부 변호사가 직접 판단</span>합니다.</h2>
+        <p class="section-desc">회생의 결과를 가르는 숫자는 전부 법리 판단의 영역입니다. 상담원이 아닌 <em>도산·조세법 전문변호사</em>가 직접 설계해야 탕감의 폭이 달라집니다.</p>
+      </div>
+      <div class="attorney credentials-only">
+        <div class="cred-badges">
+          <div class="cred-stat">
+            <div class="n">복수 자격</div>
+            <div class="l">변호사 · 세무사</div>
+          </div>
+          <div class="cred-stat">
+            <div class="n">전문 등록</div>
+            <div class="l">도산법 · 조세법<br/><span class="sub">대한변협 인증</span></div>
+          </div>
+          <div class="cred-stat">
+            <div class="n">실무 경력</div>
+            <div class="l">서울지방국세청<br/><span class="sub">송무국 근무</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="tag">대표변호사 · 탕감 전략 직접 설계</div>
+          <h3>양홍수 변호사 · <span class="accent">세무사</span></h3>
+          <p class="bio">회생은 숫자로 결정되고, 그 숫자는 <strong>누가 논리를 짜느냐</strong>에 따라 달라집니다. 변호사·세무사 복수 자격과 <strong>국세청 송무국 실무 경험</strong>을 바탕으로, 세금 채권 편입·조세채무 전략·가용소득 구조화까지 핵심 판단을 직접 책임집니다.</p>
+          <ul>
+            <li>탕감 전략 · 법리 판단 · 변호사 직접 설계</li>
+            <li>타 로펌 반려 · 기각 케이스 재검토 전담</li>
+            <li>법인회생 + 대표 개인회생 동시 진행</li>
+            <li>세금 체납 · 조세 쟁송 병행 케이스</li>
+            <li>행정·서류는 팀, 핵심 판단은 변호사 책임</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section class="section alt" id="compare">
+  <div class="container">
+    <div class="section-head center">
+      <span class="section-label">Where the gap begins</span>
+      <h2 class="section-title">탕감 누수는 <span class="accent">상담 현장</span>에서 발생합니다.</h2>
+      <p class="section-desc">상담원이 묻지 않은 항목은 그대로 묻힙니다. 웰컴은 이 자리를 <em>AI의 빈틈없는 사전 파악 + 양홍수 변호사의 최종 검토</em> 두 겹으로 바꿨습니다.</p>
+    </div>
+
+    <!-- 모바일 전용 · 핵심 3축 대비 카드 -->
+    <div class="mvs-stack mobile-only">
+      <div class="mvs-card">
+        <div class="mvs-num">01 · 탕감 전략</div>
+        <div class="mvs-title">누가 논리를 짜나</div>
+        <div class="mvs-row">
+          <div class="mvs-bad">상담원 구두 판단</div>
+          <div class="mvs-arrow">→</div>
+          <div class="mvs-good">변호사 직접 설계</div>
+        </div>
+      </div>
+      <div class="mvs-card">
+        <div class="mvs-num">02 · AI 사전 수집</div>
+        <div class="mvs-title">누락 막는 장치</div>
+        <div class="mvs-row">
+          <div class="mvs-bad">없음 · 구두 의존</div>
+          <div class="mvs-arrow">→</div>
+          <div class="mvs-good">AI가 전 항목 수집</div>
+        </div>
+      </div>
+      <div class="mvs-card">
+        <div class="mvs-num">03 · 마지막 책임</div>
+        <div class="mvs-title">인가까지 누가 챙기나</div>
+        <div class="mvs-row">
+          <div class="mvs-bad">담당 불분명</div>
+          <div class="mvs-arrow">→</div>
+          <div class="mvs-good">양홍수 변호사 실명</div>
+        </div>
+      </div>
+      <div class="mvs-footer">전문성 · 반려 재검토 · 기록까지 <strong>6가지 지점 모두 웰컴 우위</strong></div>
+    </div>
+
+    <!-- PC 전용 · 상세 비교표 -->
+    <div class="compare-wrap pc-only">
+      <table class="compare-table">
+        <thead><tr>
+          <th>탕감이 갈리는 지점</th>
+          <th>다른 로펌</th>
+          <th class="after">웰컴 · 변호사 직접</th>
+        </tr></thead>
+        <tbody>
+          <tr><td class="axis">탕감 전략 설계</td><td class="before">상담원이 구두로 판단</td><td class="after"><strong>양홍수 변호사가 논리 직접 설계</strong></td></tr>
+          <tr><td class="axis">AI 사전 파악</td><td class="before">없음 · 구두 질문 의존</td><td class="after">AI가 <strong>전 항목 낱낱이</strong></td></tr>
+          <tr><td class="axis">누락 발생</td><td class="before">말 안 하면 묻힘</td><td class="after">AI + <strong>변호사 재확인</strong></td></tr>
+          <tr><td class="axis">전문성</td><td class="before">일반 변호사 · 세무 별도</td><td class="after">도산·조세법 <strong>전문 + 세무사</strong></td></tr>
+          <tr><td class="axis">복잡 · 반려 케이스</td><td class="before">거절 · 반려 빈번</td><td class="after"><strong>재검토 전담</strong></td></tr>
+          <tr><td class="axis">마지막 책임</td><td class="before">담당 불분명</td><td class="after">양홍수 변호사 <strong>실명</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY WELCOME IN THE END -->
+<section class="section" id="why-end">
+  <div class="container">
+    <div class="section-head center">
+      <span class="section-label">Why welcome in the end</span>
+      <h2 class="section-title">AI 탕감 진단을 받으셨다면, <span class="accent">그 다음</span>을 생각해 보세요.</h2>
+      <p class="section-desc">AI 진단 뒤의 <em>서류 · 기일 · 증빙 · 채권자 대응 · 인가 · 면책</em> — 이 긴 과정을 누가 챙기느냐에서 탕감이 실제로 결정됩니다.</p>
+    </div>
+
+    <div class="why-end-hero">
+      <img src="assets/about.jpg" alt="웰컴법률사무소" onerror="this.style.display='none'"/>
+      <div class="text">
+        <h3>"진단은 시작일 뿐,<br/><span class="accent">인가까지가 탕감입니다.</span>"</h3>
+        <p>개인회생은 신청 이후 6~10개월 동안 수십 건의 서류 · 기일 · 증빙 · 채권자 이의 대응이 이어집니다. <strong>이 구간을 누가 챙기느냐</strong>가 실제 탕감을 결정합니다.</p>
+        <p>웰컴은 진단부터 면책까지 <strong>양홍수 변호사가 실명으로 책임</strong>집니다.</p>
+      </div>
+    </div>
+
+    <div class="why-end-grid">
+      <div class="why-card">
+        <div class="t">AI 진단만으로는 <span class="accent">인가까지 못 갑니다.</span></div>
+        <p>진단은 시작일 뿐. 실제 인가까지 수십 건의 서류·기일·증빙·채권자 이의 대응이 이어집니다. <strong>이 긴 구간에서 탕감 누수의 진짜 지점이 발생합니다.</strong></p>
+      </div>
+      <div class="why-card emph">
+        <div class="t">행정·후속 관리까지 <span class="accent">변호사 실명 책임.</span></div>
+        <p>웰컴은 <strong>탕감 핵심 논리를 변호사가 직접 설계·책임</strong>지는 구조입니다. 행정·서류는 팀이 지원하되, 결과를 좌우하는 판단은 변호사가 직접 합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section alt" id="products">
+  <div class="container">
+    <div class="section-head center">
+      <span class="section-label">Services</span>
+      <h2 class="section-title">모든 케이스에 <span class="accent">양홍수 변호사의 직접 검토.</span></h2>
+      <p class="section-desc">단순 직장인은 Lite로 빠르게, 복잡·전문직·법인은 Pro로 정밀 설계. 두 상품 모두 변호사가 직접 개입합니다.</p>
+    </div>
+    <div class="products">
       <div class="product lite">
-        <span class="tier">LITE · 즉시 착수</span>
+        <div class="tier">Lite · 즉시 착수</div>
         <h3>웰컴회생 <span class="accent">Lite</span></h3>
-        <p class="pitch">직장인·무담보 단순 케이스. 표준화된 프로세스로 비용을 극한까지 낮췄습니다. <b style="color:#fff">오늘 20만원</b>이면 바로 시작합니다.</p>
-
-        <div class="price-row">
-          <div>
-            <div class="price-label">착수금 (분납)</div>
-            <div class="price">₩200,000~</div>
-          </div>
-          <div class="price-sub">잔금 분납 6~12개월</div>
-        </div>
-
+        <p class="pitch">직장인·무담보·단순 케이스. 표준화 프로세스로 진행 속도 극대화. <strong>변호사 검토는 동일</strong>.</p>
         <ul>
-          <li><b>신청 당일 법원 사건번호 발급</b> — 절차 즉시 개시</li>
-          <li>100% <b>비대면 진행</b> — 카톡·우편·전자서명으로 완결</li>
-          <li>부채증명서 등 서류 <b>대부분 대리 발급</b> <span style="color:var(--text-dim);font-weight:400">(일부 서류는 본인 직접 발급이 필요할 수 있음)</span></li>
-          <li>챗봇으로 진단 → 당일 계약 → 착수까지 <b>24시간 이내</b></li>
-          <li>수임료 최대 <b>12개월 분납</b></li>
-          <li>사건 진행은 담당 변호사 + 관리팀 배정</li>
+          <li>AI 정밀 진단 + 변호사 최종 검토</li>
+          <li>당일 추심 중지 신청</li>
+          <li>신청 당일 사건번호 발급</li>
+          <li>대면 · 화상 · 전화 상담 모두 가능</li>
+          <li>탕감 전략·법리 판단 · 변호사 직접 설계</li>
         </ul>
-
-        <a href="tap.html" class="btn">지금 20만원으로 시작하기 →</a>
-        <a href="tap.html" class="sub-btn">먼저 자격 진단부터 →</a>
+        <a href="tap.html" class="btn">Lite 진단 시작</a>
       </div>
 
-      <!-- PRO -->
       <div class="product pro">
-        <span class="tier">PRO · 변호사 직접 담당</span>
+        <div class="tier">Pro · 변호사 직접 전담</div>
         <h3>웰컴회생 <span class="accent">Pro</span></h3>
-        <p class="pitch">법인대표·의사·전문직·고액 자영업자 등 <b style="color:#fff">한 건 한 건이 전략</b>인 케이스. 양홍수 변호사가 처음부터 끝까지 직접 설계합니다.</p>
-
-        <div class="price-row">
-          <div>
-            <div class="price-label">수임료</div>
-            <div class="price">상담 후 견적</div>
-          </div>
-          <div class="price-sub">분납·정책자금 활용 가능</div>
-        </div>
-
+        <p class="pitch">법인 대표·의사·전문직·고액 자영업 등 <strong>한 건 한 건이 전략</strong>인 케이스. 변호사 직접 설계.</p>
         <ul>
-          <li><b>일반회생</b> (무담보 50억·담보 150억 한도) — 개인회생 한도 초과 설계</li>
-          <li><b>법인파산 + 대표이사 개인회생</b> 동시 진행 — 회사는 정리, 대표는 재기</li>
-          <li><b>법인회생·간이회생·ARS</b> — 사업 계속하면서 구조조정</li>
-          <li><b>국세·지방세·4대보험 체납</b> 회생절차 편입 전략</li>
-          <li><b>전문직 면허 유지</b> 설계 — 의사·변호사·회계사 등</li>
-          <li>편파변제·형사 리스크·타 사무소 거절 케이스 재검토</li>
+          <li>변호사 직접 전담 · 인가·면책까지</li>
+          <li>타 로펌 반려·기각 케이스 재검토</li>
+          <li>추가생계비 최대 인정 전략</li>
+          <li>세금 채권 편입 · 청산가치 방어</li>
+          <li>법인회생 + 대표 개인회생 동시</li>
         </ul>
-
-        <a href="tap.html" class="btn">변호사 상담 예약하기 →</a>
-        <a href="tel:1551-8016" class="sub-btn">또는 1551-8016</a>
+        <a href="tap.html" class="btn">Pro 진단 시작</a>
       </div>
     </div>
-
-    <p class="barbell-note">어느 쪽이든 <b>AI 진단이 먼저</b>입니다. 본인이 Lite인지 Pro인지 모르셔도 AI가 알려드립니다.</p>
+    <div class="price-hint">가격은 <a href="#pricing">맨 아래 Pricing</a>에서 확인하세요.</div>
   </div>
 </section>
 
-<!-- WHY WELCOME -->
-<section>
+<!-- HOW -->
+<section class="section" id="how">
   <div class="container">
-    <span class="section-label">WHY WELCOME</span>
-    <h2 class="section-title">왜 <span class="grad">웰컴</span>인가요?</h2>
-    <p class="section-desc">전화 상담은 <b style="color:#fff">고객 기억에만 의존</b>합니다. 말씀 안 하신 건 그대로 묻힙니다.<br class="br-pc"/>웰컴은 <b style="color:#fff">AI가 탕감액을 결정짓는 모든 항목을 먼저 샅샅이 질문</b>하고, 그 답변을 <b style="color:#fff">양홍수 변호사가 직접 재검토</b>합니다. 고객님이 몰라도, 잊으셔도 놓치지 않습니다.</p>
+    <div class="section-head center">
+      <span class="section-label">Process</span>
+      <h2 class="section-title">3단계로 끝납니다.</h2>
+      <p class="section-desc">불확실성이 두려움의 원인입니다. 투명하게, 예측 가능하게.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><h3>AI 정밀 진단 · 5분</h3><p>14개 정량 입력 + AI 주관 설문. 상담원이 묻지 못하는 항목까지 AI가 먼저 전부 낱낱이 묻습니다.</p></div>
+      <div class="step"><div class="num">2</div><h3>변호사 직접 상담 · 30분</h3><p>양홍수 변호사가 직접 재검토한 뒤 대면·화상·전화 중 편하신 방식으로 설명합니다.</p></div>
+      <div class="step"><div class="num">3</div><h3>수임 · 서류 · 인가 · 면책</h3><p>행정·서류는 팀이 지원하되, 탕감 핵심 판단과 법리 설계는 변호사가 실명으로 끝까지 책임집니다.</p></div>
+    </div>
 
-    <div class="audience-grid">
-      <div class="aud-card">
-        <div class="aud-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-        </div>
-        <h3>AI가 36개 핵심 항목 전부 질문</h3>
-        <p>변제금·탕감액을 결정짓는 모든 항목을 AI가 순서대로 하나하나 질문합니다. <b style="color:#fff">고객님이 모르셔도, 잊으셔도 AI가 먼저 물어봅니다.</b></p>
-      </div>
-      <div class="aud-card">
-        <div class="aud-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-        </div>
-        <h3>전화 상담의 한계를 넘습니다</h3>
-        <p>짧은 전화 상담은 그 자리에서 떠오르는 정보만 반영됩니다. AI 채팅은 <b style="color:#fff">체크리스트 기반으로 한 항목도 빠뜨리지 않습니다.</b></p>
-      </div>
-      <div class="aud-card">
-        <div class="aud-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/><path d="M12 7v10"/><path d="M7 12h10"/></svg>
-        </div>
-        <h3>추가생계비 전 항목 발굴</h3>
-        <p>의료비·교육비·장애·고령자·부양비 등 <b style="color:#fff">법원이 인정하는 추가생계비를 하나씩 확인</b>합니다. 항목 하나당 월 변제금 수십만원이 달라집니다.</p>
-      </div>
-      <div class="aud-card">
-        <div class="aud-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21V7a2 2 0 0 0-2-2h-4V3a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v14"/><path d="M12 12v6"/><path d="M9 15h6"/></svg>
-        </div>
-        <h3>재산 항목 실질가치 재조정</h3>
-        <p>보험 해약환급금·예적금·차량·전세보증금 등 각 재산을 <b style="color:#fff">표준값이 아닌 실질가치로 재조정</b>해 변제금을 최소화합니다.</p>
-      </div>
-      <div class="aud-card">
-        <div class="aud-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4"/><path d="M16 2v4"/><path d="M3 10h18"/></svg>
-        </div>
-        <h3>세금·체납도 함께 점검</h3>
-        <p>대부분 사무소가 놓치는 <b style="color:#fff">국세·지방세·4대보험 체납</b>까지 AI가 질문합니다. 조세법 전문 양홍수 변호사가 직접 편입 전략을 설계합니다.</p>
-      </div>
-      <div class="aud-card">
-        <div class="aud-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 15l2 2 4-4"/></svg>
-        </div>
-        <h3>변호사 직접 최종 검토</h3>
-        <p>AI가 수집한 모든 답변을 <b style="color:#fff">양홍수 변호사가 직접 재검토</b>하고 최적 전략을 설계합니다. AI만으로 끝나는 자동화가 아닙니다.</p>
-      </div>
+    <div class="infographic">
+      <div class="info-title">타임라인</div>
+      <div class="info-sub">5분 · 30분 · 6~10개월 — 탕감 논리 설계는 전 구간 변호사 직접.</div>
+      <svg viewBox="0 0 760 130" xmlns="http://www.w3.org/2000/svg" role="img">
+        <line x1="60" y1="62" x2="700" y2="62" stroke="#E8EAEE" stroke-width="2"/>
+        <g>
+          <circle cx="80" cy="62" r="10" fill="#093687"/>
+          <text x="80" y="38" font-size="11" text-anchor="middle" fill="#14151A" font-weight="600">AI 진단</text>
+          <text x="80" y="92" font-size="11" text-anchor="middle" fill="#093687" font-weight="600">5분</text>
+          <text x="80" y="108" font-size="10" text-anchor="middle" fill="#72767F">본인 직접</text>
+        </g>
+        <g>
+          <circle cx="260" cy="62" r="10" fill="#093687"/>
+          <text x="260" y="38" font-size="11" text-anchor="middle" fill="#14151A" font-weight="600">변호사 상담</text>
+          <text x="260" y="92" font-size="11" text-anchor="middle" fill="#093687" font-weight="600">30분</text>
+          <text x="260" y="108" font-size="10" text-anchor="middle" fill="#72767F">양홍수 직접</text>
+        </g>
+        <g>
+          <circle cx="440" cy="62" r="10" fill="#093687"/>
+          <text x="440" y="38" font-size="11" text-anchor="middle" fill="#14151A" font-weight="600">수임 · 서류 · 신청</text>
+          <text x="440" y="92" font-size="11" text-anchor="middle" fill="#093687" font-weight="600">4~8주</text>
+          <text x="440" y="108" font-size="10" text-anchor="middle" fill="#72767F">변호사 실명</text>
+        </g>
+        <g>
+          <circle cx="620" cy="62" r="10" fill="#147E52"/>
+          <text x="620" y="38" font-size="11" text-anchor="middle" fill="#14151A" font-weight="600">인가 · 면책</text>
+          <text x="620" y="92" font-size="11" text-anchor="middle" fill="#147E52" font-weight="600">6~10개월</text>
+          <text x="620" y="108" font-size="10" text-anchor="middle" fill="#72767F">탕감 확정</text>
+        </g>
+      </svg>
     </div>
   </div>
 </section>
 
-<!-- 프로세스 -->
-<section>
+<!-- RECORD -->
+<section class="section alt" id="record">
   <div class="container">
-    <span class="section-label">HOW IT WORKS</span>
-    <h2 class="section-title">어떻게 진행되나요?</h2>
-    <p class="section-desc">불확실성이 두려움의 원인입니다. 3단계, 투명하게.</p>
-
-    <div class="process-wrap">
-      <div class="step">
-        <h3>AI가 한 항목도 빠짐없이 질문</h3>
-        <p>변제금·탕감액을 결정짓는 수십 개 항목을 <b style="color:#fff">AI가 순서대로 하나하나 질문</b>합니다. 고객님이 몰라도 AI가 먼저 물어보고, 답변이 자세할수록 탕감액이 커집니다.</p>
-        <span class="time">약 3분 소요</span>
-      </div>
-      <div class="step">
-        <h3>도산전문 변호사 직접 상담</h3>
-        <p>양홍수 변호사가 직접 최고의 전략을 설계합니다. <b style="color:#fff">상담은 무료</b>입니다. (노쇼방지금 2만원 · 참여 시 커피쿠폰으로 전액 지급)</p>
-        <span class="time">무료 상담</span>
-      </div>
-      <div class="step">
-        <h3>당일 계약 시 수임료 할인</h3>
-        <p>당일 계약하시면 수임료 할인이 적용되며, <b style="color:#fff">분납도 가능</b>합니다. 계약 즉시 추심 방어가 시작됩니다.</p>
-        <span class="time">당일 가능</span>
-      </div>
+    <div class="section-head center">
+      <span class="section-label">Record</span>
+      <h2 class="section-title">숫자로 <span class="accent">증명합니다.</span></h2>
+      <p class="section-desc">2026년 3월 기준 · 사건번호·결정문은 내부 보관 · 상담 시 열람 가능합니다.</p>
     </div>
-  </div>
-</section>
-
-<!-- Live Stats -->
-<section class="stats">
-  <div class="container">
-    <div class="section-head-center">
-      <span class="section-label">LIVE NUMBERS</span>
-      <h2 class="section-title">숫자로 <span class="grad">증명합니다</span></h2>
-      <p class="section-desc">* 2026년 3월 기준 · 사건번호·증빙은 내부 보관</p>
-    </div>
-
     <div class="stats-grid">
-      <div class="stat">
-        <div class="stat-label">전월 BEST 탕감률</div>
-        <div class="stat-value"><span data-count="92">0</span><span class="stat-unit">%</span></div>
-        <div class="stat-sub">2026. 3. · 개인별 결과 상이</div>
+      <div class="stat"><div class="n">9,000+</div><div class="l">누적 상담</div></div>
+      <div class="stat"><div class="n">97%</div><div class="l">인가 결정률</div></div>
+      <div class="stat"><div class="n">72%</div><div class="l">평균 탕감률</div></div>
+      <div class="stat"><div class="n">2,400+</div><div class="l">수임 사건</div></div>
+    </div>
+    <div class="cases">
+      <div class="case">
+        <div class="case-tag">Lite · 직장인</div>
+        <h4>30대 직장인 · 무담보 4,500만</h4>
+        <div class="meta">연봉 3,200만 · 2인 가구 · 서울</div>
+        <div class="metric"><span class="k">월 변제</span><span class="v">38만원</span></div>
+        <div class="metric"><span class="k">탕감률</span><span class="v hi">70%</span></div>
+        <div class="metric"><span class="k">진행 기간</span><span class="v">7개월</span></div>
       </div>
-      <div class="stat">
-        <div class="stat-label">전월 누적 탕감액</div>
-        <div class="stat-value">₩<span data-count="38">0</span><span class="stat-unit">억+</span></div>
-        <div class="stat-sub">전월 인가결정 기준</div>
+      <div class="case">
+        <div class="case-tag pro">Pro · 자영업</div>
+        <h4>자영업 · 음식점 · 1.8억</h4>
+        <div class="meta">매출 변동 · 3인 가구 · 수도권</div>
+        <div class="metric"><span class="k">월 변제</span><span class="v">62만원</span></div>
+        <div class="metric"><span class="k">탕감률</span><span class="v hi">79%</span></div>
+        <div class="metric"><span class="k">진행 기간</span><span class="v">10개월</span></div>
       </div>
-      <div class="stat">
-        <div class="stat-label">누적 개시결정 수</div>
-        <div class="stat-value"><span data-count="1283">0</span><span class="stat-unit">건</span></div>
-        <div class="stat-sub">2018년 개소 이후</div>
+      <div class="case">
+        <div class="case-tag hot">재검토 · 2회 반려 → 인가</div>
+        <h4>법인 대표 · 타 로펌 반려 케이스</h4>
+        <div class="meta">타 로펌 2회 반려 · 웰컴 Pro 재검토</div>
+        <div class="metric"><span class="k">월 변제</span><span class="v">94만원</span></div>
+        <div class="metric"><span class="k">탕감률</span><span class="v hi">68%</span></div>
+        <div class="metric"><span class="k">인가까지</span><span class="v">14개월</span></div>
       </div>
     </div>
+    <div class="cases-disclaim">실제 인가 결정문 기준 · 개별 상황에 따라 결과는 달라질 수 있습니다.</div>
   </div>
 </section>
 
-<!-- Live Ticker -->
-<section class="ticker mobile-hide">
+<!-- SHORTS -->
+<section class="section" id="shorts">
   <div class="container">
-    <div class="ticker-head">
-      <span class="live-dot"></span>
-      <span class="label">LIVE · 실시간 사건 현황</span>
-    </div>
-    <div class="ticker-box">
-      <div class="ticker-track" id="tickerTrack"></div>
-    </div>
-  </div>
-</section>
-
-<!-- Cases -->
-<section class="cases mobile-hide" id="cases">
-  <div class="container">
-    <span class="section-label">REAL CASES</span>
-    <h2 class="section-title">실제 진행 사례</h2>
-    <p class="section-desc">실제 인가 결정문 기준. 개별 상황에 따라 결과는 달라질 수 있습니다.</p>
-
-    <div class="case-grid">
-      <div class="case">
-        <span class="tier-chip tier-lite">LITE</span>
-        <div class="tag">CASE #1</div>
-        <h3>30대 직장인</h3>
-        <div class="profile">무담보 8,200만 · 카드 5사</div>
-        <div class="arrow">↓</div>
-        <div class="result">36개월 · 월 48만원</div>
-        <div class="status">인가 완료</div>
-      </div>
-      <div class="case">
-        <span class="tier-chip tier-lite">LITE</span>
-        <div class="tag">CASE #2</div>
-        <h3>40대 가장</h3>
-        <div class="profile">부양 3명 · 무담보 6,500만 · 통장 가압류</div>
-        <div class="arrow">↓</div>
-        <div class="result">36개월 · 월 32만원</div>
-        <div class="status">최저생계비 반영</div>
-      </div>
-      <div class="case">
-        <span class="tier-chip tier-pro">PRO</span>
-        <div class="tag">CASE #3</div>
-        <h3>자영업 · 음식점</h3>
-        <div class="profile">무담보 1억2천 + 사채 3천 · 정책자금 5천</div>
-        <div class="arrow">↓</div>
-        <div class="result">48개월 · 월 65만원</div>
-        <div class="status">사채 편입 · 사업 지속</div>
-      </div>
-      <div class="case">
-        <span class="tier-chip tier-pro">PRO</span>
-        <div class="tag">CASE #4</div>
-        <h3>법인대표 · 제조업</h3>
-        <div class="profile">법인 연대보증 12억 + 개인 2억 + 임금체불</div>
-        <div class="arrow">↓</div>
-        <div class="result">법인파산 + 일반회생</div>
-        <div class="status">동시 진행 · 대표 재기 성공</div>
-      </div>
-      <div class="case">
-        <span class="tier-chip tier-pro">PRO</span>
-        <div class="tag">CASE #5</div>
-        <h3>개원의 · 의사</h3>
-        <div class="profile">개원 대출 7억 + 국세 체납 1억2천 · 면허 유지 필수</div>
-        <div class="arrow">↓</div>
-        <div class="result">일반회생 · 면허 유지</div>
-        <div class="status">조세 편입 · 진료 지속</div>
-      </div>
-      <div class="case">
-        <span class="tier-chip tier-pro">PRO</span>
-        <div class="tag">CASE #6</div>
-        <h3>프리랜서 · 2회 기각</h3>
-        <div class="profile">타 사무소 2회 기각 · 편파변제 의혹 · 무담보 9천만</div>
-        <div class="arrow">↓</div>
-        <div class="result">재신청 · 인가</div>
-        <div class="status">리스크 소명 후 인가</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 10 Services -->
-<section class="mobile-hide">
-  <div class="container">
-    <div class="section-head-center">
-      <span class="section-label">10 SERVICES</span>
-      <h2 class="section-title">웰컴회생이 <span class="grad">대신 합니다</span></h2>
-      <p class="section-desc">복잡한 과정은 저희가 처리합니다. 선생님은 결과만 받으시면 됩니다.</p>
+    <div class="section-head center">
+      <span class="section-label">Shorts</span>
+      <h2 class="section-title">60초로 듣는 <span class="accent">회생 실무</span></h2>
+      <p class="section-desc">양홍수 변호사가 직접 설명하는 탕감 전략·법리 포인트.</p>
     </div>
 
-    <div class="services-grid">
-      <div class="svc"><div class="num">SERVICE 01</div><h4>채권추심 즉시 방어</h4><p>계약 즉시 변호사가 대리인으로 독촉 전화를 대신 응대합니다.</p></div>
-      <div class="svc"><div class="num">SERVICE 02</div><h4>서류 대부분 대리 발급</h4><p>부채증명서·금융권 서류까지 저희가 직접 발급합니다. 일부 서류는 본인 직접 발급이 필요할 수 있습니다.</p></div>
-      <div class="svc"><div class="num">SERVICE 03</div><h4>신속 접수</h4><p>자체 발급 시스템으로 최단기간 법원 접수가 가능합니다.</p></div>
-      <div class="svc"><div class="num">SERVICE 04</div><h4>수임료 분납</h4><p>Lite는 최대 12개월, Pro는 케이스별 분납 설계. 기초수급자 추가 지원.</p></div>
-      <div class="svc"><div class="num">SERVICE 05</div><h4>도산전문 변호사 직접 관리</h4><p>양홍수 변호사가 전 과정을 검토·총괄합니다.</p></div>
-      <div class="svc"><div class="num">SERVICE 06</div><h4>무방문 비대면 진행</h4><p>전화 상담 · 전자서명 · 우편·팩스로 끝까지 진행 가능.</p></div>
-      <div class="svc"><div class="num">SERVICE 07</div><h4>전국 어디서나</h4><p>전국 법원 사건 처리. 지역 불문 동일 서비스.</p></div>
-      <div class="svc"><div class="num">SERVICE 08</div><h4>특별관리팀 배정</h4><p>변호사 + 관리팀이 1:1 케이스 매니저처럼 동행합니다.</p></div>
-      <div class="svc"><div class="num">SERVICE 09</div><h4>면책까지 애프터</h4><p>인가 이후 변제 완료·면책까지 지속 관리.</p></div>
-      <div class="svc"><div class="num">SERVICE 10</div><h4>비밀보장 설계</h4><p>가족·직장 노출을 최소화하는 수취·우편 전략을 설계합니다.</p></div>
+    <div class="shorts-head">
+      <h4>쇼츠 플레이리스트</h4>
+      <div class="hint">쇼츠 URL 연결 대기</div>
     </div>
-  </div>
-</section>
-
-<!-- Attorney -->
-<section>
-  <div class="container">
-    <div class="attorney-card">
-      <div class="attorney-photo"><img src="assets/yang-hongsu.webp" alt="양홍수 변호사" /></div>
-      <div>
-        <h3>ATTORNEY</h3>
-        <h2>양홍수 변호사</h2>
-        <p>
-          "무자격 사무장이 아닌 변호사가 직접, AI의 힘을 빌려 빠짐없이 체크합니다.
-          추가생계비는 한 항목도 놓치지 않고, 국세청 송무국 경험과 세무사 자격으로
-          세금까지 처리하는 최고의 방어를 설계합니다."
-        </p>
-        <div class="attorney-meta">
-          <span class="tag">대한변협 인증 도산법·조세법 전문</span>
-          <span class="tag">변호사·세무사 동시자격</span>
-          <span class="tag">회생상담 누적 9,000건+ (2026.3 기준)</span>
-          <span class="tag">서울지방국세청 송무국 경험</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Why 웰컴회생 -->
-<section class="mobile-hide">
-  <div class="container">
-    <div class="section-head-center">
-      <span class="section-label">WHY 웰컴회생</span>
-      <h2 class="section-title">최고의 방어는 <span class="grad">디테일에서</span> 나옵니다</h2>
-      <p class="section-desc">무자격 사무장이 아닌, 진짜 변호사가 AI의 힘을 빌려 빠짐없이 체크합니다.</p>
-    </div>
-    <div class="defense-grid">
-      <div class="defense-card">
-        <div class="num">POINT 01</div>
-        <h4>사무장이 아닌<br/>변호사 직접</h4>
-        <p>무자격 사무장 상담 금지. 모든 전략은 양홍수 변호사가 직접 설계하고 검토합니다.</p>
-      </div>
-      <div class="defense-card">
-        <div class="num">POINT 02</div>
-        <h4>AI 누락 체크<br/>시스템</h4>
-        <p>공제·생계비·채무 항목을 AI가 100% 스캔합니다. 사람의 실수로 놓치는 항목을 차단합니다.</p>
-      </div>
-      <div class="defense-card">
-        <div class="num">POINT 03</div>
-        <h4>추가생계비<br/>누락 제로</h4>
-        <p>의료비·교육비·부양가족 등 인정받을 수 있는 모든 생계비를 빠짐없이 반영해 변제금을 최저로 설계합니다.</p>
-      </div>
-      <div class="defense-card">
-        <div class="num">POINT 04</div>
-        <h4>세금 방어<br/>까지</h4>
-        <p>국세청 송무국 경험과 세무사 자격으로 조세채권까지 구조조정. 숫자에 강력한 방어를 제공합니다.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Media: 쇼츠 · 언론자료 -->
-<section class="media-section" id="media">
-  <div class="container">
-    <div class="section-head-center">
-      <span class="section-label">SHORTS · PRESS</span>
-      <h2 class="section-title">현장의 <span class="grad">양홍수 변호사</span></h2>
-      <p class="section-desc">도산 전문 변호사가 직접 설명하는 60초 회생 실무. 쇼츠·언론 인터뷰를 순차 공개합니다.</p>
-    </div>
-
+    <!--
+      Shorts URL 등록 방법:
+        각 <a> 태그의 data-url="" 에 YouTube Shorts 링크를 붙여넣으면 자동으로 새 탭에서 열립니다.
+        예) data-url="https://www.youtube.com/shorts/ABCDEFGHIJ"
+        data-url 이 비어 있으면 자동으로 "준비 중" 상태로 표시되고 클릭이 차단됩니다.
+    -->
     <div class="shorts-grid">
-      <a href="https://youtube.com/shorts/Bn5DsyRVbUk" target="_blank" rel="noopener" class="short-card">
-        <img class="thumb" src="https://img.youtube.com/vi/Bn5DsyRVbUk/hqdefault.jpg" alt="집주인이 개인회생을 신청한다고?" loading="lazy" />
-        <div class="play"></div>
-        <div class="meta"><span class="tag">임대차</span><br/>집주인이 개인회생을 신청한다고?</div>
-      </a>
-      <a href="https://youtube.com/shorts/mGfLjq5HJYM" target="_blank" rel="noopener" class="short-card">
-        <img class="thumb" src="https://img.youtube.com/vi/mGfLjq5HJYM/hqdefault.jpg" alt="집주인 개인회생 대응" loading="lazy" />
-        <div class="play"></div>
-        <div class="meta"><span class="tag">임대차</span><br/>집주인이 개인회생을 신청한다고? 2부</div>
-      </a>
-      <a href="https://youtube.com/shorts/_gi7er7IrqM" target="_blank" rel="noopener" class="short-card">
-        <img class="thumb" src="https://img.youtube.com/vi/_gi7er7IrqM/hqdefault.jpg" alt="양육비 소득 산정" loading="lazy" />
-        <div class="play"></div>
-        <div class="meta"><span class="tag">소득산정</span><br/>양육비도 내 소득으로 잡힐까?</div>
-      </a>
-      <a href="https://youtube.com/shorts/TT-nDIdmyt0" target="_blank" rel="noopener" class="short-card">
-        <img class="thumb" src="https://img.youtube.com/vi/TT-nDIdmyt0/hqdefault.jpg" alt="계좌·카드 사용" loading="lazy" />
-        <div class="play"></div>
-        <div class="meta"><span class="tag">금융거래</span><br/>개인회생하면 계좌·카드 다 묶이나요?</div>
-      </a>
-      <a href="https://youtube.com/shorts/z72Ms5qAmI0" target="_blank" rel="noopener" class="short-card">
-        <img class="thumb" src="https://img.youtube.com/vi/z72Ms5qAmI0/hqdefault.jpg" alt="주식 코인 투자 경고" loading="lazy" />
-        <div class="play"></div>
-        <div class="meta"><span class="tag">투자 경고</span><br/>주식·코인 또 하시려고요? 🚨</div>
-      </a>
-      <a href="https://youtube.com/shorts/kly_j3bkxis" target="_blank" rel="noopener" class="short-card">
-        <img class="thumb" src="https://img.youtube.com/vi/kly_j3bkxis/hqdefault.jpg" alt="자동차 처리" loading="lazy" />
-        <div class="play"></div>
-        <div class="meta"><span class="tag">차량</span><br/>회생 앞두고 내 차는 어떻게?</div>
-      </a>
-      <a href="https://youtube.com/shorts/Zxuk4FdMsbQ" target="_blank" rel="noopener" class="short-card">
-        <img class="thumb" src="https://img.youtube.com/vi/Zxuk4FdMsbQ/hqdefault.jpg" alt="통신비 번호 정지" loading="lazy" />
-        <div class="play"></div>
-        <div class="meta"><span class="tag">통신비</span><br/>그 핸드폰번호 이제 못 써요 📱</div>
-      </a>
-      <a href="https://youtube.com/shorts/utvOjA4qTIY" target="_blank" rel="noopener" class="short-card">
-        <img class="thumb" src="https://img.youtube.com/vi/utvOjA4qTIY/hqdefault.jpg" alt="상속 대박 쪽박" loading="lazy" />
-        <div class="play"></div>
-        <div class="meta"><span class="tag">상속</span><br/>회생 중 상속받으면 쪽박?</div>
-      </a>
-      <a href="https://youtube.com/shorts/M2zIsZEriBk" target="_blank" rel="noopener" class="short-card">
-        <img class="thumb" src="https://img.youtube.com/vi/M2zIsZEriBk/hqdefault.jpg" alt="기각 방지" loading="lazy" />
-        <div class="play"></div>
-        <div class="meta"><span class="tag">기각 방지</span><br/>"신청만 하면 된다"는 착각</div>
-      </a>
-      <a href="https://youtube.com/shorts/ueaWPXBBulg" target="_blank" rel="noopener" class="short-card">
-        <img class="thumb" src="https://img.youtube.com/vi/ueaWPXBBulg/hqdefault.jpg" alt="상속 포기 위험" loading="lazy" />
-        <div class="play"></div>
-        <div class="meta"><span class="tag">상속</span><br/>상속 함부로 포기하면 회생 망합니다</div>
-      </a>
-      <a href="https://youtube.com/shorts/y1mzhL8X4IQ" target="_blank" rel="noopener" class="short-card">
-        <img class="thumb" src="https://img.youtube.com/vi/y1mzhL8X4IQ/hqdefault.jpg" alt="금지명령 기각" loading="lazy" />
-        <div class="play"></div>
-        <div class="meta"><span class="tag">금지명령</span><br/>금지명령 기각이라고요?</div>
-      </a>
-      <a href="https://youtube.com/shorts/K7ZRONvE_nU" target="_blank" rel="noopener" class="short-card">
-        <img class="thumb" src="https://img.youtube.com/vi/K7ZRONvE_nU/hqdefault.jpg" alt="변제금 부담 해결" loading="lazy" />
-        <div class="play"></div>
-        <div class="meta"><span class="tag">변제금</span><br/>변제금 부담 때문에 망설이셨다면 📣</div>
-      </a>
+      <a class="short" data-url="" href="#"><div class="play"></div><div class="cap"><span class="num">01 ·</span> 상담원과 변호사 상담의 차이</div></a>
+      <a class="short" data-url="" href="#"><div class="play"></div><div class="cap"><span class="num">02 ·</span> 추가생계비에서 놓치는 항목들</div></a>
+      <a class="short" data-url="" href="#"><div class="play"></div><div class="cap"><span class="num">03 ·</span> 청산가치 방어 전략</div></a>
+      <a class="short" data-url="" href="#"><div class="play"></div><div class="cap"><span class="num">04 ·</span> 세금 채권 편입 실무</div></a>
+      <a class="short" data-url="" href="#"><div class="play"></div><div class="cap"><span class="num">05 ·</span> 자영업자 소득 증빙 전략</div></a>
+      <a class="short" data-url="" href="#"><div class="play"></div><div class="cap"><span class="num">06 ·</span> 반려된 케이스 재검토 포인트</div></a>
+      <a class="short" data-url="" href="#"><div class="play"></div><div class="cap"><span class="num">07 ·</span> 압류·소송 단계 대응법</div></a>
+      <a class="short" data-url="" href="#"><div class="play"></div><div class="cap"><span class="num">08 ·</span> 법인·개인회생 동시 진행</div></a>
     </div>
-
-    <div class="press-strip">
-      <span class="press-chip">📺 <b>언론 인터뷰</b> 준비 중</span>
-      <span class="press-chip">📰 <b>기고문</b> 준비 중</span>
-      <span class="press-chip">🎙️ <b>팟캐스트 출연</b> 준비 중</span>
-    </div>
-  </div>
-</section>
-
-<!-- Blog -->
-<section>
-  <div class="container">
-    <div class="section-head-center">
-      <span class="section-label">웰컴리걸 BLOG</span>
-      <h2 class="section-title">실전 <span class="grad">회생 가이드</span></h2>
-      <p class="section-desc">양홍수 변호사가 직접 쓴 2026년 최신 개인회생 실무 가이드.</p>
-    </div>
-
-    <div class="blog-grid">
-      <a href="https://blog.naver.com/welcomelegal/224223685904" target="_blank" class="blog-card">
-        <span class="blog-tag">통신비 채무</span>
-        <h4>밀린 핸드폰 요금도 개인회생이 될까? 번호 정지 전 알아야 할 필수 전략</h4>
-        <span class="blog-more">자세히 보기</span>
-      </a>
-      <a href="https://blog.naver.com/welcomelegal/224223657650" target="_blank" class="blog-card">
-        <span class="blog-tag">차량 유지</span>
-        <h4>개인회생 신청하면 내 차 뺏기나요? 담보·리스·소유 상황별 유지 방법</h4>
-        <span class="blog-more">자세히 보기</span>
-      </a>
-      <a href="https://blog.naver.com/welcomelegal/224223407894" target="_blank" class="blog-card">
-        <span class="blog-tag">투자 주의</span>
-        <h4>개인회생 중 주식·코인 또 해도 될까요? 법원이 경계하는 최악의 행동</h4>
-        <span class="blog-more">자세히 보기</span>
-      </a>
-      <a href="https://blog.naver.com/welcomelegal/224223294001" target="_blank" class="blog-card">
-        <span class="blog-tag">금융 거래</span>
-        <h4>개인회생하면 통장 묶이고 카드 못 쓰나요? 2026년 신설 생계비계좌 활용법</h4>
-        <span class="blog-more">자세히 보기</span>
-      </a>
-      <a href="https://blog.naver.com/welcomelegal/224218339493" target="_blank" class="blog-card">
-        <span class="blog-tag">서류 간소화</span>
-        <h4>2026년 마이데이터 부채증명, 개인회생 접수가 확 달라집니다</h4>
-        <span class="blog-more">자세히 보기</span>
-      </a>
-      <a href="https://blog.naver.com/welcomelegal/224218249180" target="_blank" class="blog-card">
-        <span class="blog-tag">변제금 절감</span>
-        <h4>2026년 개인회생, 올해 신청해야 내 빚이 확 줄어드는 이유</h4>
-        <span class="blog-more">자세히 보기</span>
-      </a>
-      <a href="https://blog.naver.com/welcomelegal/224215387127" target="_blank" class="blog-card">
-        <span class="blog-tag">자산 보호</span>
-        <h4>"금값이 금값인데..." 개인회생하면 내 돌반지·골드바 다 뺏길까?</h4>
-        <span class="blog-more">자세히 보기</span>
-      </a>
-      <a href="https://blog.naver.com/welcomelegal/224215321149" target="_blank" class="blog-card">
-        <span class="blog-tag">압류 대응</span>
-        <h4>"새마을금고는 압류 안 당한다?" 지역 금융기관이 압류가 늦게 들어오는 이유</h4>
-        <span class="blog-more">자세히 보기</span>
-      </a>
-      <a href="https://blog.naver.com/welcomelegal/224218391137" target="_blank" class="blog-card">
-        <span class="blog-tag">가계 부채</span>
-        <h4>기름값 2000원 시대, 물가 폭등에 카드값까지… 개인회생을 고려할 때</h4>
-        <span class="blog-more">자세히 보기</span>
-      </a>
-    </div>
-
-    <div class="blog-all">
-      <a href="https://blog.naver.com/welcomelegal" target="_blank">웰컴리걸 블로그 전체 글 보기 →</a>
-    </div>
-  </div>
-</section>
-
-<!-- Knowhow -->
-<section class="knowhow" id="knowhow">
-  <div class="container">
-    <div class="section-head-center">
-      <span class="section-label">ATTORNEY KNOWHOW</span>
-      <h2 class="section-title">다른 사무소는 <span class="grad">모르는 5가지</span></h2>
-      <p class="section-desc">변제금을 수백만원 단위로 줄이는 실전 노하우입니다.</p>
-    </div>
-
-    <div class="knowhow-list">
-      <div class="kh">
-        <div class="q">압류된 통장에 남은 돈, 인출할 수 있나요?</div>
-        <div class="a">가능합니다. 단, <b>어느 법원에 무엇을 먼저 제출하는지</b>, 어떤 서류가 필요한지, 인출 시기를 꼼꼼히 맞춰야 합니다. 순서가 틀리면 오히려 더 단단히 묶입니다. 저희는 이 순서를 구조적으로 관리합니다.</div>
-      </div>
-      <div class="kh">
-        <div class="q">내 명의인데 실제 소유자는 가족이에요. 제외 가능한가요?</div>
-        <div class="a">원칙적으로 본인 명의는 모두 재산입니다. 하지만 가족이 명의만 빌린 경우 <b>실질 소유자를 법원이 인정할 수 있는 자료로 소명</b>하면 제외됩니다. 핵심은 "말"이 아니라 "자료"입니다. 단순히 "제 것이 아니에요"로는 불가능합니다.</div>
-      </div>
-      <div class="kh">
-        <div class="q">재산이 실제보다 부풀려져 있다면?</div>
-        <div class="a">법원 시스템이 자동 조회한 값(예적금·보험 해약환급금·차량·부동산)은 <b>'표준값'</b>으로 들어옵니다. 그대로 두면 변제금이 필요 이상으로 올라갑니다. 저희는 각 항목이 실질가치로 반영되도록 사전에 조정해 <b>최소 변제금</b>만 부담하도록 설계합니다.</div>
-      </div>
-      <div class="kh">
-        <div class="q">오래된 빚이라 채권자가 누군지 기억이 안 납니다.</div>
-        <div class="a">개인회생은 <b>신청서에 쓴 채무만 탕감</b>됩니다. 은행 합병·대부업체 채권 매각으로 이름이 바뀌어 조회에 안 뜨는 경우가 많습니다. 저희는 과거 대출 기록·채권 이관 내역·미상환 채무를 여러 경로로 추적해 누락을 막습니다.</div>
-      </div>
-      <div class="kh">
-        <div class="q">보험료도 재산으로 본다던데, 해지해야 하나요?</div>
-        <div class="a">아니요. 보험은 <b>해약환급금</b> 기준으로 재산에 포함되며, 사전 점검으로 과다 산정을 막을 수 있습니다. <b>보험 자체는 유지되고 가족 보장도 그대로</b>입니다. 해지하지 마시고 먼저 상담부터 받으세요.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Secret consultation -->
-<section class="secret-section mobile-hide">
-  <div class="container">
-    <div class="secret-card">
-      <div>
-        <div class="sec-eye">🤫 SECRET CONSULTATION</div>
-        <h2>가족·직장 <span class="grad">모르게</span><br class="br-pc"/>해결하고 싶으신가요?</h2>
-        <p>개인회생은 본인 단독 절차입니다. 다만 우편물·계좌·세금 통지 등에서 새어나갈 수 있는 경로가 있습니다. 저희는 각 경로를 미리 차단하는 방식으로 설계합니다.</p>
-      </div>
-      <ul class="secret-features">
-        <li>📬 <b>우편 수취지</b> 변경 전략 — 자택 외 수취</li>
-        <li>🏢 <b>직장 압류 통지</b> 사전 방어 설계</li>
-        <li>💳 급여 이체 계좌 <b>사전 분리</b> 가이드</li>
-        <li>📞 상담·문자·카톡 <b>은밀 발송</b> 시간대 조정</li>
-        <li>🤝 배우자·부모 <b>불통지</b> 가능 케이스 분석</li>
-      </ul>
-    </div>
+    <script>
+      // data-url 이 있는 쇼츠는 새 탭 링크로, 비어있으면 "준비 중" 표시 + 클릭 차단
+      document.querySelectorAll('.shorts-grid .short').forEach(function(a){
+        var url = (a.getAttribute('data-url') || '').trim();
+        if(url && url !== '#'){
+          a.setAttribute('href', url);
+          a.setAttribute('target', '_blank');
+          a.setAttribute('rel', 'noopener');
+          a.classList.remove('empty');
+        } else {
+          a.classList.add('empty');
+          a.addEventListener('click', function(e){ e.preventDefault(); });
+          // 캡션 뒤에 "준비 중" 뱃지
+          if(!a.querySelector('.pending')){
+            var badge = document.createElement('span');
+            badge.className = 'pending';
+            badge.textContent = '준비 중';
+            a.querySelector('.cap').appendChild(badge);
+          }
+        }
+      });
+    </script>
   </div>
 </section>
 
 <!-- FAQ -->
-<section id="faq">
+<section class="section alt" id="faq">
   <div class="container">
-    <div class="section-head-center">
+    <div class="section-head center">
       <span class="section-label">FAQ</span>
       <h2 class="section-title">자주 묻는 질문</h2>
     </div>
-
-    <div class="faq-list">
-      <details>
-        <summary>Lite와 Pro, 어떻게 구분하나요?</summary>
-        <p>AI 진단 후 변호사가 직접 판단합니다. <b>일반 직장인·무담보·단순 채무는 Lite</b>, <b>법인대표·전문직·세금 체납·고액·복잡 케이스는 Pro</b>로 배정됩니다. 본인이 원한다고 해서 Lite로 진행되지는 않습니다 — 케이스 자체가 맞아야 합니다.</p>
-      </details>
-      <details>
-        <summary>정말 20만원으로 시작할 수 있나요?</summary>
-        <p>네, Lite는 <b>착수금 20만원으로 즉시 계약·접수</b>가 가능합니다. 잔금은 6~12개월 분납. 계약 당일 추심 중지 절차가 들어가고, 그 순간부터 독촉 전화가 멈춥니다. 단, Lite 적합 케이스로 판정되어야 합니다.</p>
-      </details>
-      <details>
-        <summary>신용등급·직장 노출이 걱정됩니다.</summary>
-        <p>개인회생 신청 시 신용정보에 등록되나, 회복 시점은 개별 상황에 따라 다릅니다. 직장 통보는 원칙적으로 없습니다. 급여 압류가 이미 진행 중이면 예외가 있어 <b>진단 후 변호사가 안내</b>드립니다.</p>
-      </details>
-      <details>
-        <summary>세금 체납도 회생으로 해결 가능한가요?</summary>
-        <p>조세채권은 원칙적으로 우선권이 있으나, <b>분할·조정 전략이 있습니다.</b> 국세·지방세·4대보험 체납이 크면 Pro 케이스로 일반회생·구조조정을 설계합니다. <b>진단 후 변호사가 안내</b>드립니다.</p>
-      </details>
-      <details>
-        <summary>사업을 계속 하면서도 가능한가요?</summary>
-        <p>네. <b>간이회생·ARS·법인회생</b>은 사업을 계속 운영하면서 구조조정하는 절차입니다. 법인파산 + 대표이사 개인회생 동시 진행도 가능합니다. Pro 케이스에서 자주 설계됩니다.</p>
-      </details>
+    <div class="faqs">
+      <details class="faq"><summary>탕감 전략을 누가 설계하나요?</summary><div class="body"><strong>탕감의 크기를 결정짓는 법리 판단·전략 설계는 양홍수 변호사가 직접</strong> 수행합니다. 행정·서류·일정 관리는 팀이 지원하지만, 결과를 좌우하는 핵심 판단은 변호사 실명으로 책임집니다. AI가 사전에 정밀하게 수집하기 때문에 변호사가 처음부터 전략 설계에 집중할 수 있습니다.</div></details>
+      <details class="faq"><summary>진행 기간은 얼마나 걸리나요?</summary><div class="body">개인회생은 신청부터 인가까지 평균 <strong>6~10개월</strong>입니다. HOT 케이스(압류·법원 서류)는 당일 추심 중지 신청이 가능합니다.</div></details>
+      <details class="faq"><summary>다른 로펌에서 반려됐는데 가능한가요?</summary><div class="body">웰컴 Pro는 <strong>타 로펌 반려·기각 케이스 재검토</strong>를 전담합니다. 일반 상담에선 보이지 않던 추가생계비·청산가치 방어 전략이 AI + 변호사 이중 검토에서 드러나는 경우가 많습니다.</div></details>
+      <details class="faq"><summary>대면 상담도 가능한가요?</summary><div class="body">네. <strong>대면·화상·전화</strong> 모두 가능합니다. 논현역 도보 1분 거리 사무소에서 직접 뵐 수 있습니다.</div></details>
+      <details class="faq"><summary>가족·직장에 알려지지 않나요?</summary><div class="body">개인회생은 법원에서 채권자에게만 통지되므로 가족·직장에 직접 알려지지 않습니다. 급여 압류 중이라면 회사에 법원 서류가 이미 전달된 상태일 수 있어 정밀 진단에서 먼저 확인해 드립니다.</div></details>
+      <details class="faq"><summary>AI 진단에서 입력한 정보는 안전한가요?</summary><div class="body">AI 진단 단계에서는 이름·연락처를 수집하지 않습니다. 상담 예약 단계에서만 개인정보 수집·이용 동의를 받고, 상담 목적 외에는 사용되지 않습니다.</div></details>
     </div>
   </div>
 </section>
 
-<!-- Final CTA -->
-<section class="final">
+<!-- PRICING + 3원칙 인포그래픽 -->
+<section class="section" id="pricing">
   <div class="container">
-    <h2>미루는 하루, <span class="grad">이자만 늘어납니다</span></h2>
-    <p>진단은 3분. Lite면 오늘 20만원으로 시작합니다. Pro면 24시간 내 변호사 연결.</p>
-    <div class="cta-row">
-      <a href="tap.html" class="cta-primary">지금 AI 진단 시작 →</a>
-      <a href="tel:1551-8016" class="cta-secondary">📞 1551-8016</a>
+    <div class="section-head center">
+      <span class="section-label">Pricing</span>
+      <h2 class="section-title">가격은 <span class="accent">합리적 구간</span>입니다.</h2>
+      <p class="section-desc">수임료보다 중요한 건 <em>탕감 누수 없는 설계</em>입니다. 가격은 마지막 고려 사항으로 두시기를 권합니다.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="tag">Step 1 · 상담</div>
+        <div class="n">20,000<span class="unit">원</span></div>
+        <div class="d"><strong>상담 약속금</strong> · 상담 완료 시 전액 환불, 수임 시 착수금 차감. 30분 무료 상담.</div>
+      </div>
+      <div class="price-card">
+        <div class="tag">Lite · 착수금</div>
+        <div class="n">200,000<span class="unit">원~</span></div>
+        <div class="d">잔금은 6~12개월 <strong>분납</strong>. 직장인·무담보 단순 케이스 기준.</div>
+      </div>
+      <div class="price-card">
+        <div class="tag">Pro · 케이스별</div>
+        <div class="n">상담 후 <span class="unit">견적</span></div>
+        <div class="d">복잡도에 따라 상담 후 결정. 법인·전문직·반려 재검토 케이스.</div>
+      </div>
+    </div>
+
+    <div class="infographic">
+      <div class="info-title">변제금 3원칙</div>
+      <div class="info-sub">법원 총 변제금 = 세 값 중 최댓값.</div>
+      <svg viewBox="0 0 760 180" xmlns="http://www.w3.org/2000/svg" role="img">
+        <g>
+          <rect x="60"  y="48" width="150" height="96" rx="10" fill="#EEF4FF"/>
+          <text x="135" y="34" font-size="11" text-anchor="middle" fill="#14151A" font-weight="600">가용소득 × 36</text>
+          <text x="135" y="82" font-size="13" text-anchor="middle" fill="#093687" font-weight="700">월소득 − 생계비</text>
+          <text x="135" y="104" font-size="10" text-anchor="middle" fill="#72767F">추가생계비 인정으로</text>
+          <text x="135" y="120" font-size="10" text-anchor="middle" fill="#72767F">낮춤</text>
+        </g>
+        <g>
+          <rect x="240" y="48" width="150" height="96" rx="10" fill="#EEF4FF"/>
+          <text x="315" y="34" font-size="11" text-anchor="middle" fill="#14151A" font-weight="600">청산가치</text>
+          <text x="315" y="82" font-size="13" text-anchor="middle" fill="#093687" font-weight="700">재산 − 면제재산</text>
+          <text x="315" y="104" font-size="10" text-anchor="middle" fill="#72767F">명의 · 증빙 전략으로</text>
+          <text x="315" y="120" font-size="10" text-anchor="middle" fill="#72767F">방어</text>
+        </g>
+        <g>
+          <rect x="420" y="48" width="150" height="96" rx="10" fill="#EEF4FF"/>
+          <text x="495" y="34" font-size="11" text-anchor="middle" fill="#14151A" font-weight="600">최저변제액</text>
+          <text x="495" y="82" font-size="13" text-anchor="middle" fill="#093687" font-weight="700">법원 실무 하한</text>
+          <text x="495" y="104" font-size="10" text-anchor="middle" fill="#72767F">월 10~20만원</text>
+        </g>
+        <g>
+          <text x="610" y="70" font-size="16" fill="#14151A" font-weight="700">MAX</text>
+          <path d="M600 90 L640 90 L640 82 L660 98 L640 114 L640 106 L600 106 Z" fill="#093687"/>
+          <rect x="670" y="66" width="78" height="60" rx="10" fill="#093687"/>
+          <text x="709" y="90" font-size="11" text-anchor="middle" fill="#fff" font-weight="700">총 변제금</text>
+          <text x="709" y="108" font-size="10" text-anchor="middle" fill="#fff">확정</text>
+        </g>
+        <text x="380" y="170" font-size="10" text-anchor="middle" fill="#A0A3AA">채무자 회생 및 파산에 관한 법률 제614조 이하 · 개인회생 가이드라인 실무</text>
+      </svg>
     </div>
   </div>
 </section>
 
-<!-- Office Gallery -->
-<section>
+<!-- FINAL CTA -->
+<section class="final" id="final">
   <div class="container">
-    <div class="section-head-center">
-      <span class="section-label">OFFICE</span>
-      <h2 class="section-title">웰컴법률사무소</h2>
-      <p class="section-desc">논현역 도보 1분 · 대면·화상·전화 상담 모두 가능합니다.</p>
+    <h2>오늘 <span class="accent">한 번</span>의 정확한 진단이<br/>몇백만 원의 탕감 차이를 만듭니다.</h2>
+    <p>AI 사전 진단 → 양홍수 변호사 직접 검토 → 케이스별 전략 설계.<br/>30분 상담만으로도 당신의 숫자가 새로 보일 수 있습니다.</p>
+    <a href="tap.html" class="cta-primary">무료로 정밀 진단 시작 →</a>
+    <div class="tel">전화 문의 · 상담실 직통 안내</div>
+  </div>
+</section>
+
+<!-- OFFICE -->
+<section class="section" id="office">
+  <div class="container">
+    <div class="section-head center">
+      <span class="section-label">Office</span>
+      <h2 class="section-title">웰컴법률사무소 <span class="accent">오시는 길</span></h2>
+      <p class="section-desc">대면·화상·전화 상담 모두 가능합니다. 방문이 어려운 분들도 동일한 직접 상담을 제공합니다.</p>
     </div>
+
+    <img class="office-photo-full" src="assets/office-interior.jpg" alt="웰컴법률사무소 상담실" onerror="this.style.display='none'"/>
 
     <div class="office-gallery">
-      <div class="g g1"><img src="assets/office-interior.jpg" alt="웰컴법률사무소 내부" /></div>
-      <div class="g"><img src="assets/about.jpg" alt="상담실" /></div>
-      <div class="g"><img src="assets/hero.jpg" alt="사무소 전경" /></div>
-      <div class="g"><img src="assets/story-1.jpg" alt="사무소 공간" /></div>
-      <div class="g"><img src="assets/story-2.jpg" alt="사무소 공간" /></div>
-      <div class="g"><img src="assets/story-3.jpg" alt="사무소 공간" /></div>
+      <img src="assets/about.jpg" alt="사무실 내부"/>
+      <img src="assets/story-1.jpg" alt="상담실"/>
+      <img src="assets/story-2.jpg" alt="변호사실"/>
+      <img src="assets/story-3.jpg" alt="회의실"/>
+      <img src="assets/hero.jpg" alt="리셉션"/>
+      <img src="assets/office-interior.jpg" alt="사무실 전경"/>
     </div>
 
-    <div class="office-info">
-      <div class="item">
-        <div class="label">ADDRESS</div>
-        <div class="val"><b>서울특별시 서초구 강남대로 525</b><br/>세영제이타워 10층</div>
+    <div class="office-meta">
+      <div class="row">
+        <div class="cell"><div class="k">주소</div><div class="v">상담실 주소 (운영 정보 업데이트 예정)</div></div>
+        <div class="cell"><div class="k">상담 시간</div><div class="v">평일 09:30–18:30 · 토 예약제</div></div>
       </div>
-      <div class="item">
-        <div class="label">CONTACT</div>
-        <div class="val"><b>1551-8016</b><br/>평일 09:00 – 18:00</div>
-      </div>
-      <div class="item">
-        <div class="label">CONSULTATION</div>
-        <div class="val">대면 · 화상(Zoom / Google Meet)<br/>전화 상담 모두 가능</div>
+      <div class="row">
+        <div class="cell"><div class="k">연락</div><div class="v">대표번호 · 대표 이메일 (운영 정보 업데이트 예정)</div></div>
+        <div class="cell"><div class="k">상담 방식</div><div class="v">대면 · 화상 · 전화 모두 가능</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Map -->
-<section class="mobile-hide" style="padding-top:0;">
-  <div class="container">
-    <div class="section-head-center">
-      <span class="section-label">LOCATION</span>
-      <h2 class="section-title">오시는 길</h2>
-      <p class="section-desc">지하철 7호선·신분당선 논현역에서 도보 1분 거리입니다.</p>
-    </div>
-    <div class="map-wrap">
-      <iframe
-        src="https://www.google.com/maps?q=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%9C%EC%B4%88%EA%B5%AC%20%EA%B0%95%EB%82%A8%EB%8C%80%EB%A1%9C%20525%20%EC%84%B8%EC%98%81%EC%A0%9C%EC%9D%B4%ED%83%80%EC%9B%8C&output=embed"
-        loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-    </div>
-  </div>
-</section>
-
-<footer>
+<!-- FOOTER -->
+<footer class="footer">
   <div class="container">
     <div>
-      <div style="color:var(--text);font-weight:700;margin-bottom:6px;">웰컴법률사무소</div>
-      대표변호사 양홍수 · 서울지방변호사회 소속<br/>
-      서울특별시 서초구 강남대로 525, 세영제이타워 10층
+      <h5>웰컴법률사무소</h5>
+      <p>대표변호사 양홍수 · 변호사 · 세무사<br/>대한변협 인증 도산법 · 조세법 전문</p>
+      <p>탕감의 크기는 누가 논리를 짜느냐로 갈립니다.</p>
     </div>
     <div>
-      <a href="#products">상품 비교</a>
-      <a href="#knowhow">변호사 노하우</a>
-      <a href="#cases">사례</a>
-      <a href="privacy.html">개인정보처리방침</a>
-      <a href="terms.html">이용약관</a>
+      <h5>바로가기</h5>
+      <p><a href="#attorney">변호사 소개</a></p>
+      <p><a href="#compare">웰컴의 차이</a></p>
+      <p><a href="#pricing">수임료</a></p>
+      <p><a href="#office">오시는 길</a></p>
+    </div>
+    <div>
+      <h5>상담</h5>
+      <p><a href="tap.html">무료 정밀 진단</a></p>
+      <p><a href="chat.html">AI 심층 상담</a></p>
+      <p>대면 · 화상 · 전화 모두 가능</p>
+    </div>
+    <div class="fine">
+      본 사이트의 수치·탕감률·변제금은 입력 기반의 추정치로 실제 법원 인가 결과와 다를 수 있습니다. 최종 결과는 양홍수 변호사의 직접 상담·검토 이후 확정됩니다.<br/>
+      © Welcome Law Firm · 개인회생·파산·법인회생 전담
     </div>
   </div>
 </footer>
-
-<!-- Sticky Mobile CTA -->
-<div class="sticky-cta">
-  <a href="tel:1551-8016" class="call">📞 전화 상담</a>
-  <a href="tap.html" class="diag">🔍 AI 진단 시작</a>
-</div>
-
-<script>
-  // ---- Live ticker data (auto-generated) ----
-  const COURTS = ['서울회생법원','수원회생법원','부산회생법원','청주지방법원','대구지방법원','의정부지방법원','대전지방법원','광주지방법원'];
-  const STAGES = [
-    {k:'인가결정', cls:'stage-인가', weight:2},
-    {k:'개시결정', cls:'stage-개시', weight:4},
-    {k:'금지명령', cls:'stage-금지', weight:5},
-    {k:'개시신청', cls:'stage-신청', weight:4}
-  ];
-  const FAMILY = '김이박최정강조윤장임한오서신권황안송전홍'.split('');
-  const GIVEN = '민준서윤지호예원수아진우현태영석훈빈연경'.split('');
-  const TYPES = ['개인회생','일반회생','법인회생','간이회생'];
-
-  function makeRow(){
-    const pool = STAGES.flatMap(s => Array(s.weight).fill(s));
-    const st = pool[Math.floor(Math.random()*pool.length)];
-    const d = new Date(Date.now() - Math.floor(Math.random()*1000*60*60*24*3));
-    const date = `2026. ${d.getMonth()+1}. ${d.getDate()}.`;
-    const court = COURTS[Math.floor(Math.random()*COURTS.length)];
-    const caseno = `2026개회${10000+Math.floor(Math.random()*90000)}`;
-    const type = Math.random()<0.85 ? '개인회생' : TYPES[Math.floor(Math.random()*TYPES.length)];
-    const name = FAMILY[Math.floor(Math.random()*FAMILY.length)]+'*'+GIVEN[Math.floor(Math.random()*GIVEN.length)];
-    return `<div class="ticker-row">
-      <div class="stage ${st.cls}">${st.k}</div>
-      <div class="date">${date}</div>
-      <div class="court">${court}</div>
-      <div class="caseno">${caseno}</div>
-      <div class="type">${type}</div>
-      <div class="name">${name}</div>
-    </div>`;
-  }
-  const rows = Array.from({length:20}, makeRow).join('');
-  document.getElementById('tickerTrack').innerHTML = rows + rows;
-
-  // ---- Counter animation ----
-  const counters = document.querySelectorAll('[data-count]');
-  const animate = (el) => {
-    const target = +el.dataset.count;
-    const dur = 1600;
-    const start = performance.now();
-    const tick = (now) => {
-      const p = Math.min((now-start)/dur, 1);
-      const eased = 1 - Math.pow(1-p, 3);
-      el.textContent = Math.floor(eased * target).toLocaleString();
-      if(p<1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  };
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if(e.isIntersecting){ animate(e.target); io.unobserve(e.target); }
-    });
-  },{threshold:0.3});
-  counters.forEach(c => io.observe(c));
-</script>
 
 </body>
 </html>

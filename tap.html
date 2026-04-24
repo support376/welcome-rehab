@@ -3,396 +3,351 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-<title>1분 진단 · 웰컴회생</title>
-<link href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css" rel="stylesheet">
+<title>정밀 AI 진단 · 웰컴회생</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
 <style>
-  :root{
-    --bg-0:#0B0913; --bg-1:#161320;
-    --purple-bright:#6529FF; --cyan:#00B8FF; --mint:#1EF5CA;
-    --text:#F5F5FA; --text-dim:#A7A7A7;
-    --border:rgba(255,255,255,.08);
-    --border-strong:rgba(255,255,255,.14);
-    --card:rgba(255,255,255,.04);
-    --card-hover:rgba(255,255,255,.08);
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  html,body{height:100%;}
-  body{
-    font-family:'Wanted Sans Variable','Wanted Sans',-apple-system,system-ui,sans-serif;
-    background:var(--bg-0); color:var(--text);
-    letter-spacing:-0.03em; -webkit-font-smoothing:antialiased;
-    overflow:hidden;
-    word-break:keep-all;
-    overflow-wrap:break-word;
-  }
-  body::before{
-    content:'';position:fixed;inset:-20%;z-index:0;
-    background:
-      radial-gradient(50% 40% at 20% 10%,rgba(101,41,255,.32),transparent 70%),
-      radial-gradient(50% 40% at 80% 90%,rgba(0,184,255,.22),transparent 70%),
-      radial-gradient(40% 40% at 50% 50%,rgba(30,245,202,.1),transparent 70%);
-    filter:blur(80px);pointer-events:none;
-  }
-  a{color:inherit;text-decoration:none;}
-  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+:root{
+  --bg:#FFFFFF; --bg-alt:#F9FAFB; --bg-card:#FFFFFF;
+  --text:#14151A; --text-muted:#72767F; --text-dim:#A0A3AA;
+  --line:rgba(20,21,26,.08);
+  --line-strong:rgba(20,21,26,.14);
+  --primary:#093687; --primary-ink:#07447F; --primary-soft:#EEF4FF;
+  --danger:#D44D4D; --danger-soft:#FDEEEE;
+  --warning:#B87900; --warning-soft:#FFF4DD;
+  --success:#147E52; --success-soft:#E6F2EC;
+  --radius-sm:6px; --radius-md:10px; --radius-lg:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;background:var(--bg);color:var(--text);}
+body{
+  font-family:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,system-ui,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+  font-weight:400;letter-spacing:-0.015em;line-height:1.6;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  overflow:hidden;word-break:keep-all;overflow-wrap:break-word;
+}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
 
-  .app{
-    position:relative;z-index:1;
-    height:100vh;max-width:720px;margin:0 auto;
-    display:flex;flex-direction:column;
-    padding:24px 24px 32px;
-  }
+.app{
+  height:100vh;max-width:720px;margin:0 auto;
+  display:flex;flex-direction:column;
+  padding:24px 24px 32px;overflow-y:auto;background:var(--bg);
+}
+.app::-webkit-scrollbar{width:6px;}
+.app::-webkit-scrollbar-thumb{background:rgba(20,21,26,.12);border-radius:3px;}
 
-  /* Header */
-  .top{
-    display:flex;align-items:center;gap:14px;margin-bottom:28px;
-  }
-  .back{
-    width:40px;height:40px;border-radius:12px;
-    display:flex;align-items:center;justify-content:center;
-    background:var(--card);border:1px solid var(--border);
-    font-size:20px;flex-shrink:0;
-  }
-  .back:disabled{opacity:.3;cursor:not-allowed;}
-  .progress{
-    flex:1;height:6px;border-radius:3px;
-    background:rgba(255,255,255,.06);overflow:hidden;
-  }
-  .progress-bar{
-    height:100%;border-radius:3px;
-    background:linear-gradient(90deg,var(--purple-bright),var(--cyan),var(--mint));
-    transition:width .4s cubic-bezier(.2,.8,.2,1);
-  }
-  .counter{
-    font-size:12px;color:var(--text-dim);font-weight:700;
-    letter-spacing:.05em;min-width:40px;text-align:right;
-  }
+/* Header */
+.top{display:flex;align-items:center;gap:14px;margin-bottom:28px;flex-shrink:0;}
+.back{
+  width:40px;height:40px;border-radius:var(--radius-md);
+  display:flex;align-items:center;justify-content:center;
+  background:var(--bg-alt);border:1px solid var(--line);
+  color:var(--text);font-size:20px;flex-shrink:0;
+}
+.back:disabled{opacity:.35;cursor:not-allowed;}
+.progress{
+  flex:1;height:6px;border-radius:3px;
+  background:rgba(20,21,26,.06);overflow:hidden;
+}
+.progress-bar{
+  height:100%;border-radius:3px;background:var(--primary);
+  transition:width .4s cubic-bezier(.2,.8,.2,1);
+}
+.counter{
+  font-size:12px;color:var(--text-muted);font-weight:600;
+  min-width:48px;text-align:right;
+}
 
-  /* Question */
-  .q-wrap{
-    flex:1;display:flex;flex-direction:column;justify-content:center;
-    animation:slideIn .45s cubic-bezier(.2,.8,.2,1);
-  }
-  @keyframes slideIn{
-    from{opacity:0;transform:translateX(20px);}
-    to{opacity:1;transform:translateX(0);}
-  }
-  .q-label{
-    font-size:12px;font-weight:800;color:var(--mint);
-    letter-spacing:.1em;margin-bottom:12px;
-  }
-  .q-title{
-    font-size:clamp(24px,5vw,32px);font-weight:800;
-    letter-spacing:-0.04em;line-height:1.3;margin-bottom:14px;
-  }
-  .q-desc{
-    font-size:14px;color:var(--text-dim);line-height:1.6;margin-bottom:32px;
-  }
+/* Intro screen */
+.intro{
+  flex:1;display:flex;flex-direction:column;justify-content:center;
+  gap:22px;animation:fadeUp .5s cubic-bezier(.2,.8,.2,1);padding:8px 0;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.intro-badge{
+  align-self:flex-start;padding:6px 12px;border-radius:999px;
+  background:var(--primary-soft);color:var(--primary-ink);
+  font-size:12px;font-weight:600;
+}
+.intro-title{
+  font-size:clamp(28px,6vw,36px);font-weight:700;
+  letter-spacing:-0.032em;line-height:1.22;color:var(--text);
+}
+.intro-warning{
+  padding:16px 18px;border-radius:var(--radius-md);
+  background:var(--warning-soft);color:var(--warning);
+  font-size:14px;line-height:1.7;
+}
+.intro-warning b{color:var(--text);font-weight:600;}
+.intro-flow{
+  padding:20px;border-radius:var(--radius-lg);
+  background:var(--bg-alt);border:1px solid var(--line);
+}
+.intro-flow .step{display:flex;align-items:flex-start;gap:14px;padding:12px 0;}
+.intro-flow .step + .step{border-top:1px solid var(--line);}
+.intro-flow .num{
+  width:28px;height:28px;border-radius:50%;flex-shrink:0;
+  background:var(--primary);color:#fff;font-weight:600;font-size:13px;
+  display:flex;align-items:center;justify-content:center;
+}
+.intro-flow .txt{font-size:14px;line-height:1.55;color:var(--text);}
+.intro-flow .txt b{color:var(--primary);font-weight:700;}
+.intro-flow .txt .dim{color:var(--text-muted);font-size:13px;display:block;margin-top:3px;}
+.intro-meta{display:flex;gap:8px;flex-wrap:wrap;}
+.intro-meta .chip{
+  padding:8px 14px;border-radius:999px;
+  background:var(--bg-alt);border:1px solid var(--line);
+  font-size:12.5px;color:var(--text-muted);font-weight:500;
+}
+.intro-meta .chip b{color:var(--text);font-weight:600;}
+.intro-cta{display:flex;flex-direction:column;gap:10px;margin-top:12px;}
+.intro-cta .cta-primary{
+  display:block;padding:17px;border-radius:var(--radius-md);text-align:center;
+  background:var(--primary);color:#fff;font-weight:600;font-size:15.5px;
+  letter-spacing:-0.01em;transition:background .15s;
+}
+.intro-cta .cta-primary:hover{background:var(--primary-ink);}
+.intro-cta .cta-secondary{
+  display:block;padding:14px;border-radius:var(--radius-md);text-align:center;
+  background:var(--bg-alt);border:1px solid var(--line);
+  font-size:13.5px;color:var(--text-muted);
+}
+.intro-cta .cta-secondary:hover{background:#F0F1F4;color:var(--text);}
 
-  /* Options */
-  .options{display:flex;flex-direction:column;gap:10px;}
-  .opt{
-    width:100%;padding:18px 22px;text-align:left;
-    border-radius:14px;
-    background:var(--card);border:1px solid var(--border);
-    font-size:15px;font-weight:600;color:var(--text);
-    transition:all .18s;
-    display:flex;justify-content:space-between;align-items:center;gap:12px;
-  }
-  .opt:hover{background:var(--card-hover);border-color:var(--border-strong);transform:translateY(-1px);}
-  .opt .tag{
-    font-size:11px;font-weight:700;color:var(--text-dim);
-  }
-  .opt .arrow{
-    color:var(--text-dim);font-size:18px;transition:transform .18s;
-  }
-  .opt:hover .arrow{transform:translateX(3px);color:var(--cyan);}
+/* Question */
+.q-wrap{
+  flex:1;display:flex;flex-direction:column;justify-content:center;
+  animation:slideIn .45s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes slideIn{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);}}
+.q-label{
+  font-size:12px;font-weight:600;color:var(--primary);
+  letter-spacing:.02em;margin-bottom:14px;text-transform:uppercase;
+}
+.q-title{
+  font-size:clamp(24px,5vw,30px);font-weight:700;
+  letter-spacing:-0.03em;line-height:1.28;margin-bottom:14px;color:var(--text);
+}
+.q-desc{
+  font-size:14.5px;color:var(--text-muted);line-height:1.7;margin-bottom:28px;
+}
 
-  /* Options grid (small items) */
-  .options.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
-  .options.grid .opt{
-    flex-direction:column;align-items:center;justify-content:center;
-    padding:22px 14px;text-align:center;min-height:88px;
-  }
-  .options.grid .opt .arrow{display:none;}
-  .options.grid .opt .big{
-    font-size:22px;font-weight:800;letter-spacing:-0.04em;margin-bottom:4px;
-  }
-  .options.grid .opt .tag{font-size:11px;}
+/* Options */
+.options{display:flex;flex-direction:column;gap:10px;}
+.opt{
+  width:100%;padding:18px 20px;text-align:left;
+  border-radius:var(--radius-md);
+  background:var(--bg-card);border:1px solid var(--line);
+  font-size:15px;font-weight:500;color:var(--text);
+  transition:border .15s,background .15s;
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  letter-spacing:-0.01em;
+}
+.opt:hover{border-color:var(--primary);background:var(--primary-soft);}
+.opt .tag{
+  font-size:11px;font-weight:600;color:var(--text-muted);
+  padding:3px 9px;border-radius:999px;
+  background:var(--bg-alt);border:1px solid var(--line);
+}
+.opt .tag.pro{color:var(--primary);background:var(--primary-soft);border-color:rgba(9,54,135,.25);}
+.opt .arrow{color:var(--text-dim);font-size:18px;transition:color .15s,transform .15s;}
+.opt:hover .arrow{transform:translateX(3px);color:var(--primary);}
 
-  /* Footer hint */
-  .foot{
-    text-align:center;font-size:11px;color:var(--text-dim);
-    margin-top:20px;line-height:1.6;
-  }
-  .foot b{color:var(--mint);}
+/* Options grid */
+.options.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.options.grid .opt{
+  flex-direction:column;align-items:center;justify-content:center;
+  padding:22px 14px;text-align:center;min-height:88px;
+}
+.options.grid .opt .arrow{display:none;}
+.options.grid .opt .big{
+  font-size:22px;font-weight:700;letter-spacing:-0.03em;margin-bottom:4px;color:var(--text);
+}
+.options.grid .opt .tag{font-size:11.5px;background:none;border:none;padding:0;}
 
-  /* Result screen */
-  .result{
-    flex:1;display:flex;flex-direction:column;justify-content:center;
-    animation:fadeUp .5s cubic-bezier(.2,.8,.2,1);
-  }
-  @keyframes fadeUp{
-    from{opacity:0;transform:translateY(16px);}
-    to{opacity:1;transform:translateY(0);}
-  }
-  .result-card{
-    padding:32px 28px;border-radius:24px;
-    background:
-      radial-gradient(60% 80% at 0% 0%,rgba(101,41,255,.22),transparent 70%),
-      radial-gradient(60% 80% at 100% 100%,rgba(30,245,202,.15),transparent 70%),
-      var(--card);
-    border:1px solid var(--border-strong);
-    margin-bottom:20px;
-  }
-  .result-card .eye{
-    font-size:12px;color:var(--mint);font-weight:800;
-    letter-spacing:.1em;margin-bottom:8px;
-  }
-  .result-card h2{
-    font-size:22px;font-weight:800;letter-spacing:-0.04em;
-    margin-bottom:24px;line-height:1.35;
-  }
-  .result-row{
-    display:flex;justify-content:space-between;align-items:baseline;
-    padding:14px 0;border-bottom:1px solid var(--border);
-  }
-  .result-row:last-of-type{border-bottom:none;}
-  .result-row .label{font-size:13px;color:var(--text-dim);}
-  .result-row .value{
-    font-size:18px;font-weight:800;
-    background:linear-gradient(120deg,#fff,var(--mint));
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-    letter-spacing:-0.03em;
-  }
-  .hot-alert{
-    margin-bottom:16px;padding:14px 18px;border-radius:14px;
-    background:rgba(255,107,136,.1);border:1px solid rgba(255,107,136,.3);
-    font-size:13px;color:#FFB6C6;line-height:1.5;
-  }
-  .hot-alert b{color:#FF6B88;}
-  .disclaim{
-    padding:14px 18px;border-radius:12px;
-    background:rgba(255,180,0,.05);border:1px solid rgba(255,180,0,.18);
-    font-size:11px;color:#FFD591;line-height:1.6;
-    margin-bottom:20px;
-  }
-  .cta-row{display:flex;flex-direction:column;gap:10px;}
-  .cta-primary{
-    display:block;padding:18px;border-radius:14px;text-align:center;
-    background:linear-gradient(90deg,var(--purple-bright),var(--cyan),var(--mint));
-    color:#0B0913;font-weight:800;font-size:15px;letter-spacing:-0.02em;
-    transition:transform .15s;
-  }
-  .cta-primary:hover{transform:translateY(-1px);}
-  .cta-secondary{
-    display:block;padding:16px;border-radius:14px;text-align:center;
-    background:var(--card);border:1px solid var(--border);
-    font-size:14px;color:var(--text-dim);
-  }
-  .cta-secondary:hover{border-color:var(--border-strong);color:var(--text);}
+/* Options grid-4 */
+.options.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.options.grid-4 .opt{
+  flex-direction:column;align-items:center;justify-content:center;
+  padding:20px 10px;text-align:center;min-height:80px;
+}
+.options.grid-4 .opt .arrow{display:none;}
+.options.grid-4 .opt .big{
+  font-size:20px;font-weight:700;letter-spacing:-0.03em;margin-bottom:2px;color:var(--text);
+}
+.options.grid-4 .opt .tag{font-size:10.5px;background:none;border:none;padding:0;}
 
-  /* Loading */
-  .loading{
-    flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;
-    gap:20px;
-  }
-  .spinner{
-    width:44px;height:44px;border-radius:50%;
-    border:3px solid rgba(255,255,255,.1);
-    border-top-color:var(--mint);
-    animation:spin 1s linear infinite;
-  }
-  @keyframes spin{to{transform:rotate(360deg);}}
-  .loading p{font-size:13px;color:var(--text-dim);}
+/* Footer hint */
+.foot{
+  text-align:center;font-size:12px;color:var(--text-dim);
+  margin-top:20px;line-height:1.6;
+}
+.foot b{color:var(--primary);font-weight:600;}
 
-  @media (max-width:420px){
-    .app{padding:18px 18px 24px;}
-    .options.grid{grid-template-columns:repeat(3,1fr);gap:8px;}
-    .options.grid .opt{min-height:74px;padding:16px 8px;}
-    .options.grid .opt .big{font-size:18px;}
-  }
+/* Result screen */
+.result{
+  flex:1;display:flex;flex-direction:column;justify-content:center;
+  animation:fadeUp .5s cubic-bezier(.2,.8,.2,1);
+}
+.result-card{
+  padding:28px 24px;border-radius:var(--radius-lg);
+  background:var(--bg-card);border:1px solid var(--line);margin-bottom:18px;
+}
+.result-card .eye{
+  font-size:11px;color:var(--primary);font-weight:700;
+  letter-spacing:.04em;margin-bottom:10px;text-transform:uppercase;
+}
+.result-card h2{
+  font-size:22px;font-weight:700;letter-spacing:-0.03em;
+  margin-bottom:22px;line-height:1.35;
+}
+.result-row{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line);
+}
+.result-row:last-of-type{border-bottom:none;}
+.result-row .label{font-size:13.5px;color:var(--text-muted);}
+.result-row .value{
+  font-size:17px;font-weight:700;color:var(--primary);letter-spacing:-0.02em;
+}
+.case-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:12px;padding:6px 12px;border-radius:999px;
+  background:var(--primary-soft);color:var(--primary);
+  font-size:11px;font-weight:600;
+}
+.case-chip.lite{background:var(--success-soft);color:var(--success);}
+.case-chip.hot{background:var(--danger-soft);color:var(--danger);}
+.hot-alert{
+  margin-bottom:16px;padding:14px 18px;border-radius:var(--radius-md);
+  background:var(--danger-soft);color:var(--danger);
+  font-size:13.5px;line-height:1.6;
+}
+.hot-alert b{color:var(--danger);font-weight:700;}
+.value-gap{
+  padding:14px 18px;border-radius:var(--radius-md);
+  background:var(--primary-soft);color:var(--primary-ink);
+  font-size:13.5px;line-height:1.7;margin-bottom:16px;
+}
+.value-gap b{color:var(--primary);font-weight:700;}
+.disclaim{
+  padding:14px 18px;border-radius:var(--radius-md);
+  background:var(--warning-soft);color:var(--warning);
+  font-size:12px;line-height:1.7;margin-bottom:18px;
+}
+.cta-primary{
+  display:block;padding:17px;border-radius:var(--radius-md);text-align:center;
+  background:var(--primary);color:#fff;font-weight:600;font-size:15.5px;
+  letter-spacing:-0.01em;transition:background .15s;
+}
+.cta-primary:hover{background:var(--primary-ink);color:#fff;}
+.cta-sub{
+  display:block;margin-top:10px;text-align:center;
+  font-size:12px;color:var(--text-dim);line-height:1.55;
+}
+.emergency-call{
+  margin-top:24px;padding:12px 14px;border-radius:var(--radius-md);
+  background:var(--danger-soft);color:var(--danger);
+  font-size:12.5px;text-align:center;line-height:1.55;
+}
+.emergency-call a{color:var(--danger);font-weight:700;}
+.emergency-call b{color:var(--danger);}
 
-  /* Booking modal */
-  .book-backdrop{
-    position:fixed;inset:0;z-index:100;
-    background:rgba(11,9,19,.85);backdrop-filter:blur(12px);
-    display:flex;align-items:flex-end;justify-content:center;
-    animation:fadeBg .25s ease-out;
-  }
-  @keyframes fadeBg{from{opacity:0;}to{opacity:1;}}
-  .book-panel{
-    width:100%;max-width:720px;max-height:92vh;
-    border-radius:24px 24px 0 0;
-    background:linear-gradient(180deg,#1a1425,#0f0b18);
-    border:1px solid var(--border-strong);border-bottom:none;
-    overflow-y:auto;padding:24px 24px 40px;
-    animation:slideUp .35s cubic-bezier(.2,.8,.2,1);
-  }
-  @keyframes slideUp{from{transform:translateY(30px);opacity:0;}to{transform:translateY(0);opacity:1;}}
-  .book-panel::-webkit-scrollbar{width:6px;}
-  .book-panel::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:3px;}
-  .book-head{
-    display:flex;align-items:center;justify-content:space-between;
-    margin-bottom:20px;
-  }
-  .book-head h3{
-    font-size:20px;font-weight:800;letter-spacing:-0.04em;
-  }
-  .book-head .x{
-    width:36px;height:36px;border-radius:10px;
-    background:var(--card);border:1px solid var(--border);
-    font-size:18px;color:var(--text-dim);
-  }
-  .book-section{margin-bottom:22px;}
-  .book-label{
-    font-size:11px;font-weight:800;color:var(--mint);
-    letter-spacing:.1em;margin-bottom:10px;
-  }
-  .book-input{
-    width:100%;padding:14px 16px;border-radius:12px;
-    background:rgba(255,255,255,.04);border:1px solid var(--border);
-    color:var(--text);font-family:inherit;font-size:14.5px;
-    outline:none;transition:border .2s;margin-bottom:10px;
-  }
-  .book-input:focus{border-color:rgba(0,184,255,.5);}
-  .book-consent{
-    display:flex;gap:10px;align-items:flex-start;
-    padding:12px 14px;border-radius:10px;
-    background:rgba(255,255,255,.03);border:1px solid var(--border);
-    font-size:12px;color:var(--text-dim);line-height:1.5;cursor:pointer;
-  }
-  .book-consent input{width:16px;height:16px;margin-top:2px;accent-color:var(--mint);flex-shrink:0;}
-  .book-consent b{color:var(--text);}
-  .slot-loading,.slot-empty{
-    padding:20px;border-radius:12px;text-align:center;
-    background:rgba(255,255,255,.03);border:1px solid var(--border);
-    font-size:13px;color:var(--text-dim);
-  }
-  /* Date strip (horizontal) */
-  .date-strip{
-    display:flex;gap:8px;overflow-x:auto;
-    padding-bottom:8px;margin-bottom:16px;
-    scrollbar-width:thin;
-    -webkit-overflow-scrolling:touch;
-  }
-  .date-strip::-webkit-scrollbar{height:4px;}
-  .date-strip::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px;}
-  .date-chip{
-    flex:0 0 auto;min-width:62px;
-    padding:12px 10px;border-radius:14px;text-align:center;
-    background:rgba(255,255,255,.04);border:1px solid var(--border);
-    font-family:inherit;color:var(--text);cursor:pointer;
-    transition:all .15s;
-  }
-  .date-chip:hover{background:rgba(30,245,202,.06);border-color:rgba(30,245,202,.3);}
-  .date-chip .dow{
-    font-size:11px;color:var(--text-dim);font-weight:700;
-    letter-spacing:.02em;margin-bottom:4px;
-  }
-  .date-chip .day{
-    font-size:18px;font-weight:800;letter-spacing:-0.04em;
-  }
-  .date-chip.selected{
-    background:linear-gradient(135deg,rgba(101,41,255,.28),rgba(30,245,202,.2));
-    border-color:var(--mint);
-    box-shadow:0 0 0 1px var(--mint) inset;
-  }
-  .date-chip.selected .dow{color:var(--mint);}
-  .date-chip.selected .day{color:#fff;}
-  .date-chip.sat .dow{color:#6BA8FF;}
-  .date-chip.sun .dow{color:#FF6B88;}
+/* Result — compare + narrative */
+.result-hero{margin-bottom:20px;}
+.result-hero .eye{
+  font-size:11px;color:var(--primary);font-weight:700;
+  letter-spacing:.04em;margin-bottom:10px;text-transform:uppercase;
+}
+.result-hero h2{
+  font-size:clamp(22px,5vw,28px);font-weight:700;
+  letter-spacing:-0.03em;line-height:1.32;
+}
+.result-hero h2 .hi{color:var(--primary);}
+.compare-grid{
+  display:grid;grid-template-columns:1fr auto 1fr;gap:10px;
+  align-items:stretch;margin-bottom:20px;
+}
+.compare-card{
+  padding:16px 14px;border-radius:var(--radius-md);
+  background:var(--bg-card);border:1px solid var(--line);
+  display:flex;flex-direction:column;gap:4px;
+}
+.compare-card.current{opacity:.55;}
+.compare-card.potential{
+  background:var(--primary-soft);border-color:var(--primary);
+}
+.compare-card .tag{
+  font-size:10.5px;font-weight:600;color:var(--text-muted);
+  letter-spacing:.02em;margin-bottom:6px;text-transform:uppercase;
+}
+.compare-card.potential .tag{color:var(--primary);}
+.compare-card .metric{display:flex;justify-content:space-between;align-items:baseline;padding:3px 0;}
+.compare-card .metric .k{font-size:11.5px;color:var(--text-muted);}
+.compare-card .metric .v{
+  font-size:14px;font-weight:700;color:var(--text);letter-spacing:-0.02em;
+}
+.compare-card.potential .metric .v{color:var(--primary);font-size:15.5px;}
+.compare-arrow{align-self:center;font-size:20px;color:var(--primary);font-weight:700;}
+.value-pitch{
+  margin-bottom:22px;padding:20px;border-radius:var(--radius-lg);
+  background:var(--bg-alt);border:1px solid var(--line);
+}
+.value-pitch h3{
+  font-size:16px;font-weight:700;color:var(--text);
+  margin-bottom:8px;letter-spacing:-0.02em;
+}
+.value-pitch p{font-size:13.5px;color:var(--text-muted);line-height:1.7;margin-bottom:10px;}
+.value-pitch p strong,.value-pitch p b{color:var(--text);font-weight:600;}
+.value-pitch ul{list-style:none;margin:0 0 12px;padding:0;}
+.value-pitch li{
+  font-size:13.5px;color:var(--text);padding:5px 0 5px 22px;
+  position:relative;line-height:1.5;
+}
+.value-pitch li::before{
+  content:'✓';position:absolute;left:0;top:5px;color:var(--primary);font-weight:700;
+}
+.value-pitch .welcome-promise{
+  margin-top:14px;padding-top:14px;border-top:1px solid var(--line);
+  font-size:13px;color:var(--text-muted);line-height:1.7;
+}
+.value-pitch .welcome-promise b{color:var(--primary);font-weight:700;}
+.disclaim-tiny{
+  margin-top:18px;font-size:11.5px;color:var(--text-dim);
+  text-align:center;line-height:1.55;
+}
+.hot-banner{
+  margin-bottom:14px;padding:12px 16px;border-radius:var(--radius-md);
+  background:var(--danger-soft);color:var(--danger);
+  font-size:13px;line-height:1.6;
+}
+.hot-banner b{color:var(--danger);font-weight:700;}
+.emergency-inline{
+  margin-top:10px;text-align:center;font-size:12px;color:var(--text-muted);
+}
+.emergency-inline a{color:var(--danger);font-weight:700;text-decoration:none;}
 
-  /* Time slot sections */
-  .time-section{margin-bottom:14px;}
-  .time-section .sec-label{
-    font-size:11px;font-weight:800;color:var(--text-dim);
-    letter-spacing:.02em;margin-bottom:8px;
-  }
-  .slot-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
-  .slot-btn{
-    padding:13px 6px;border-radius:10px;
-    background:rgba(255,255,255,.04);border:1px solid var(--border);
-    font-size:13px;font-weight:700;color:var(--text);
-    transition:all .15s;cursor:pointer;font-family:inherit;
-  }
-  .slot-btn:hover{background:rgba(30,245,202,.06);border-color:rgba(30,245,202,.3);}
-  .slot-btn.selected{
-    background:linear-gradient(135deg,rgba(101,41,255,.25),rgba(30,245,202,.2));
-    border-color:var(--mint);color:var(--mint);
-    box-shadow:0 0 0 1px var(--mint) inset;
-  }
-  .book-submit{
-    display:block;width:100%;padding:16px;border-radius:14px;
-    background:linear-gradient(90deg,var(--purple-bright),var(--cyan),var(--mint));
-    color:#0B0913;font-weight:800;font-size:15px;letter-spacing:-0.02em;
-    border:none;cursor:pointer;font-family:inherit;
-    transition:transform .15s,opacity .15s;margin-top:12px;
-  }
-  .book-submit:hover:not(:disabled){transform:translateY(-1px);}
-  .book-submit:disabled{opacity:.35;cursor:not-allowed;}
-  .book-err{
-    margin-top:12px;padding:12px 14px;border-radius:10px;
-    background:rgba(255,80,80,.08);border:1px solid rgba(255,80,80,.3);
-    color:#FF9999;font-size:12px;line-height:1.5;
-  }
-  /* Payment mockup */
-  .pay-hero{
-    padding:24px 24px 20px;border-radius:16px;margin-bottom:18px;
-    background:
-      radial-gradient(60% 80% at 0% 0%,rgba(101,41,255,.2),transparent 70%),
-      radial-gradient(60% 80% at 100% 100%,rgba(30,245,202,.14),transparent 70%),
-      rgba(255,255,255,.03);
-    border:1px solid var(--border-strong);
-  }
-  .pay-hero .row{
-    display:flex;justify-content:space-between;align-items:baseline;
-    padding:6px 0;font-size:13px;
-  }
-  .pay-hero .row .k{color:var(--text-dim);}
-  .pay-hero .row .v{color:var(--text);font-weight:700;}
-  .pay-hero .divider{height:1px;background:var(--border);margin:10px 0;}
-  .pay-hero .total{font-size:16px;}
-  .pay-hero .total .v{
-    font-size:22px;font-weight:800;letter-spacing:-0.04em;
-    background:linear-gradient(120deg,#fff,var(--mint));
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  .pay-methods{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px;}
-  .pay-method{
-    padding:14px 12px;border-radius:12px;text-align:center;
-    background:rgba(255,255,255,.04);border:1px solid var(--border);
-    font-size:13px;font-weight:700;color:var(--text);cursor:pointer;
-    transition:all .15s;font-family:inherit;
-  }
-  .pay-method:hover{background:rgba(30,245,202,.06);border-color:rgba(30,245,202,.3);}
-  .pay-method.selected{
-    background:linear-gradient(135deg,rgba(101,41,255,.22),rgba(30,245,202,.16));
-    border-color:var(--mint);box-shadow:0 0 0 1px var(--mint) inset;
-  }
-  .pay-method .emoji{display:block;font-size:18px;margin-bottom:4px;}
-  .pay-notice{
-    padding:12px 14px;border-radius:10px;
-    background:rgba(255,180,0,.05);border:1px solid rgba(255,180,0,.18);
-    font-size:11px;color:#FFD591;line-height:1.5;margin-bottom:12px;
-  }
-  .pay-notice b{color:#fff;}
-  .pay-back{
-    margin-top:10px;width:100%;padding:12px;border-radius:12px;
-    background:transparent;border:1px solid var(--border);
-    font-size:12px;color:var(--text-dim);font-family:inherit;cursor:pointer;
-  }
+/* Loading */
+.loading{
+  flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:20px;
+}
+.spinner{
+  width:44px;height:44px;border-radius:50%;
+  border:3px solid rgba(20,21,26,.08);border-top-color:var(--primary);
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loading p{font-size:14px;color:var(--text-muted);}
 
-  .book-success{
-    padding:28px 24px;border-radius:16px;text-align:center;
-    background:rgba(30,245,202,.08);border:1px solid rgba(30,245,202,.35);
-  }
-  .book-success h4{
-    font-size:20px;font-weight:800;color:var(--mint);
-    margin-bottom:10px;letter-spacing:-0.03em;
-  }
-  .book-success p{font-size:13px;color:var(--text-dim);line-height:1.6;}
-  @media (max-width:460px){ .slot-grid{grid-template-columns:repeat(3,1fr);} }
+@media (max-width:420px){
+  .app{padding:20px 18px 28px;}
+  .options.grid{grid-template-columns:repeat(3,1fr);gap:8px;}
+  .options.grid .opt{min-height:78px;padding:18px 8px;}
+  .options.grid .opt .big{font-size:20px;}
+  .options.grid-4{grid-template-columns:repeat(4,1fr);gap:6px;}
+  .options.grid-4 .opt{min-height:72px;padding:16px 6px;}
+  .options.grid-4 .opt .big{font-size:18px;}
+}
 </style>
 
 <!-- Meta Pixel Code -->
@@ -429,15 +384,18 @@ src="https://www.facebook.com/tr?id=1912072069447860&ev=PageView&noscript=1"
   <div class="top">
     <button class="back" id="backBtn">←</button>
     <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
-    <div class="counter" id="counter">1 / 7</div>
+    <div class="counter" id="counter">준비</div>
   </div>
 
   <div id="stage"></div>
 </div>
 
-<div id="bookModal" style="display:none;"></div>
-
 <script>
+/* ──────────────────────────────────────────────────────────────
+ *  STEPS — 14개 정량 질문
+ *  v2 필드: housing_cost / children_minor / medical_cost / job_type
+ *           / real_estate / financial_assets / history_rehab
+ * ──────────────────────────────────────────────────────────────*/
 const STEPS = [
   {
     key: 'region',
@@ -456,7 +414,7 @@ const STEPS = [
     key: 'household',
     label: 'STEP 2 · 실제 부양가족',
     title: '본인이 실제로<br/>부양하는 인원은?',
-    desc: '본인 포함, 본인이 실질적으로 생계를 책임지는 인원만 선택하세요.<br/><span style="color:var(--text-dim);font-size:12px;">예) 맞벌이 부부 + 미성년 자녀 2명 → 각자 1명씩 부양하므로 <b>본인 기준 2인</b>. 경제력 없는 배우자·미성년 자녀·노부모 등 실제 부양 대상만 포함.</span>',
+    desc: '본인 포함, 본인이 실질적으로 생계를 책임지는 인원만 선택하세요.<br/><span style="color:var(--text-dim);font-size:12px;">예) 맞벌이 부부 + 미성년 자녀 2명 → 각자 1명씩 부양하므로 <b>본인 기준 2인</b>.</span>',
     layout: 'grid',
     options: [
       { v:'1', big:'1인', tag:'본인만' },
@@ -541,13 +499,110 @@ const STEPS = [
       { v:'court', label:'법원 서류 받음', tag:'긴급' },
     ]
   },
+  {
+    key: 'housing_cost',
+    label: 'STEP 8 · 월 주거비',
+    title: '월 주거비는<br/>얼마 정도 나가세요?',
+    desc: '월세, 주택담보대출 이자, 전세대출 이자, 관리비 등의 합계입니다. 자가이거나 가족 집 거주면 "없음"을 선택하세요.',
+    layout: 'list',
+    options: [
+      { v:'none',   label:'없음 · 자가 또는 가족 집' },
+      { v:'u30',    label:'30만원 미만' },
+      { v:'30_50',  label:'30 ~ 50만원' },
+      { v:'50_80',  label:'50 ~ 80만원' },
+      { v:'80_120', label:'80 ~ 120만원' },
+      { v:'120p',   label:'120만원 이상' },
+    ]
+  },
+  {
+    key: 'children_minor',
+    label: 'STEP 9 · 미성년 자녀',
+    title: '미성년 자녀가<br/>몇 명 계세요?',
+    desc: '만 18세 미만 자녀 기준. 미성년 자녀 1인당 약 20만원의 추가 교육비를 인정받을 수 있어요.',
+    layout: 'grid-4',
+    options: [
+      { v:'0', big:'없음', tag:'0명' },
+      { v:'1', big:'1명', tag:'' },
+      { v:'2', big:'2명', tag:'' },
+      { v:'3', big:'3명+', tag:'' },
+    ]
+  },
+  {
+    key: 'medical_cost',
+    label: 'STEP 10 · 정기 의료비',
+    title: '본인·가족 의료비<br/>지출이 꾸준히 있으세요?',
+    desc: '치료·약값·물리치료 등 매월 지속적으로 나가는 평균 의료비. 일회성 병원비는 제외해 주세요.',
+    layout: 'list',
+    options: [
+      { v:'none',  label:'없음 · 특별한 지속 지출 없음' },
+      { v:'u10',   label:'10만원 미만' },
+      { v:'10_30', label:'10 ~ 30만원' },
+      { v:'30p',   label:'30만원 이상' },
+    ]
+  },
+  {
+    key: 'job_type',
+    label: 'STEP 11 · 직업 유형',
+    title: '현재 직업은<br/>어떻게 되세요?',
+    desc: '소득 구조에 따라 진단 방향이 달라져요. 자영업·전문직은 정밀 검토가 필요한 Pro 케이스로 분류됩니다.',
+    layout: 'list',
+    options: [
+      { v:'employee',               label:'직장인 · 4대보험 가입' },
+      { v:'self_employed',          label:'자영업 · 사업자', tag:'Pro 검토', tagClass:'pro' },
+      { v:'freelance_no_insurance', label:'프리랜서 · 일용직' },
+      { v:'professional',           label:'전문직 (의사·변호사·세무사·약사 등)', tag:'Pro 검토', tagClass:'pro' },
+      { v:'corporate',              label:'법인 대표 · 임원', tag:'Pro 검토', tagClass:'pro' },
+      { v:'unemployed',             label:'무직 · 구직 중' },
+    ]
+  },
+  {
+    key: 'real_estate',
+    label: 'STEP 12 · 부동산',
+    title: '본인 명의<br/>부동산이 있으세요?',
+    desc: '주거용·투자용 모두 포함. 시세 기준(근저당 제외 전)으로 선택하세요. 청산가치 계산의 핵심 항목입니다.',
+    layout: 'list',
+    options: [
+      { v:'none',     label:'없음' },
+      { v:'u100m',    label:'있음 · 시가 1억 미만' },
+      { v:'100_300m', label:'있음 · 시가 1억 ~ 3억' },
+      { v:'300_500m', label:'있음 · 시가 3억 ~ 5억' },
+      { v:'500mp',    label:'있음 · 시가 5억 이상' },
+    ]
+  },
+  {
+    key: 'financial_assets',
+    label: 'STEP 13 · 금융자산 · 퇴직금',
+    title: '금융자산과 퇴직금<br/>합치면 얼마쯤 되세요?',
+    desc: '예적금 + 보험 해약환급금 + 주식·코인 + 퇴직금 예상액의 합계. 면제재산(500만원) 공제 전 금액으로 선택하세요.',
+    layout: 'list',
+    options: [
+      { v:'u500',      label:'500만원 미만' },
+      { v:'500_1000',  label:'500 ~ 1,000만원' },
+      { v:'1000_3000', label:'1,000 ~ 3,000만원' },
+      { v:'3000p',     label:'3,000만원 이상' },
+    ]
+  },
+  {
+    key: 'history_rehab',
+    label: 'STEP 14 · 과거 이력',
+    title: '과거 회생·파산<br/>신청 이력이 있으세요?',
+    desc: '이력이 있으면 재신청 가능 시점·조건이 달라져요. 정확히 선택해 주셔야 전략이 꼬이지 않습니다.',
+    layout: 'list',
+    options: [
+      { v:'none',              label:'없음 · 이번이 처음' },
+      { v:'rejected',          label:'신청했지만 기각·취하됨' },
+      { v:'bankruptcy',        label:'파산 면책 받은 적 있음' },
+      { v:'rehab_stopped',     label:'회생 개시 후 중단·폐지' },
+      { v:'rehab_discharged',  label:'회생 완료·면책 받음' },
+    ]
+  },
 ];
 
 const state = {
   step: 0,
   answers: {},
   result: null,
-  mode: 'tap', // 'tap' | 'loading' | 'result'
+  mode: 'intro', // 'intro' | 'tap' | 'loading' | 'result'
 };
 
 const $ = (id) => document.getElementById(id);
@@ -557,7 +612,8 @@ const counter = $('counter');
 const backBtn = $('backBtn');
 
 function render(){
-  if(state.mode === 'tap'){ renderTap(); }
+  if(state.mode === 'intro'){ renderIntro(); }
+  else if(state.mode === 'tap'){ renderTap(); }
   else if(state.mode === 'loading'){ renderLoading(); }
   else if(state.mode === 'result'){ renderResult(); }
   updateProgress();
@@ -565,27 +621,101 @@ function render(){
 
 function updateProgress(){
   const total = STEPS.length;
+  if(state.mode === 'intro'){
+    progressBar.style.width = '0%';
+    counter.textContent = '준비';
+    backBtn.disabled = true;
+    return;
+  }
   let done = state.step;
   if(state.mode === 'loading' || state.mode === 'result') done = total;
   progressBar.style.width = (done / total * 100) + '%';
   counter.textContent = (state.mode === 'tap' ? (state.step + 1) : total) + ' / ' + total;
-  backBtn.disabled = (state.mode !== 'tap' || state.step === 0);
+  backBtn.disabled = (state.mode === 'intro') || (state.mode === 'loading');
 }
 
+/* ──────────────────────────────────────────────────────────────
+ *  Intro screen (Step 0)
+ * ──────────────────────────────────────────────────────────────*/
+function renderIntro(){
+  stage.innerHTML = `
+    <div class="intro">
+      <div class="intro-badge">⚖ 변호사 검토 AI 진단 툴</div>
+      <h1 class="intro-title">다른 계산기보다<br/><span style="color:var(--primary);">10배 더 묻습니다.</span></h1>
+
+      <div class="intro-warning">
+        이 진단은 <b>양홍수 변호사가 사전 검토 단계에서 실제로 쓰는 정밀 AI 툴</b>입니다.
+        드러나지 않은 인정 항목을 찾는 것이 목적이기 때문에, 가볍게 찍고 지나가면 탕감 이유가 수집되지 않아요. 중간에 나가시면 변호사 검토를 받으실 수 없습니다.
+      </div>
+
+      <div class="intro-flow">
+        <div class="step">
+          <div class="num">1</div>
+          <div class="txt">
+            <b>정량 입력 · 14개 항목</b>
+            <span class="dim">거주·소득·채무·재산·이력까지. 객관식으로 약 2분.</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <div class="txt">
+            <b>AI 주관 설문 · 정밀 파악</b>
+            <span class="dim">탭으로 잡히지 않는 디테일을 AI가 대화로 확인. 약 3분.</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <div class="txt">
+            <b>정밀 추정 + 변호사 연결</b>
+            <span class="dim">수집 정보 기반 변제금·탕감률 재계산 → 양홍수 변호사 직접 상담.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="intro-meta">
+        <div class="chip">⏱ <b>총 5분</b> 소요</div>
+        <div class="chip">🔒 이름·연락처 <b>미요구</b></div>
+        <div class="chip">📋 <b>객관식</b> 중심</div>
+      </div>
+
+      <div class="intro-cta">
+        <button type="button" class="cta-primary" id="introStartBtn">집중할 수 있어요 · 정밀 진단 시작 →</button>
+        <button type="button" class="cta-secondary" id="introLaterBtn">나중에 · 홈으로 돌아가기</button>
+      </div>
+    </div>
+  `;
+  document.getElementById('introStartBtn').onclick = () => {
+    try { if(window.gtag) gtag('event', 'diagnostic_start', { method: 'tap_intro' }); } catch(e){}
+    state.mode = 'tap';
+    state.step = 0;
+    render();
+  };
+  document.getElementById('introLaterBtn').onclick = () => {
+    location.href = 'index.html';
+  };
+}
+
+/* ──────────────────────────────────────────────────────────────
+ *  Question screen
+ * ──────────────────────────────────────────────────────────────*/
 function renderTap(){
   const q = STEPS[state.step];
-  const layoutClass = q.layout === 'grid' ? 'options grid' : 'options';
+  let layoutClass = 'options';
+  if(q.layout === 'grid') layoutClass = 'options grid';
+  else if(q.layout === 'grid-4') layoutClass = 'options grid-4';
+
   const optsHtml = q.options.map(o => {
-    if(q.layout === 'grid'){
+    if(q.layout === 'grid' || q.layout === 'grid-4'){
       return `<button class="opt" data-v="${o.v}">
         <div class="big">${o.big}</div>
         ${o.tag ? `<div class="tag">${o.tag}</div>` : ''}
       </button>`;
     }
+    const tagClass = o.tagClass ? ` ${o.tagClass}` : '';
     return `<button class="opt" data-v="${o.v}">
       <span>${o.label}</span>
       <span style="display:flex;align-items:center;gap:10px;">
-        ${o.tag ? `<span class="tag">${o.tag}</span>` : ''}
+        ${o.tag ? `<span class="tag${tagClass}">${o.tag}</span>` : ''}
         <span class="arrow">→</span>
       </span>
     </button>`;
@@ -598,7 +728,7 @@ function renderTap(){
       <p class="q-desc">${q.desc}</p>
       <div class="${layoutClass}">${optsHtml}</div>
       <div class="foot">
-        약 <b>30초</b> 소요 · 이름·연락처 없이 진행
+        <b>${state.step + 1} / ${STEPS.length}</b> · 정량 입력 단계
       </div>
     </div>
   `;
@@ -620,7 +750,7 @@ function renderLoading(){
   stage.innerHTML = `
     <div class="loading">
       <div class="spinner"></div>
-      <p>입력하신 정보로 1차 추정 중...</p>
+      <p>입력하신 14개 정보로 1차 정밀 추정 중...</p>
     </div>
   `;
 }
@@ -635,223 +765,117 @@ async function submit(){
     });
     const data = await res.json();
     state.result = data;
+    try { if(window.gtag) gtag('event', 'diagnostic_step1_complete'); } catch(e){}
   } catch(e){
     state.result = { error: e.message };
   }
   state.mode = 'result'; render();
 }
 
+/* ──────────────────────────────────────────────────────────────
+ *  Result screen — 단일 CTA (AI 상담만이 경로)
+ * ──────────────────────────────────────────────────────────────*/
 function renderResult(){
   const r = state.result?.result;
   if(!r){
     stage.innerHTML = `<div class="loading"><p>계산 중 오류가 발생했어요. 다시 시도해 주세요.</p></div>`;
     return;
   }
-  const hotBlock = r.is_hot ? `
-    <div class="hot-alert">
-      <b>긴급 상황으로 보여요.</b> 압류·소송이나 법원 서류를 받으신 경우, 빠른 대응이 변제금과 인가에 큰 영향을 줍니다. 아래 "자세히 진단받기"로 정밀 진단을 받으시거나 1551-8016으로 직접 연락 주세요.
-    </div>
-  ` : '';
 
   const ctxRaw = btoa(unescape(encodeURIComponent(JSON.stringify({
     answers: state.answers,
     result: r,
+    calc: state.result.calc || {},
+    inputs: state.result.inputs || {},
   }))));
   const ctx = encodeURIComponent(ctxRaw);
 
+  // 정밀 진단 후 예상 개선 범위 (경험치 기반 · 구간 표현으로 단정 회피)
+  const potentialMonthlyMin = Math.max(r.monthly_repayment_min_manwon - 30, 10);
+  const potentialMonthlyMax = Math.max(r.monthly_repayment_max_manwon - 12, 15);
+  const potentialRateMin = Math.min(r.discharge_rate_min + 15, 95);
+  const potentialRateMax = Math.min(r.discharge_rate_max + 25, 95);
+
+  const hotBanner = r.is_hot ? `
+    <div class="hot-banner">
+      <b>압류·소송·법원 서류 상황이에요.</b> AI 정밀 진단 끝내시면 변호사가 빠른 대응 플랜을 바로 알려드려요.
+    </div>
+  ` : '';
+
   stage.innerHTML = `
     <div class="result">
-      ${hotBlock}
-      <div class="result-card">
-        <div class="eye">1차 추정 결과</div>
-        <h2>선생님의 개략 추정 결과예요</h2>
-        <div class="result-row">
-          <div class="label">월 변제액 (추정 구간)</div>
-          <div class="value">약 ${r.monthly_repayment_min_manwon} ~ ${r.monthly_repayment_max_manwon}만원</div>
+      ${hotBanner}
+
+      <div class="result-hero">
+        <div class="eye">STEP 1 · AI 1차 추정 완료</div>
+        <h2>여기까지는 14개 숫자로 계산한 결과예요.<br/><span class="hi">진짜 탕감은 지금부터 AI가 대화로 찾아냅니다.</span></h2>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-card current">
+          <div class="tag">여기까지 · Step 1</div>
+          <div class="metric"><span class="k">월 변제</span><span class="v">${r.monthly_repayment_min_manwon}~${r.monthly_repayment_max_manwon}만</span></div>
+          <div class="metric"><span class="k">탕감률</span><span class="v">${r.discharge_rate_min}~${r.discharge_rate_max}%</span></div>
+          <div class="metric"><span class="k">기간</span><span class="v">${r.period_months}개월</span></div>
         </div>
-        <div class="result-row">
-          <div class="label">탕감률 (추정 구간)</div>
-          <div class="value">약 ${r.discharge_rate_min} ~ ${r.discharge_rate_max}%</div>
-        </div>
-        <div class="result-row">
-          <div class="label">변제기간</div>
-          <div class="value">${r.period_months}개월</div>
+        <div class="compare-card after">
+          <div class="tag">AI 정밀 진단 + 변호사 설계 후 예상</div>
+          <div class="metric"><span class="k">월 변제</span><span class="v hi">${potentialMonthlyMin}~${potentialMonthlyMax}만</span></div>
+          <div class="metric"><span class="k">탕감률</span><span class="v hi">${potentialRateMin}~${potentialRateMax}%</span></div>
+          <div class="metric"><span class="k">기간</span><span class="v hi">36개월 목표</span></div>
+          <div class="note">추가생계비·청산가치 방어·세금 채권 편입 등 AI 대화로 끝까지 끌어냅니다.</div>
         </div>
       </div>
-      <div class="disclaim">
-        ⓘ 본 결과는 AI가 핵심 정보 5개로 계산한 <b>개략 추정</b>이며, 법률 자문이 아닙니다. 추가생계비·재산·부양가족 등을 반영하면 변제금이 더 낮아질 수 있어요. 정확한 전략은 양홍수 변호사 검토가 필요합니다.
+
+      <div class="next-cta">
+        <a class="cta-primary" href="chat.html?ctx=${ctx}">AI와 심층 상담 시작 →</a>
+        <div class="cta-note">이름·연락처 없이 시작 · 대화 내내 숨은 탕감 포인트를 찾아드려요.</div>
       </div>
-      <div class="cta-row">
-        <a class="cta-primary" href="chat.html?ctx=${ctx}">탕감액 더 찾아보기 →</a>
-        <button type="button" class="cta-secondary" id="quickBookBtn">바로 상담 예약하기</button>
+
+      <div class="trust-row">
+        <div class="trust-item"><strong>양홍수 변호사</strong> · 대한변협 도산·조세법 전문</div>
+        <div class="trust-item">변호사 · 세무사 <strong>복수 자격</strong></div>
+        <div class="trust-item">상담 약속금 <strong>2만원</strong> · 상담 완료 시 전액 환불</div>
       </div>
     </div>
   `;
-  document.getElementById('quickBookBtn').onclick = openBookingModal;
 }
 
-/* ---------- Simple booking modal (날짜 + 시간대) ---------- */
-
-const bookState = { submitting: false, done: false };
-
-function todayISO(offset){
-  const d = new Date();
-  d.setDate(d.getDate() + (offset || 0));
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, '0');
-  const dd = String(d.getDate()).padStart(2, '0');
-  return `${y}-${m}-${dd}`;
+/* ──────────────────────────────────────────────────────────────
+ *  Router
+ * ──────────────────────────────────────────────────────────────*/
+function render(){
+  if(state.mode === 'intro') renderIntro();
+  else if(state.mode === 'result') renderResult();
+  else renderStep();
+  updateProgress();
 }
 
-function openBookingModal(){
-  bookState.done = false;
-  const modal = document.getElementById('bookModal');
-  modal.style.display = 'flex';
-  modal.className = 'book-backdrop';
-  modal.innerHTML = `
-    <div class="book-panel">
-      <div class="book-head">
-        <h3>상담 예약</h3>
-        <button type="button" class="x" id="bookClose">✕</button>
-      </div>
-
-      <div class="book-section">
-        <div class="book-label">1 · 연락처 입력</div>
-        <input type="text" class="book-input" id="bkName" placeholder="이름 (예: 홍길동)" autocomplete="name"/>
-        <input type="tel" class="book-input" id="bkPhone" placeholder="휴대폰 (예: 010-0000-0000)" autocomplete="tel"/>
-        <label class="book-consent">
-          <input type="checkbox" id="bkConsent"/>
-          <span><b>[필수]</b> 상담 예약 목적으로 개인정보(이름·연락처) 수집·이용에 동의합니다.</span>
-        </label>
-      </div>
-
-      <div class="book-section">
-        <div class="book-label">2 · 희망 상담 일자</div>
-        <input type="date" class="book-input" id="bkDate" min="${todayISO(0)}" max="${todayISO(30)}" value="${todayISO(1)}" />
-      </div>
-
-      <div class="book-section">
-        <div class="book-label">3 · 희망 시간대</div>
-        <select class="book-input" id="bkTime">
-          <option value="오전 (10시~12시)">오전 (10시 ~ 12시)</option>
-          <option value="점심 (12시~14시)">점심 (12시 ~ 14시)</option>
-          <option value="오후 (14시~17시)" selected>오후 (14시 ~ 17시)</option>
-          <option value="저녁 (17시~20시)">저녁 (17시 ~ 20시)</option>
-          <option value="아무때나 가능">아무때나 가능 (변호사 판단)</option>
-        </select>
-      </div>
-
-      <button type="button" class="book-submit" id="bkSubmit" disabled>상담 신청하기</button>
-      <div id="bkErr"></div>
-    </div>
-  `;
-  document.getElementById('bookClose').onclick = closeBookingModal;
-  modal.onclick = (e) => { if(e.target === modal) closeBookingModal(); };
-  document.getElementById('bkName').addEventListener('input', updateSubmitState);
-  document.getElementById('bkPhone').addEventListener('input', updateSubmitState);
-  document.getElementById('bkConsent').addEventListener('change', updateSubmitState);
-  document.getElementById('bkDate').addEventListener('change', updateSubmitState);
-  document.getElementById('bkTime').addEventListener('change', updateSubmitState);
-  document.getElementById('bkSubmit').onclick = submitBooking;
-  updateSubmitState();
+function updateProgress(){
+  let pct;
+  if(state.mode === 'intro') pct = 0;
+  else if(state.mode === 'result') pct = 100;
+  else pct = Math.round(((state.step + 1) / STEPS.length) * 100);
+  progressBar.style.width = pct + '%';
+  counter.textContent = state.mode === 'intro'
+    ? '시작'
+    : state.mode === 'result'
+      ? '완료'
+      : `${state.step + 1} / ${STEPS.length}`;
+  backBtn.disabled = (state.mode === 'intro');
 }
 
-function closeBookingModal(){
-  document.getElementById('bookModal').style.display = 'none';
-}
-
-function updateSubmitState(){
-  const name = document.getElementById('bkName').value.trim();
-  const phone = document.getElementById('bkPhone').value.trim();
-  const consent = document.getElementById('bkConsent').checked;
-  const date = document.getElementById('bkDate').value;
-  const time = document.getElementById('bkTime').value;
-  const valid = name.length >= 2 && /^[\d\-\s+]{9,}$/.test(phone) && consent && !!date && !!time && !bookState.submitting;
-  document.getElementById('bkSubmit').disabled = !valid;
-}
-
-async function submitBooking(){
-  const submitBtn = document.getElementById('bkSubmit');
-  const errBox = document.getElementById('bkErr');
-  errBox.innerHTML = '';
-
-  const contact = {
-    name: document.getElementById('bkName').value.trim(),
-    phone: document.getElementById('bkPhone').value.trim(),
-    consent: true,
-  };
-  const desiredDate = document.getElementById('bkDate').value;
-  const desiredTime = document.getElementById('bkTime').value;
-
-  bookState.submitting = true;
-  submitBtn.disabled = true;
-  submitBtn.textContent = '신청 처리 중...';
-
-  const r = state.result?.result || {};
-  const summary = {
-    source: 'tap_quick_book',
-    case_classification: 'Lite',
-    urgency: r.is_hot ? 'high' : 'medium',
-    classification_reason: 'tap 직접 상담 신청 (AI 상담 스킵)',
-    inputs: state.answers,
-    estimate: r,
-    booking_request: {
-      desired_date: desiredDate,
-      desired_time_slot: desiredTime,
-    },
-  };
-
-  try {
-    const res = await fetch('/api/lead', {
-      method:'POST',
-      headers:{'content-type':'application/json'},
-      body: JSON.stringify({ contact, summary }),
-    });
-    const data = await res.json().catch(() => ({}));
-    if(!res.ok || data.error){
-      throw new Error(data.error || '서버 응답 오류');
-    }
-    bookState.done = true;
-    try { if(window.fbq) fbq('track', 'Lead'); } catch(e){}
-    try { if(window.gtag) gtag('event', 'generate_lead', { method: 'tap_direct_booking' }); } catch(e){}
-    showBookingSuccess(desiredDate, desiredTime, contact.name);
-  } catch(e){
-    errBox.innerHTML = `<div class="book-err">${e.message}<br/>잠시 후 다시 시도하시거나 1551-8016으로 전화 주세요.</div>`;
-    bookState.submitting = false;
-    submitBtn.disabled = false;
-    submitBtn.textContent = '상담 신청하기';
+backBtn.addEventListener('click', () => {
+  if(state.mode === 'result'){
+    state.mode = 'step'; state.step = STEPS.length - 1;
+    render(); return;
   }
-}
-
-function showBookingSuccess(dateStr, timeStr, name){
-  const modal = document.getElementById('bookModal');
-  modal.innerHTML = `
-    <div class="book-panel">
-      <div class="book-head">
-        <h3>신청 완료</h3>
-        <button type="button" class="x" id="bookClose2">✕</button>
-      </div>
-      <div class="book-success">
-        <h4>상담 신청이 접수되었습니다</h4>
-        <p>
-          <b style="color:#fff">${name}</b> 선생님, 감사합니다.<br/>
-          희망하신 <b style="color:#fff">${dateStr} · ${timeStr}</b> 기준으로<br/>
-          담당자가 확인 후 24시간 이내 연락드립니다.<br/><br/>
-          급한 문의는 <b style="color:#fff">1551-8016</b> 으로 연락 주세요.
-        </p>
-      </div>
-    </div>
-  `;
-  document.getElementById('bookClose2').onclick = closeBookingModal;
-}
-
-backBtn.onclick = () => {
-  if(state.mode === 'tap' && state.step > 0){
-    state.step--; render();
-  } else if(state.mode === 'result'){
-    state.mode = 'tap'; render();
+  if(state.mode === 'step'){
+    if(state.step === 0){ state.mode = 'intro'; }
+    else { state.step -= 1; }
+    render();
   }
-};
+});
 
 render();
 </script>
